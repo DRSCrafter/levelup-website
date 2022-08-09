@@ -1,0 +1,20 @@
+.navbar-menu-btn {
+    display: flex;
+    align-items: center;
+    font-family: IRMehr, sans-serif;
+    color: #707070;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.css-6hp17o-MuiList-root-MuiMenu-list {
+    padding-top: 0!important;
+    padding-bottom: 0!important;
+    direction: rtl;
+}
+
+.navbar-menu-btn-inner {
+    font-family: "B Yekan", sans-serif;
+    color: #707070;
+    margin: 5px;
+}
