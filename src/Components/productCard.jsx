@@ -4,7 +4,7 @@ import {Button, IconButton, useMediaQuery} from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
-function ProductCard({name, price, image}) {
+function ProductCard({name, price, image, shadow=false}) {
     const data = {
         name: "Paper Mario the Origami King",
         price: "1,300,000",
@@ -15,7 +15,7 @@ function ProductCard({name, price, image}) {
 
     return (
         <>
-            <div className="card-root card-shadow">
+            <div className={`card-root ${shadow ? 'card-shadow' : ''}`}>
                 <div className="card-container">
                     <img src={data.image} className="product-image" alt="product"/>
                     <div className="product-info">

@@ -51,7 +51,7 @@
     margin-top: 15px;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1200px) {
     .card-root {
         width: 220px;
     }
