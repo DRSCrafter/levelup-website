@@ -1,8 +1,10 @@
 import React from "react";
+import Banner from "./Components/banner";
 
-function App({title, data}) {
+function App() {
     return (
         <>
+            <Banner/>
         </>
     );
 }
