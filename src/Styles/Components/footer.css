@@ -1,0 +1,79 @@
+.footer-root {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding-top: 100px;
+}
+
+.footer-container {
+    width: 85%;
+    margin-inline: auto;
+    display: flex;
+    font-family: "B Yekan", sans-serif;
+    justify-content: flex-end;
+    flex-direction: column;
+    padding: 20px;
+    direction: rtl;
+    color: #8c8c8c;
+}
+
+.footer-list-title {
+    position: relative;
+    color: #707070;
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.footer-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.footer-list > li:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+.footer-list:last-child {
+    direction: ltr;
+}
+
+.footer-list-title > h4::before {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    right: -25px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: 50%;
+    background: #00ACFF;
+    box-shadow: 0 0 6px #00ACFF;
+    display: block;
+    content: "";
+}
+
+.footer-list > li > a {
+    all: unset;
+    cursor: pointer;
+    transition: color 0.5s;
+}
+
+ .footer-list > li > a:hover {
+     color: #414141;
+ }
+
+@media (min-width: 1024px) {
+    .footer-root {
+        padding-top: 60px;
+    }
+    .footer-container {
+        justify-content: space-between;
+        flex-direction: row;
+    }
+    .footer-list:last-child {
+        direction: rtl;
+    }
+}
