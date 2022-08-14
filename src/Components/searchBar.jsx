@@ -3,14 +3,14 @@ import React from 'react';
 import {IconButton} from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 
-function SearchBar() {
+function SearchBar({placeholder, isSideBar}) {
     return (
         <>
-            <div className="search-bar-container">
+            <div className={`search-bar-container ${isSideBar ? 'side-search-bar' : ''}`}>
                 <IconButton className="search-bar-btn">
                     <SearchIcon htmlColor="#0080FF"/>
                 </IconButton>
-                <input className="search-bar-input input" placeholder="چی میخوای بیا به خودم بگو"/>
+                <input className="search-bar-input input" placeholder={placeholder}/>
             </div>
         </>
     );

@@ -1,0 +1,8 @@
+.side-input-container {
+    direction: rtl;
+}
+
+.side-input > .MuiTypography-root {
+    font-family: "Segoe UI Light", sans-serif;
+    font-size: 13px;
+}

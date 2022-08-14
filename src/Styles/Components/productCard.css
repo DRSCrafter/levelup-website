@@ -1,9 +1,10 @@
 .card-root {
     display: flex;
-    width: 180px;
+    width: 100%;
     height: 430px;
     border-radius: 10px;
     background-color: white;
+    /*flex: 1 0 22%;*/
 }
 
 .card-shadow {
@@ -51,12 +52,18 @@
     margin-top: 15px;
 }
 
-@media (min-width: 1200px) {
-    .card-root {
-        width: 220px;
-    }
+/*@media (min-width: 1200px) {*/
+/*    .card-root {*/
+/*        width: 220px;*/
+/*    }*/
 
-    .card-container {
-        width: 170px;
+/*    .card-container {*/
+/*        width: 170px;*/
+/*    }*/
+/*}*/
+
+@media (max-width: 1024px) {
+    .products-grid-item > .card-root > .card-container {
+        width: 90%;
     }
 }

@@ -60,7 +60,7 @@ function NavBar() {
                     <AccountBalanceWalletIcon htmlColor="#0080FF"/>
                   </IconButton>
               </span>
-                    <SearchBar/>
+                    <SearchBar placeholder="چی میخوای بیا به خودم بگو"/>
                     <img className="navbar-logo" src={require('../Assets/logo.png')} alt="logo"/>
                 </div>
                 <div className={`sub-navbar-container ${visible ? "active" : "hidden"}`}>

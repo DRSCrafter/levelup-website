@@ -5,9 +5,18 @@
     max-width: 450px;
     width: 45%;
     height: 40px;
-    border-radius: 200px;
+    border-radius: 50px;
     background-color: rgb(249, 249, 249);
     color: #707070;
+}
+
+.side-search-bar {
+    width: 100%;
+    max-width: none;
+    height: 70px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 5px 8px -3px rgb(0 0 0 / 10%);
 }
 
 .search-bar-input {

@@ -1,0 +1,90 @@
+.products-root {
+    width: 100%;
+    margin-inline: auto;
+    display: flex;
+    position: relative;
+    margin-top: 110px;
+}
+
+.products-items-container {
+    flex-basis: 100%;
+    padding: 15px;
+}
+
+.products-top-filter-root {
+    display: none;
+    padding: 15px;
+    align-items: center;
+    justify-content: flex-end;
+    border-radius: 10px;
+    box-shadow: 0 5px 8px -3px rgb(0 0 0 / 10%);
+    background-color: white;
+}
+
+.products-top-filter-container {
+    direction: rtl;
+    display: flex;
+    column-gap: 30px;
+    color: #8d8d8d;
+}
+
+.products-top-filter-title {
+    font-family: "B Yekan", sans-serif;
+    color: #707070;
+    padding-top: 5px;
+}
+
+.products-grid {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.products-grid-item {
+    box-sizing: border-box;
+    padding: 10px;
+    width: 100%;
+}
+
+.products-side-container {
+    display: flex;
+    position: sticky;
+    flex-direction: column;
+    height: 670px;
+    padding: 15px;
+    row-gap: 30px;
+    top: 100px;
+}
+
+.products-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+@media (min-width: 1024px) {
+    .products-top-filter-root {
+        display: flex;
+    }
+
+    .products-side-container {
+        display: flex;
+        flex-basis: 20%;
+    }
+
+    .products-items-container {
+        flex-basis: 80%;
+    }
+
+    .products-grid-item {
+        width: 25%;
+    }
+}
+
+@media (min-width: 768px) {
+    .products-root {
+        width: 90%;
+    }
+}
