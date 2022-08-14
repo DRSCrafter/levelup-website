@@ -1,5 +1,5 @@
 .product-swiper-container {
-    width: 95%;
+    width: 100%;
     margin-inline: auto;
     background-color: white;
     box-shadow: 0 5px 8px -3px rgb(0 0 0 / 10%);
@@ -37,10 +37,4 @@
 
 .product-swiper {
     width: 100%;
-}
-
-@media (min-width: 1200px) {
-    .product-swiper-container {
-        width: 90%;
-    }
 }

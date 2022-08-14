@@ -1,0 +1,90 @@
+.product-plate-container-outer {
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 8px -3px rgb(0 0 0 / 10%);
+}
+
+.product-plate-container-inner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 30px;
+    justify-content: space-between;
+}
+
+.product-plate-left-side {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: "Segoe UI Light", sans-serif;
+}
+
+.product-title-image {
+    width: 250px;
+    height: 400px;
+}
+
+.product-title {
+    font-family: "Teko SemiBold", sans-serif;
+    font-size: 25px;
+}
+
+.product-info-price {
+    color: #00ACFF;
+    font-family: "B Yekan", sans-serif;
+    font-weight: bold;
+}
+
+.product-controls {
+    width: 100%;
+    direction: rtl;
+}
+
+
+
+.product-plate-right-side {
+    color: #707070;
+    font-size: 16px;
+    font-family: "B Nazanin", sans-serif;
+    direction: rtl;
+    margin-top: 15px;
+}
+
+.product-exp {
+    font-family: "Segoe UI Light", sans-serif;
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: black;
+}
+
+@media (min-width: 1024px) {
+    .product-plate-container-outer {
+        height: 500px;
+    }
+
+    .product-plate-container-inner {
+        flex-direction: row;
+    }
+
+    .product-info-container {
+        margin-left: 15px;
+        height: 400px;
+    }
+
+    .product-plate-left-side {
+        flex-direction: row;
+    }
+
+    .product-plate-right-side {
+        width: 400px;
+        margin-top: 0;
+    }
+}

@@ -1,0 +1,16 @@
+.content-container {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: 20px;
+    margin-inline: auto;
+    margin-top: 120px;
+    margin-bottom: 30px;
+}
+
+@media (min-width: 1200px) {
+    .content-container {
+        width: 90%;
+    }
+}
