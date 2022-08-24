@@ -1,7 +1,6 @@
 import '../Styles/Components/account.css';
 import React from 'react';
 import ContentContainer from "../Components/ContentContainer";
-import NavBar from "../Components/navBar";
 import Footer from "../Components/Footer";
 
 import {Button} from "@mui/material";
@@ -33,7 +32,6 @@ function AccountPage() {
 
     return (
         <>
-            <NavBar/>
             <ContentContainer>
                 <div className="user-root">
                     <div className="orders-table-container-outer">

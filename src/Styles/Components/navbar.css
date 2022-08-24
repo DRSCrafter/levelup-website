@@ -2,7 +2,7 @@
     width: 100%;
     height: 110px;
     position: fixed;
-    z-index: 99999;
+    z-index: 1;
     top: 0;
 }
 
@@ -32,6 +32,10 @@
 
 .sub-navbar-container {
     display: none;
+}
+
+.font-sm {
+    font-size: 13px;
 }
 
 @media (min-width: 1024px) {
