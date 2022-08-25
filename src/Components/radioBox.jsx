@@ -15,7 +15,6 @@ function RadioBox({label, onChange, selectedValue, value}) {
                             onChange={onChange}
                             value={value}
                             name="radio-buttons"
-                            inputProps={{ 'aria-label': 'A' }}
                         />}
                     label={label}
                     labelPlacement="end"

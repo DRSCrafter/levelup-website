@@ -71,7 +71,7 @@ function NavBar() {
                     <span className="sub-navbar-btn-container">
                     {data.map(menu => (
                         <MenuButton title={menu.name} list={menu.list} anchorEl={anchorEl} onClick={handleClick}
-                                    onClose={handleClose}/>
+                                    onClose={handleClose} key={menu.name} />
                     ))}
                 </span>
                 </div>

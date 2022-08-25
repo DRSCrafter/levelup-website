@@ -33,7 +33,7 @@ function MenuButton({title, list, anchorEl, onClick, onClose}) {
                 }}
             >
                 {list.map(item => (
-                    <MenuItem onClick={onClose}>
+                    <MenuItem onClick={onClose} key={item.name}>
                     <span className="navbar-menu-btn-inner">
                         {item.name}
                     </span>

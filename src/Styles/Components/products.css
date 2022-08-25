@@ -11,7 +11,7 @@
 }
 
 .products-top-filter-root {
-    display: none;
+    display: flex;
     padding: 15px;
     align-items: center;
     justify-content: flex-end;
@@ -52,8 +52,13 @@
     flex-direction: column;
     height: 600px;
     padding: 15px;
-    row-gap: 20px;
+    row-gap: 10px;
     top: 100px;
+    transition: top 0.5s;
+}
+
+.side-up {
+    top: 60px!important;
 }
 
 .products-pagination {
@@ -68,7 +73,7 @@
         display: flex;
     }
 
-    .products-side-container {
+    .products-dede-container {
         display: flex;
         flex-basis: 20%;
     }
@@ -79,11 +84,5 @@
 
     .products-grid-item {
         width: 25%;
-    }
-}
-
-@media (min-width: 768px) {
-    .products-root {
-        width: 90%;
     }
 }

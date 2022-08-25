@@ -1,6 +1,6 @@
 import '../Styles/Components/products.css';
-import React from "react";
-import {Pagination} from "@mui/material";
+import React, {useEffect, useState} from "react";
+import {Pagination, Slider} from "@mui/material";
 
 import SideFilter from "../Components/sideFilter";
 import SearchBar from "../Components/searchBar";
@@ -9,22 +9,45 @@ import RadioBox from "../Components/radioBox";
 import RadioButton from "../Components/radioButton";
 import ProductCard from "../Components/productCard";
 
-function Products() {
-    const [selectedValue, setSelectedValue] = React.useState('');
-    const [selectedFilter, setSelectedFilter] = React.useState('');
+function Products({
+                      items,
+                      onCheckboxChange,
+                      radioValue,
+                      onRadioChange,
+                      pageValue,
+                      onPageChange,
+                      filterValue,
+                      onFilterChange,
+                      maxPrice,
+                      onSubmitString
+                  }) {
+    const [string, setString] = useState('');
 
-    const handleChange = (e) => {
-        setSelectedValue(e.target.value);
-    };
+    const handleChangeString = event => {
+        setString(event.target.value);
+    }
 
-    const handleSelect = (value) => {
-        setSelectedFilter(value);
-    };
+    const [range, setRange] = useState(-1);
+    const [price, setPrice] = useState(maxPrice);
 
-    const [page, setPage] = React.useState(1);
-    const handleTogglePage = (event, value) => {
-        setPage(value);
+    const handleRange = event => setRange(event.target.value);
+
+    const handlePriceChange = (event, newValue) => {
+        setPrice(newValue);
+    }
+
+    const [scrollPos, setScrollPos] = useState(0);
+    const [visible, setVisible] = useState(true);
+
+    const handleScroll = () => {
+        setScrollPos(document.body.getBoundingClientRect().top);
+        setVisible(document.body.getBoundingClientRect().top > scrollPos);
     };
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+    }, [handleScroll]);
+
+    const filteredItems = items.length !== 0 && range !== -1 ? items.filter(item => item.price <= price) : items;
 
     return (
         <>
@@ -33,50 +56,48 @@ function Products() {
                     <div className="products-top-filter-root">
                         <div className="products-top-filter-container">
                             <span className="products-top-filter-title">مرتب سازی بر اساس:</span>
-                            <RadioButton value={'جدیدترین'} selectedValue={selectedFilter}
-                                         onSelect={handleSelect}>جدیدترین</RadioButton>
-                            <RadioButton value={'محبوب ترین'} selectedValue={selectedFilter} onSelect={handleSelect}>محبوب
-                                ترین</RadioButton>
-                            <RadioButton value={'ارزان ترین'} selectedValue={selectedFilter} onSelect={handleSelect}>ارزان
-                                ترین</RadioButton>
-                            <RadioButton value={'گران ترین'} selectedValue={selectedFilter} onSelect={handleSelect}>گران
-                                ترین</RadioButton>
+                            <RadioButton value={'dateCreated'} selectedValue={filterValue}
+                                         onSelect={onFilterChange}>
+                                جدیدترین
+                            </RadioButton>
+                            <RadioButton value={'likes'} selectedValue={filterValue} onSelect={onFilterChange}>
+                                محبوب ترین
+                            </RadioButton>
+                            <RadioButton value={'-price'} selectedValue={filterValue} onSelect={onFilterChange}>
+                                ارزان ترین
+                            </RadioButton>
+                            <RadioButton value={'price'} selectedValue={filterValue} onSelect={onFilterChange}>
+                                گران ترین
+                            </RadioButton>
                         </div>
                     </div>
                     <div className="products-grid">
-                        <div className="products-grid-item"><ProductCard shadow/></div>
-                        <div className="products-grid-item"><ProductCard shadow/></div>
-                        <div className="products-grid-item"><ProductCard shadow/></div>
-                        <div className="products-grid-item"><ProductCard shadow/></div>
-                        <div className="products-grid-item"><ProductCard shadow/></div>
-                        <div className="products-grid-item"><ProductCard shadow/></div>
-                        <div className="products-grid-item"><ProductCard shadow/></div>
-                        <div className="products-grid-item"><ProductCard shadow/></div>
-                        <div className="products-grid-item"><ProductCard shadow/></div>
-                        <div className="products-grid-item"><ProductCard shadow/></div>
-                        <div className="products-grid-item"><ProductCard shadow/></div>
-                        <div className="products-grid-item"><ProductCard shadow/></div>
+                        {filteredItems.map(item => (
+                            <div className="products-grid-item" key={item.name}><ProductCard info={item} shadow/></div>
+                        ))}
                     </div>
                     <div className="products-pagination">
-                        <Pagination count={10} page={page} onChange={handleTogglePage}/>
+                        <Pagination count={10} page={pageValue} onChange={onPageChange}/>
                     </div>
                 </div>
-                <div className="products-side-container">
-                    <SearchBar placeholder="نام محصول را جستجو کنید" isSideBar/>
+                <div className={`products-side-container ${!visible ? 'side-up' : ''}`}>
+                    <SearchBar placeholder="نام محصول را جستجو کنید" isSideBar value={string}
+                               onChange={handleChangeString} onSubmit={() => onSubmitString(string)}/>
                     <SideFilter label="برند ها">
-                        <CheckBox label="سونی"/>
-                        <CheckBox label="سونی"/>
-                        <CheckBox label="سونی"/>
-                        <CheckBox label="سونی"/>
-                        <CheckBox label="سونی"/>
-                        <CheckBox label="سونی"/>
-                        <CheckBox label="سونی"/>
-                        <CheckBox label="سونی"/>
-                        <CheckBox label="سونی"/>
+                        <CheckBox label="Nintendo" onChanged={onCheckboxChange}/>
+                        <CheckBox label="Microsoft" onChanged={onCheckboxChange}/>
+                        <CheckBox label="Sony" onChanged={onCheckboxChange}/>
+                        <CheckBox label="CD Projekt" onChanged={onCheckboxChange}/>
                     </SideFilter>
                     <SideFilter label="موجودی">
-                        <RadioBox label="همه" onChange={handleChange} selectedValue={selectedValue} value="1"/>
-                        <RadioBox label="موجود" onChange={handleChange} selectedValue={selectedValue} value="2"/>
+                        <RadioBox label="همه" onChange={onRadioChange} selectedValue={radioValue} value={"0"}/>
+                        <RadioBox label="موجود" onChange={onRadioChange} selectedValue={radioValue} value={"1"}/>
+                    </SideFilter>
+                    <SideFilter label="محدوده قیمت" overFlowVisible>
+                        <div style={{padding: 20}}>
+                            <Slider step={100000} min={0} max={maxPrice} valueLabelDisplay="auto" marks value={range}
+                                    onChange={handleRange} onChangeCommitted={handlePriceChange}/>
+                        </div>
                     </SideFilter>
                 </div>
             </div>

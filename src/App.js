@@ -16,7 +16,7 @@ function App() {
             <NavBar/>
             <Routes>
                 <Route path="/" element={<MainPage/>}/>
-                <Route path="/cat/:category/:brand" element={<ProductsPage/>}/>
+                <Route path="/cat/:category" element={<ProductsPage/>}/>
                 <Route path="/products/:id" element={<ItemPage/>}/>
                 <Route path="/login" element={<LoginPage/>}/>
                 <Route path="/signup" element={<SignUpPage/>}/>

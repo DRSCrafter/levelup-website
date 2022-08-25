@@ -4,12 +4,9 @@ import {Button, IconButton, useMediaQuery} from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
-function ProductCard({name, price, image, shadow=false}) {
-    const data = {
-        name: "Paper Mario the Origami King",
-        price: "1,300,000",
-        image: require('../Assets/product.png')
-    }
+
+function ProductCard({info, shadow=false}) {
+    const {name, price, thumbnailImage, stock} = info;
 
     const matches = useMediaQuery('(min-width: 1024px)');
 
@@ -17,10 +14,10 @@ function ProductCard({name, price, image, shadow=false}) {
         <>
             <div className={`card-root ${shadow ? 'card-shadow' : ''}`}>
                 <div className="card-container">
-                    <img src={data.image} className="product-image" alt="product"/>
+                    <img src={'http://localhost:3001/' + thumbnailImage} className="product-image" alt="product"/>
                     <div className="product-info">
-                        <div className="product-name">{data.name}</div>
-                        <div className="product-price">{data.price} تومان</div>
+                        <div className="product-name">{name}</div>
+                        <div className="product-price">{stock !== 0 ? `${price} تومان` : 'ناموجود'}</div>
                         <div className="product-commands">
                             <IconButton style={{color: "#FF5D5D"}}>
                                 <FavoriteBorderIcon htmlColor="#FF5D5D"/>
