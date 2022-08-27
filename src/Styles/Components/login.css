@@ -70,6 +70,21 @@
     margin-block: 5px;
 }
 
+.signup-upload-image {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-family: "Segoe UI Light", sans-serif;
+    font-size: 13px;
+    padding-right: 5px;
+    margin-top: 10px;
+}
+
+.MuiInputLabel-root {
+    font-family: "Segoe UI Light", sans-serif !important;
+    font-size: 13px !important;
+}
+
 @media (min-width: 1024px) {
     .login-container {
         width: 40%;

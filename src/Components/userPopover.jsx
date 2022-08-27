@@ -1,13 +1,19 @@
 import '../Styles/Components/userPopover.css';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import IconPopOver from "./iconPopOver";
 
 import {Button, IconButton} from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PersonIcon from "@mui/icons-material/Person";
+import UserContext from "../Context/userContext";
+import {useNavigate} from "react-router-dom";
 
 function UserPopover() {
+    const currentUser = useContext(UserContext);
+
+    const navigate = useNavigate();
+
     const [popAnchorEl1, setPopAnchorEl1] = useState(null);
 
     const handlePopOver1 = (event) => {
@@ -19,6 +25,11 @@ function UserPopover() {
     const openUser = Boolean(popAnchorEl1);
     const userID = openUser ? 'user-popover' : undefined;
 
+    const handleLogOut = () => {
+        localStorage.removeItem('token');
+        window.location = '/';
+    }
+
     return (
         <>
             <IconButton style={{marginRight: 10}} className="navbar-icon-btn" aria-describedby={userID}
@@ -29,22 +40,21 @@ function UserPopover() {
                 <div className="user-popover-container">
                     <div className="user-popover-topside">
                         <div className="user-popover-topside-info">
-                            <div style={{
+                            <img src={'http://localhost:3001/' + currentUser.userImage} style={{
                                 width: 70,
                                 height: 70,
-                                backgroundColor: 'grey',
                                 borderRadius: '50%',
                                 position: "absolute",
                                 top: -15,
                                 right: 5
-                            }}/>
+                            }} alt="User"/>
                             <div className="user-popover-topside-info-inner">
-                                <div>محمد رضا آراسته شاهراه</div>
-                                <div className="font-sm">drsprogramming2020@gmail.com</div>
+                                <div>{currentUser && currentUser.name}</div>
+                                <div className="font-sm">{currentUser && currentUser.email}</div>
                             </div>
                         </div>
                         <div className="user-popover-topside-account">
-                            مانده اعتبار: 0 تومان
+                            {`مانده اعتبار: ${currentUser && currentUser.account} تومان`}
                         </div>
                     </div>
                     <div className="user-popover-downside">
@@ -55,7 +65,7 @@ function UserPopover() {
                             justifyContent: "flex-start",
                             color: '#707070',
                             fontFamily: 'Segoe UI Light'
-                        }} variant="text">
+                        }} variant="text" onClick={() => navigate('../account')}>
                             <ShoppingCartOutlinedIcon style={{marginLeft: 15}}/>
                             سفارشات من
                         </Button>
@@ -66,7 +76,7 @@ function UserPopover() {
                             justifyContent: "flex-start",
                             color: '#707070',
                             fontFamily: 'Segoe UI Light',
-                        }} variant="text">
+                        }} variant="text" onClick={handleLogOut}>
                             <LogoutIcon style={{marginLeft: 15}}/>
                             خروج از حساب کاربری
                         </Button>
