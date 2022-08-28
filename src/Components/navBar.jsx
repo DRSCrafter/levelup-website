@@ -9,7 +9,14 @@ import AccountPopover from "./accountPopover";
 
 const data = [
     {
-        name: 'کنسول',
+        name: 'سایر',
+        list: [
+            {name: 'گیفت کارت', link: '#'},
+            {name: 'لایسنس قانونی', link: '#'},
+        ]
+    },
+    {
+        name: 'بازی',
         list: [
             {name: 'نینتندو سوییچ', link: '#'},
             {name: 'پلی استیشن', link: '#'},
@@ -17,19 +24,10 @@ const data = [
         ]
     },
     {
-        name: 'کنسول',
+        name: 'کنسول و لوازم جانبی',
         list: [
-            {name: 'نینتندو سوییچ', link: '#'},
-            {name: 'پلی استیشن', link: '#'},
-            {name: 'ایکس باکس', link: '#'},
-        ]
-    },
-    {
-        name: 'کنسول',
-        list: [
-            {name: 'نینتندو سوییچ', link: '#'},
-            {name: 'پلی استیشن', link: '#'},
-            {name: 'ایکس باکس', link: '#'},
+            {name: 'کنسول', link: '#'},
+            {name: 'لوازم جانبی', link: '#'},
         ]
     },
 ];
@@ -47,14 +45,6 @@ function NavBar() {
         window.addEventListener("scroll", handleScroll);
     }, [handleScroll]);
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
     return (
         <>
             <div className="navbar-root">
@@ -70,8 +60,7 @@ function NavBar() {
                     <DarkModeButton/>
                     <span className="sub-navbar-btn-container">
                     {data.map(menu => (
-                        <MenuButton title={menu.name} list={menu.list} anchorEl={anchorEl} onClick={handleClick}
-                                    onClose={handleClose} key={menu.name} />
+                        <MenuButton title={menu.name} list={menu.list} anchorEl={anchorEl} key={menu.name} />
                     ))}
                 </span>
                 </div>

@@ -1,15 +1,25 @@
 import '../Styles/Components/menuButton.css'
-import React from 'react';
+import React, {useState} from 'react';
+
 import Menu from '@mui/material/Menu';
 import MenuItem from "@mui/material/MenuItem";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-function MenuButton({title, list, anchorEl, onClick, onClose}) {
+function MenuButton({title, list}) {
+    const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
     return (
         <>
-            <span className="navbar-menu-btn" onClick={onClick}>
+            <span className="navbar-menu-btn" onClick={handleClick}>
                 <ExpandMoreIcon fontSize="small"/>
                 {title}
             </span>
@@ -19,7 +29,7 @@ function MenuButton({title, list, anchorEl, onClick, onClose}) {
                 id="basic-menu"
                 anchorEl={anchorEl}
                 open={open}
-                onClose={onClose}
+                onClose={handleClose}
                 MenuListProps={{
                     'aria-labelledby': 'basic-button',
                 }}
@@ -33,7 +43,7 @@ function MenuButton({title, list, anchorEl, onClick, onClose}) {
                 }}
             >
                 {list.map(item => (
-                    <MenuItem onClick={onClose} key={item.name}>
+                    <MenuItem onClick={handleClose} key={item.name}>
                     <span className="navbar-menu-btn-inner">
                         {item.name}
                     </span>

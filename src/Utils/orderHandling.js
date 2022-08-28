@@ -1,7 +1,7 @@
 import httpConnection from "./httpConnection";
 const {apiEndpoint} = require('../config.json');
 
-export const handleDeleteOrder = async (user, handleUpdateUser, order) => {
+export const DeleteOrder = async (user, handleUpdateUser, order) => {
     const {productID, quantity} = order;
 
     let shoppingCart = [...user.shoppingCart];
@@ -15,7 +15,7 @@ export const handleDeleteOrder = async (user, handleUpdateUser, order) => {
 
         const request = JSON.stringify({productID: productID, quantity: quantity});
 
-        await httpConnection.put(`${apiEndpoint}${user._id}/order/delete`, request, {
+        await httpConnection.put(`${apiEndpoint}users/${user._id}/order/delete`, request, {
             headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
         });
 

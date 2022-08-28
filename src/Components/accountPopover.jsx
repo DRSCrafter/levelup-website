@@ -8,7 +8,7 @@ import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import DeleteIcon from '@mui/icons-material/Delete';
 import UserContext from "../Context/userContext";
 import ShopIcon from '@mui/icons-material/Shop';
-import {handleDeleteOrder} from "../Utils/orderHandling";
+import {DeleteOrder} from "../Utils/orderHandling";
 
 function AccountPopover() {
     const navigate = useNavigate();
@@ -54,7 +54,7 @@ function AccountPopover() {
                             {user && shoppingList.map(order => (
                                 <div className="account-order-container">
                                     <IconButton style={{color: '#FF9797'}} size="small"
-                                                onClick={() => handleDeleteOrder(user, handleUpdateUser, order)}>
+                                                onClick={() => DeleteOrder(user, handleUpdateUser, order)}>
                                         <DeleteIcon htmlColor="#FF0000"/>
                                     </IconButton>
                                     <span>{user && order.totalPrice} تومان</span>

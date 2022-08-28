@@ -11,6 +11,7 @@ import AccountPage from "./Pages/accountPage";
 import httpConnection from "./Utils/httpConnection";
 import jwtDecode from "jwt-decode";
 import UserContext from "./Context/userContext";
+import ShoppingCartPage from "./Pages/shoppingCartPage";
 
 function App() {
     const [user, setUser] = useState(null);
@@ -40,6 +41,7 @@ function App() {
                     <Route path="/login" element={<LoginPage/>}/>
                     <Route path="/signup" element={<SignUpPage/>}/>
                     <Route path="/account" element={<AccountPage/>}/>
+                    <Route path="/shoppingCart" element={<ShoppingCartPage/>}/>
                 </Routes>
             </UserContext.Provider>
         </>
