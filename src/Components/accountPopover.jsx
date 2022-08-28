@@ -1,11 +1,19 @@
 import '../Styles/Components/accountPopover.css';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
+import {useNavigate} from "react-router-dom";
 import IconPopOver from "./iconPopOver";
 
-import {IconButton} from "@mui/material";
+import {Button, IconButton} from "@mui/material";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import DeleteIcon from '@mui/icons-material/Delete';
+import UserContext from "../Context/userContext";
+import httpConnection from "../Utils/httpConnection";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import ShopIcon from '@mui/icons-material/Shop';
 
 function AccountPopover() {
+    const navigate = useNavigate();
+
     const [popAnchorEl2, setPopAnchorEl2] = useState(null);
 
     const handlePopOver2 = (event) => {
@@ -18,12 +26,88 @@ function AccountPopover() {
     const openCart = Boolean(popAnchorEl2);
     const shoppingCardID = openCart ? 'shopping-card-popover' : undefined;
 
+    const trimString = (string, length = 16) =>
+        string.length > length ? string.substring(0, length) + '...' : string;
+
+    const {user, handleUpdateUser} = useContext(UserContext);
+
+    const shoppingList = user && user.shoppingCart;
+    const totalCost = shoppingList && shoppingList.reduce((a, b) => a + b.totalPrice, 0);
+
+    const handleDeleteOrder = async ({productID, quantity}) => {
+        let shoppingCart = [...user.shoppingCart];
+        let backup = [...user.shoppingCart];
+
+        try {
+            const orderItem = shoppingCart.find((order) => order.productID == productID);
+            const orderIndex = shoppingCart.indexOf(orderItem);
+            shoppingCart.splice(orderIndex, 1);
+            handleUpdateUser('shoppingCart', shoppingCart);
+
+            const request = JSON.stringify({productID: productID, quantity: quantity});
+
+            await httpConnection.put('http://localhost:3001/api/users/' + user._id + '/order/delete', request, {
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
+            });
+
+        } catch (ex) {
+            handleUpdateUser('shoppingCart', backup);
+        }
+    }
+
+    const handleNavigate = () => {
+        handleClosePopOver2();
+        navigate('../shoppingCart');
+    }
+
     return (
         <>
             <IconButton className="navbar-icon-btn" aria-describedby={shoppingCardID} onClick={handlePopOver2}>
                 <AccountBalanceWalletIcon htmlColor="#0080FF"/>
             </IconButton>
             <IconPopOver anchorEl={popAnchorEl2} onClose={handleClosePopOver2} open={openCart} id={shoppingCardID}>
+                {shoppingList && shoppingList.length !== 0 ?
+                    <div className="account-popover-container">
+                        <div className="account-popover-topside">
+                            <span>جمع کل سفارش ها:</span>
+                            <span>{user && totalCost} تومان</span>
+                        </div>
+                        <div className="account-popover-downside">
+                            {user && shoppingList.map(order => (
+                                <div className="account-order-container">
+                                    <IconButton style={{color: '#FF9797'}} size="small"
+                                                onClick={() => handleDeleteOrder(order)}>
+                                        <DeleteIcon htmlColor="#FF0000"/>
+                                    </IconButton>
+                                    <span>{user && order.totalPrice} تومان</span>
+                                    <span>
+                                        <span>{user && trimString(order.name)}</span>
+                                        <span>x{user && order.quantity}</span>
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="account-popover-btn-container">
+                            <Button
+                                style={{
+                                    width: '60%',
+                                    borderRadius: 10,
+                                    fontFamily: '"B Yekan", sans-serif',
+                                    color: '#ffffff',
+                                    position: "relative"
+                                }}
+                                variant="contained"
+                                endIcon={<ShopIcon style={{position: "absolute", left: 30, top: 10}}/>}
+                                onClick={handleNavigate}>تکمیل خرید</Button>
+                        </div>
+                    </div>
+                    :
+                    <div className="account-popover-container">
+                        <div className="account-popover-empty">
+                            سبد خرید شما خالی است
+                        </div>
+                    </div>
+                }
             </IconPopOver>
         </>
     );

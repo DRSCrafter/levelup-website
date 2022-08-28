@@ -10,7 +10,7 @@ import UserContext from "../Context/userContext";
 import {useNavigate} from "react-router-dom";
 
 function UserPopover() {
-    const currentUser = useContext(UserContext);
+    const currentUser = useContext(UserContext).user;
 
     const navigate = useNavigate();
 
@@ -40,7 +40,7 @@ function UserPopover() {
                 <div className="user-popover-container">
                     <div className="user-popover-topside">
                         <div className="user-popover-topside-info">
-                            <img src={'http://localhost:3001/' + currentUser.userImage} style={{
+                            <img src={currentUser && 'http://localhost:3001/' + currentUser.userImage} style={{
                                 width: 70,
                                 height: 70,
                                 borderRadius: '50%',

@@ -3,7 +3,6 @@ import React from 'react';
 import SignUpBox from "../Components/signupBox";
 
 function SignUpPage() {
-
     return (
         <>
             <SignUpBox/>

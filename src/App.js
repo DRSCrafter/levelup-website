@@ -27,9 +27,11 @@ function App() {
         loginUser();
     }, []);
 
+    const handleUpdateUser = (key, value) => setUser({...user, [key]: value});
+
     return (
         <>
-            <UserContext.Provider value={user}>
+            <UserContext.Provider value={{user, handleUpdateUser}}>
                 <NavBar/>
                 <Routes>
                     <Route path="/" force element={<MainPage/>}/>
