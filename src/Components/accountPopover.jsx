@@ -7,9 +7,8 @@ import {Button, IconButton} from "@mui/material";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import DeleteIcon from '@mui/icons-material/Delete';
 import UserContext from "../Context/userContext";
-import httpConnection from "../Utils/httpConnection";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import ShopIcon from '@mui/icons-material/Shop';
+import {handleDeleteOrder} from "../Utils/orderHandling";
 
 function AccountPopover() {
     const navigate = useNavigate();
@@ -34,27 +33,6 @@ function AccountPopover() {
     const shoppingList = user && user.shoppingCart;
     const totalCost = shoppingList && shoppingList.reduce((a, b) => a + b.totalPrice, 0);
 
-    const handleDeleteOrder = async ({productID, quantity}) => {
-        let shoppingCart = [...user.shoppingCart];
-        let backup = [...user.shoppingCart];
-
-        try {
-            const orderItem = shoppingCart.find((order) => order.productID == productID);
-            const orderIndex = shoppingCart.indexOf(orderItem);
-            shoppingCart.splice(orderIndex, 1);
-            handleUpdateUser('shoppingCart', shoppingCart);
-
-            const request = JSON.stringify({productID: productID, quantity: quantity});
-
-            await httpConnection.put('http://localhost:3001/api/users/' + user._id + '/order/delete', request, {
-                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
-            });
-
-        } catch (ex) {
-            handleUpdateUser('shoppingCart', backup);
-        }
-    }
-
     const handleNavigate = () => {
         handleClosePopOver2();
         navigate('../shoppingCart');
@@ -76,7 +54,7 @@ function AccountPopover() {
                             {user && shoppingList.map(order => (
                                 <div className="account-order-container">
                                     <IconButton style={{color: '#FF9797'}} size="small"
-                                                onClick={() => handleDeleteOrder(order)}>
+                                                onClick={() => handleDeleteOrder(user, handleUpdateUser, order)}>
                                         <DeleteIcon htmlColor="#FF0000"/>
                                     </IconButton>
                                     <span>{user && order.totalPrice} تومان</span>

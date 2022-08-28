@@ -9,31 +9,13 @@ import {CacheProvider} from '@emotion/react';
 import createCache from '@emotion/cache';
 import httpConnection from "../Utils/httpConnection";
 import {useNavigate} from "react-router-dom";
+import {Login} from "../Utils/userHandling";
 
 function LoginBox() {
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const reqBody = JSON.stringify({
-            email: email,
-            password: password
-        })
-
-        try {
-            const request = await httpConnection.put('http://localhost:3001/api/users/login', reqBody, {
-                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
-            });
-            localStorage.setItem("token", request.headers['x-auth-token']);
-            window.location = '/';
-        } catch (ex) {
-            console.log(ex.response.message);
-        }
-    };
 
     const handleNavigation = () => navigate('../signup');
 
@@ -80,7 +62,7 @@ function LoginBox() {
                                             color: 'white',
                                             boxShadow: '0 10px 20px -10px #0080FF',
                                             fontFamily: '"B Yekan"'
-                                        }} variant="contained" onClick={handleSubmit}>ورود</Button>
+                                        }} variant="contained" onClick={(event) => Login(event, email, password)}>ورود</Button>
                                         <Button style={{
                                             width: '100%',
                                             paddingBlock: 15,

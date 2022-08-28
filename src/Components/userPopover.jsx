@@ -8,6 +8,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import PersonIcon from "@mui/icons-material/Person";
 import UserContext from "../Context/userContext";
 import {useNavigate} from "react-router-dom";
+import {handleLogOut} from "../Utils/userHandling";
 
 function UserPopover() {
     const currentUser = useContext(UserContext).user;
@@ -24,11 +25,6 @@ function UserPopover() {
     }
     const openUser = Boolean(popAnchorEl1);
     const userID = openUser ? 'user-popover' : undefined;
-
-    const handleLogOut = () => {
-        localStorage.removeItem('token');
-        window.location = '/';
-    }
 
     return (
         <>

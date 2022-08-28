@@ -1,9 +1,9 @@
 import React, {useEffect, useRef, useState} from "react";
 import Products from "../Components/products";
 import Footer from "../Components/Footer";
-import httpConnection from "../Utils/httpConnection";
 import {useParams} from "react-router-dom";
 import ContentContainer from "../Components/ContentContainer";
+import {getProducts} from "../Utils/productHandling";
 
 function ProductsPage() {
     const [string, setString] = useState("");
@@ -15,24 +15,11 @@ function ProductsPage() {
 
     const {category} = useParams();
 
-    const getData = async () => {
-        const reqBody = JSON.stringify({
-            name: string,
-            companies: companies,
-            isAvailable: isAvailable,
-            type: category
-        });
-        const resBody = await httpConnection.put('http://localhost:3001/api/products/filter/', reqBody, {
-            headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
-        });
-        return resBody.data;
-    };
-
     const prices = useRef(0);
     const maxPrice = useRef(0);
 
     useEffect(() => {
-        getData().then(res => {
+        getProducts(string, companies, isAvailable, category).then(res => {
             setItems(res);
             prices.current = res.map(item => item.price);
             maxPrice.current = res.length !== 0 ? Math.max.apply(Math, prices.current) : 0;

@@ -11,6 +11,7 @@ import ProductCard from "../Components/productCard";
 import httpConnection from "../Utils/httpConnection";
 import UserContext from "../Context/userContext";
 import toast from "react-hot-toast";
+import {Buy, Like} from "../Utils/productHandling";
 
 function Products({
                       items,
@@ -50,80 +51,6 @@ function Products({
         window.addEventListener("scroll", handleScroll);
     }, [handleScroll]);
 
-    const {user, handleUpdateUser} = useContext(UserContext);
-
-    const handleBuy = async (info, quantity = 1) => {
-        let shoppingCart = [...user.shoppingCart];
-        let backupCart = [...user.shoppingCart];
-        try {
-            let orderIndex = -1;
-            const order = {
-                productID: info._id,
-                name: info.name,
-                quantity: quantity,
-                totalPrice: info.price * quantity
-            };
-
-            const orderIDList = shoppingCart.map(item => item.productID);
-            const itemExists = orderIDList.findIndex(productID => productID == info._id) !== -1;
-
-            if (!itemExists) {
-                shoppingCart.push(order);
-            } else {
-                orderIndex = shoppingCart.findIndex(item => item.productID === info._id);
-                shoppingCart[orderIndex].quantity = shoppingCart[orderIndex].quantity + quantity;
-                shoppingCart[orderIndex].totalPrice = shoppingCart[orderIndex].totalPrice + info.price * quantity;
-            }
-            handleUpdateUser('shoppingCart', shoppingCart);
-
-            await httpConnection.post('http://localhost:3001/api/users/' + user._id + '/order', JSON.stringify({
-                ...order,
-                itemExists: itemExists
-            }), {
-                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
-            });
-
-            toast.success("به سبد اضافه شد");
-        } catch (ex) {
-            handleUpdateUser('shoppingCart', backupCart);
-            toast.error(ex.response.message);
-        }
-    };
-
-    const handleLike = async (id) => {
-        let likes = [...user.likes];
-
-        if (user.likes.includes(id)) {
-            const dislike = JSON.stringify({userID: user._id, isIncrement: false});
-            try {
-                console.log(likes);
-                likes = likes.filter(productID => productID !== id);
-                console.log(likes);
-                await httpConnection.put(`http://localhost:3001/api/products/${id}/like`, dislike, {
-                    headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
-                });
-                console.log('disliked');
-            } catch (ex) {
-                likes.push(id);
-                console.log(ex.response.message);
-            }
-        } else {
-            try {
-                likes.push(id);
-                const like = JSON.stringify({userID: user._id, isIncrement: true});
-                await httpConnection.put(`http://localhost:3001/api/products/${id}/like`, like, {
-                    headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
-                });
-                console.log('liked');
-            } catch (ex) {
-                likes = likes.filter(productID => productID !== id);
-                console.log(ex.response.message);
-            }
-        }
-
-        handleUpdateUser('likes', likes);
-    }
-
     const filteredItems = items.length !== 0 && range !== -1 ? items.filter(item => item.price <= price) : items;
 
     return (
@@ -151,7 +78,7 @@ function Products({
                     <div className="products-grid">
                         {filteredItems.map(item => (
                             <div className="products-grid-item" key={item.name}>
-                                <ProductCard info={item} onBuy={handleBuy} onLike={handleLike} shadow/>
+                                <ProductCard info={item} onBuy={Buy} onLike={Like} shadow/>
                             </div>
                         ))}
                     </div>
