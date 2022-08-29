@@ -1,7 +1,7 @@
 .user-root {
     width: 100%;
     display: flex;
-    column-gap: 15px;
+    flex-direction: column-reverse;
     justify-content: space-between;
 }
 
@@ -60,15 +60,14 @@ td {
 }
 
 .user-info-container {
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     background-color: white;
     flex-basis: 0;
-    height: 600px;
-    top: 120px;
-    position: sticky;
+    row-gap: 30px;
+    padding: 10px;
     box-shadow: 0 5px 8px -3px rgb(0 0 0 / 10%);
     border-radius: 10px;
     direction: rtl;
@@ -107,10 +106,18 @@ td {
 
 @media (min-width: 1024px) {
     .orders-table-container-outer {
-        flex-basis: 75%;
+        flex-basis: 70%;
+    }
+    .user-root {
+        column-gap: 15px;
+        flex-direction: row;
     }
     .user-info-container {
         display: flex;
-        flex-basis: 25%;
+        height: 600px;
+        flex-basis: 30%;
+        row-gap: 0;
+        position: sticky;
+        top: 120px;
     }
 }

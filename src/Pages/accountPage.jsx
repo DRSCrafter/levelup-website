@@ -1,34 +1,50 @@
 import '../Styles/Components/account.css';
-import React from 'react';
+import React, {useContext} from 'react';
 import ContentContainer from "../Components/ContentContainer";
 import Footer from "../Components/Footer";
 
-import {Button} from "@mui/material";
+import {Button, useMediaQuery} from "@mui/material";
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import LogoutIcon from '@mui/icons-material/Logout';
+import UserContext from "../Context/userContext";
+import AccountDialog from "../Components/accountDialog";
+import httpConnection from "../Utils/httpConnection";
 
-const data = [
-    {name: "Halo Unlimited", date: '2022/03/07', quantity: 1, totalCost: '1,300,000'},
-    {name: "Halo Unlimited", date: '2022/03/07', quantity: 1, totalCost: '1,300,000'},
-    {name: "Halo Unlimited", date: '2022/03/07', quantity: 1, totalCost: '1,300,000'},
-    {name: "Halo Unlimited", date: '2022/03/07', quantity: 1, totalCost: '1,300,000'},
-    {name: "Halo Unlimited", date: '2022/03/07', quantity: 1, totalCost: '1,300,000'},
-    {name: "Halo Unlimited", date: '2022/03/07', quantity: 1, totalCost: '1,300,000'},
-    {name: "Halo Unlimited", date: '2022/03/07', quantity: 1, totalCost: '1,300,000'},
-    {name: "Halo Unlimited", date: '2022/03/07', quantity: 1, totalCost: '1,300,000'},
-    {name: "Halo Unlimited", date: '2022/03/07', quantity: 1, totalCost: '1,300,000'},
-    {name: "Halo Unlimited", date: '2022/03/07', quantity: 1, totalCost: '1,300,000'},
-    {name: "Halo Unlimited", date: '2022/03/07', quantity: 1, totalCost: '1,300,000'},
-    {name: "Halo Unlimited", date: '2022/03/07', quantity: 1, totalCost: '1,300,000'},
-    {name: "Halo Unlimited", date: '2022/03/07', quantity: 1, totalCost: '1,300,000'},
-    {name: "Halo Unlimited", date: '2022/03/07', quantity: 1, totalCost: '1,300,000'},
-    {name: "Halo Unlimited", date: '2022/03/07', quantity: 1, totalCost: '1,300,000'},
-    {name: "Halo Unlimited", date: '2022/03/07', quantity: 1, totalCost: '1,300,000'},
-    {name: "Halo Unlimited", date: '2022/03/07', quantity: 1, totalCost: '1,300,000'},
-    {name: "Halo Unlimited", date: '2022/03/07', quantity: 1, totalCost: '1,300,000'},
-];
+const {apiEndpoint} = require('../config.json');
 
 function AccountPage() {
+    const {user, handleUpdateUser} = useContext(UserContext);
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleChargeAccount = async (amount) => {
+        const currentAmount = user.account;
+        const request = JSON.stringify({
+            amount: amount
+        })
+
+        try {
+            handleUpdateUser('account', currentAmount + amount);
+
+            await httpConnection.put(`${apiEndpoint}users/${user._id}/account`, request, {
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
+            });
+        } catch (ex) {
+            handleUpdateUser('account', currentAmount);
+        }
+
+        handleClose();
+    }
+
+    const isPC = useMediaQuery('(min-width: 1024px)');
 
     return (
         <>
@@ -45,46 +61,50 @@ function AccountPage() {
                                 <th>تعداد</th>
                                 <th>مبلغ کل</th>
                             </tr>
-                            {data.map(item => (
+                            {user && user.order.map(item => (
                                 <tr>
                                     <td>{item.name}</td>
                                     <td>{item.date}</td>
                                     <td>{item.quantity}</td>
-                                    <td>{item.totalCost}</td>
+                                    <td>{item.totalPrice}</td>
                                 </tr>
                             ))}
                         </table>
                     </div>
                     <div className="user-info-container">
                         <div className="user-personal-info">
-                            <div style={{width: 150, height: 150, backgroundColor: 'grey', borderRadius: 80}}/>
-                            <div className="user-info-name">محمد رضا آراسته شاهراه</div>
-                            <div className="user-info-email">drsprogramming2020@gmail.com</div>
+                            <img src={user && `http://localhost:3001/${user.userImage}`} style={{width: 150, height: 150, borderRadius: '50%'}}/>
+                            <div className="user-info-name">{user && user.name}</div>
+                            <div className="user-info-email">{user && user.email}</div>
                         </div>
                         <div className="user-wallet-container">
                             <div className="user-wallet-container-inner">
                                 <span>اعتبار فعلی شما:</span>
-                                <span>0 تومان</span>
+                                <span>{user && user.account} تومان</span>
                             </div>
                             <Button style={{
                                 width: '100%',
                                 backgroundColor: '#98CCFF',
                                 color: '#0080FF',
                                 fontFamily: '"B Yekan"'
-                            }} startIcon={<AccountBalanceWalletIcon style={{marginLeft: 10}}/>} variant="contained">افزایش
-                                اعتبار</Button>
+                            }} startIcon={<AccountBalanceWalletIcon style={{marginLeft: 10}}/>} variant="contained"
+                                    onClick={handleClickOpen}>
+                                افزایش اعتبار
+                            </Button>
                         </div>
                         <Button style={{
                             width: '75%',
                             backgroundColor: '#FF9797',
                             color: '#FF0000',
                             fontFamily: '"B Yekan"'
-                        }} startIcon={<LogoutIcon style={{marginLeft: 10}}/>} variant="contained">خروج از حساب
-                            کاربری</Button>
+                        }} startIcon={<LogoutIcon style={{marginLeft: 10}}/>} variant="contained">
+                            خروج از حساب کاربری
+                        </Button>
                     </div>
                 </div>
             </ContentContainer>
             <Footer/>
+            <AccountDialog onClose={handleClose} open={open} onCharge={handleChargeAccount} isPC={isPC}/>
         </>
     );
 }
