@@ -8,6 +8,7 @@
 .products-items-container {
     flex-basis: 100%;
     padding: 15px;
+    box-sizing: border-box;
 }
 
 .products-top-filter-root {
@@ -47,7 +48,7 @@
 }
 
 .products-side-container {
-    display: flex;
+    display: none;
     position: sticky;
     flex-direction: column;
     height: 600px;
@@ -73,13 +74,12 @@
         display: flex;
     }
 
-    .products-dede-container {
-        display: flex;
-        flex-basis: 20%;
-    }
-
     .products-items-container {
         flex-basis: 80%;
+    }
+
+    .products-side-container {
+        display: flex;
     }
 
     .products-grid-item {

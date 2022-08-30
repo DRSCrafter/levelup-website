@@ -30,7 +30,7 @@ const data = [
         tag: 'other',
         icon: <Inventory2Icon/>,
         list: [
-            {name: 'گیفت کارت', category: 'cat/giftcard'},
+            {name: 'گیفت کارت', link: 'cat/giftcard'},
             {name: 'لایسنس قانونی', link: 'cat/license'},
         ]
     },
@@ -39,7 +39,7 @@ const data = [
         tag: 'game',
         icon: <SportsEsportsIcon/>,
         list: [
-            {name: 'نینتندو سوییچ', link: 'switch'},
+            {name: 'نینتندو سوییچ', link: 'cat/switch'},
             {name: 'پلی استیشن', link: 'cat/playstation'},
             {name: 'ایکس باکس', link: 'cat/xbox'},
         ]
@@ -62,6 +62,7 @@ function NavBar() {
     const [anchorEl, setAnchorEl] = useState(null);
     const [drawer, setDrawer] = useState(false);
     const [search, setSearch] = React.useState(false);
+    const [string, setString] = useState('');
     const [category, setCategory] = React.useState(false);
 
     const handleScroll = () => {
@@ -86,16 +87,19 @@ function NavBar() {
     }
     const handleCloseCategory = () => setCategory(false);
 
+    const handleSetString = (event) => setString(event.target.value);
+
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
     }, [handleScroll]);
 
     const isPC = useMediaQuery('(min-width: 1024px)');
 
-    const {user, handleUpdateUser} = useContext(UserContext);
+    const {user} = useContext(UserContext);
 
     const navigate = useNavigate();
     const handleNavigate = (destination) => navigate(`./${destination}`);
+    const handleSearch = () => window.location = `/search?str=${string}`;
 
     const drawerList1 = [
         {
@@ -143,8 +147,10 @@ function NavBar() {
                       </>
                   }
               </span>
-                    <SearchBar placeholder="چی میخوای بیا به خودم بگو"/>
-                    <img className="navbar-logo" src={require('../Assets/logo.png')} alt="logo" onClick={() => navigate('./')}/>
+                    <SearchBar placeholder="چی میخوای بیا به خودم بگو" value={string} onChange={handleSetString}
+                               onSubmit={handleSearch}/>
+                    <img className="navbar-logo" src={require('../Assets/logo.png')} alt="logo"
+                         onClick={() => navigate('./')}/>
                 </div>
                 <div className={`sub-navbar-container ${visible ? "active" : "hidden"}`}>
                     <span className="sub-navbar-btn-container">
@@ -202,7 +208,8 @@ function NavBar() {
                     </List>
                 </Box>
             </Drawer>
-            <SearchDialog open={search} onClose={handleCloseSearch}/>
+            <SearchDialog open={search} onClose={handleCloseSearch} value={string} onChange={handleSetString}
+                          onSubmit={handleSearch}/>
             <CategoryDialog open={category} onClose={handleCloseCategory} data={data} onTrigger={handleNavigate}/>
         </>
     );

@@ -1,16 +1,17 @@
 import React, {useEffect, useRef, useState} from "react";
+import {useParams} from "react-router-dom";
+
 import Products from "../Components/products";
 import Footer from "../Components/Footer";
-import {useParams} from "react-router-dom";
 import ContentContainer from "../Components/ContentContainer";
 import {getProducts} from "../Utils/productHandling";
 
 function ProductsPage() {
     const [string, setString] = useState("");
     const [companies, setCompanies] = useState([]);
-    const [isAvailable, setIsAvailable] = useState('');
+    const [isAvailable, setIsAvailable] = useState('0');
 
-    const [selectedSort, setSelectedSort] = React.useState('');
+    const [selectedSort, setSelectedSort] = React.useState('name');
     const [items, setItems] = useState([]);
 
     const {category} = useParams();
@@ -19,12 +20,12 @@ function ProductsPage() {
     const maxPrice = useRef(0);
 
     useEffect(() => {
-        getProducts(string, companies, isAvailable, category).then(res => {
+        getProducts(string, companies, isAvailable, category, selectedSort).then(res => {
             setItems(res);
             prices.current = res.map(item => item.price);
             maxPrice.current = res.length !== 0 ? Math.max.apply(Math, prices.current) : 0;
         });
-    }, [string, companies, isAvailable])
+    }, [string, companies, isAvailable, selectedSort])
 
     const handleCheckboxChange = event => {
         let newArray = [...companies, event.target.value];

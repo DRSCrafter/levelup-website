@@ -43,6 +43,10 @@
     font-weight: bold;
 }
 
+.text-danger {
+    color: rgba(255, 83, 83, 0.8) !important;
+}
+
 .product-controls {
     width: 100%;
     direction: rtl;

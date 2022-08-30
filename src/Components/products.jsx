@@ -1,17 +1,19 @@
 import '../Styles/Components/products.css';
-import React, {useContext, useEffect, useState} from "react";
-import {Pagination, Slider} from "@mui/material";
+import React, {useEffect, useState} from "react";
 
+import {Buy, Like} from "../Utils/productHandling";
 import SideFilter from "../Components/sideFilter";
 import SearchBar from "../Components/searchBar";
 import CheckBox from "../Components/checkBox";
 import RadioBox from "../Components/radioBox";
 import RadioButton from "../Components/radioButton";
 import ProductCard from "../Components/productCard";
-import httpConnection from "../Utils/httpConnection";
-import UserContext from "../Context/userContext";
-import toast from "react-hot-toast";
-import {Buy, Like} from "../Utils/productHandling";
+
+import {Fab, Pagination, Slider, useMediaQuery} from "@mui/material";
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import FilterDialog from "./filterDialog";
+import NotFound from "./notFound";
+import {handlePagination} from "../Utils/paginationHandling";
 
 function Products({
                       items,
@@ -31,6 +33,8 @@ function Products({
         setString(event.target.value);
     }
 
+    const isPC = useMediaQuery('(min-width: 1024px)');
+
     const [range, setRange] = useState(-1);
     const [price, setPrice] = useState(maxPrice);
 
@@ -47,11 +51,31 @@ function Products({
         setScrollPos(document.body.getBoundingClientRect().top);
         setVisible(document.body.getBoundingClientRect().top > scrollPos);
     };
+
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
     }, [handleScroll]);
 
+    const handleAvailableFirst = (list) => {
+        const result = [];
+        for (let item of list) {
+            if (item.stock !== 0)
+                result.push(item);
+        }
+        for (let item of list) {
+            if (item.stock === 0)
+                result.push(item);
+        }
+        return result;
+    }
+
+    const [openFilter, setOpenFilter] = useState(false);
+    const handleOpenFilter = () => setOpenFilter(true);
+    const handleCloseFilter = () => setOpenFilter(false);
+
     const filteredItems = items.length !== 0 && range !== -1 ? items.filter(item => item.price <= price) : items;
+    const sortedItems = handleAvailableFirst(filteredItems);
+    const paginatedItems = handlePagination(sortedItems, pageValue, 12);
 
     return (
         <>
@@ -75,16 +99,24 @@ function Products({
                             </RadioButton>
                         </div>
                     </div>
-                    <div className="products-grid">
-                        {filteredItems.map(item => (
-                            <div className="products-grid-item" key={item.name}>
-                                <ProductCard info={item} onBuy={Buy} onLike={Like} shadow/>
+                    {paginatedItems && paginatedItems.length !== 0 ?
+                        <>
+                            <div className="products-grid">
+                                {
+                                    paginatedItems.map(item => (
+                                        <div className="products-grid-item" key={item.name}>
+                                            <ProductCard info={item} onBuy={Buy} onLike={Like} shadow/>
+                                        </div>
+                                    ))
+                                }
                             </div>
-                        ))}
-                    </div>
-                    <div className="products-pagination">
-                        <Pagination count={10} page={pageValue} onChange={onPageChange}/>
-                    </div>
+                            {(paginatedItems / 12) >= 1 ?
+                                <div className="products-pagination">
+                                    <Pagination count={paginatedItems / 12} page={pageValue} onChange={onPageChange}/>
+                                </div> : <></>}
+                        </> :
+                        <NotFound/>
+                    }
                 </div>
                 <div className={`products-side-container ${!visible ? 'side-up' : ''}`}>
                     <SearchBar placeholder="نام محصول را جستجو کنید" isSideBar value={string}
@@ -107,6 +139,15 @@ function Products({
                     </SideFilter>
                 </div>
             </div>
+            {!isPC ?
+                <Fab color="primary" style={{position: 'fixed', bottom: '20px', right: '20px'}} aria-label="add"
+                     onClick={handleOpenFilter}>
+                    <FilterAltIcon/>
+                </Fab> : <></>}
+            <FilterDialog onClose={handleCloseFilter} open={openFilter} onSubmitString={onSubmitString}
+                          onRadioChange={onRadioChange} radioValue={radioValue} onCheckboxChange={onCheckboxChange}
+                          maxPrice={maxPrice} onPriceChange={handlePriceChange} onRangeChange={handleRange}
+                          onStringChange={handleChangeString} range={range} string={string}/>
         </>
     );
 }

@@ -22,6 +22,8 @@ function ProductPlate({product}) {
         }
     }
 
+    const isAvailable = product.stock !== 0;
+
     return (
         <>
             <div className="product-plate-root">
@@ -39,8 +41,9 @@ function ProductPlate({product}) {
                                 <div>تعداد:</div>
                                 <div style={{width: "100%", display: 'flex', justifyContent: 'space-between'}}>
                                     <Counter value={count} onChange={setCount} maxValue={product && product.stock}/>
-                                    <span className="product-info-price">
-                                        {product && (count !== 0 ? product.price * count : product.price)} تومان
+                                    <span className={`product-info-price ${!isAvailable ? 'text-danger' : ''}`}>
+                                        {product && isAvailable ? (count !== 0 ? product.price * count : product.price + "تومان")
+                                            : "کالا موجود نمی باشد"}
                                     </span>
                                 </div>
                                 <Button style={{

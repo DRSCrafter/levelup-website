@@ -1,13 +1,17 @@
 .search-bar-container {
-    display: flex;
+    display: none;
     align-items: center;
     min-width: 250px;
     max-width: 450px;
     width: 45%;
-    height: 40px;
+    height: 60px;
     border-radius: 50px;
     background-color: rgb(249, 249, 249);
     color: #707070;
+}
+
+.filter-dialog {
+    display: flex;
 }
 
 .side-search-bar {
@@ -38,8 +42,9 @@
     border-radius: 100%;
 }
 
-@media (max-width: 1024px) {
+@media (min-width: 1024px) {
     .search-bar-container {
-        display: none;
+        display: flex;
+        height: 40px;
     }
 }

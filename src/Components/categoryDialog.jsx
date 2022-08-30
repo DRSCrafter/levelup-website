@@ -2,15 +2,12 @@ import React, {useState} from 'react';
 
 import {
     AppBar,
-    Button, Collapse,
+    Collapse,
     Dialog,
-    Divider,
     IconButton,
     List,
-    ListItem,
     ListItemButton, ListItemIcon,
     ListItemText,
-    Slide,
     Toolbar,
     Typography
 } from "@mui/material";
@@ -55,7 +52,7 @@ function CategoryDialog({onClose, open, onTrigger, data}) {
                                     <IconButton edge="end" color="inherit" onClick={onClose} aria-label="close">
                                         <CloseIcon/>
                                     </IconButton>
-                                    <Typography sx={{ml: 2, flex: 1}} variant="h6" component="div">
+                                    <Typography sx={{ml: 2, flex: 1, direction: "rtl"}} variant="h6" component="div">
                                         دسته بندی
                                     </Typography>
                                 </Toolbar>

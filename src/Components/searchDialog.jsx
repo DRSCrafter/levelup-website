@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {createTheme} from "@mui/material/styles";
 import createCache from "@emotion/cache";
 import {prefixer} from "stylis";
@@ -7,13 +7,15 @@ import {Button, Dialog, TextField} from "@mui/material";
 import {CacheProvider, ThemeProvider} from "@emotion/react";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 
-function SearchDialog({onClose, open, onTrigger}) {
+function SearchDialog({onClose, open, value, onChange, onSubmit}) {
     const handleClose = () => {
         onClose();
     };
 
-    const [string, setString] = useState('');
-    const handleChangeAmount = (event) => setString(event.target.value);
+    const handleTrigger = () => {
+        onSubmit(value);
+        onClose();
+    }
 
     const theme = createTheme({
         direction: 'rtl',
@@ -21,6 +23,7 @@ function SearchDialog({onClose, open, onTrigger}) {
     const cacheRtl = createCache({
         key: 'muirtl',
         stylisPlugins: [prefixer, rtlPlugin],
+
     });
 
     return (
@@ -36,7 +39,7 @@ function SearchDialog({onClose, open, onTrigger}) {
                                 <div dir="rtl">
                                     <TextField sx={{width: '100%', marginBlock: '25px'}}
                                                inputProps={{style: {fontFamily: 'Segoe UI Light'}}} variant="outlined"
-                                               name="name" value={string} onChange={handleChangeAmount}
+                                               name="name" value={value} onChange={onChange}
                                                label="چی میخوای به خودم بگو"/>
                                     <div className="account-dialog-btn-section">
                                         <Button style={{
@@ -52,7 +55,7 @@ function SearchDialog({onClose, open, onTrigger}) {
                                             color: '#0080FF',
                                             fontFamily: '"B Yekan"',
                                         }} startIcon={<AccountBalanceWalletIcon style={{marginLeft: 20}}/>}
-                                                variant="contained" onClick={() => onTrigger(string)}>
+                                                variant="contained" onClick={handleTrigger}>
                                             جستجو
                                         </Button>
                                     </div>
