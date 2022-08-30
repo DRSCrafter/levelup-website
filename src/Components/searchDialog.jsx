@@ -1,24 +1,19 @@
-import '../Styles/Components/accountDialog.css';
 import React, {useState} from 'react';
-
-import {Button, Dialog, TextField} from "@mui/material";
 import {createTheme} from "@mui/material/styles";
+import createCache from "@emotion/cache";
 import {prefixer} from "stylis";
 import rtlPlugin from "stylis-plugin-rtl";
-import createCache from "@emotion/cache";
+import {Button, Dialog, TextField} from "@mui/material";
 import {CacheProvider, ThemeProvider} from "@emotion/react";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 
-function AccountDialog({onClose, open, onCharge, isPC}) {
+function SearchDialog({onClose, open, onTrigger}) {
     const handleClose = () => {
         onClose();
     };
 
-    const [amount, setAmount] = useState('');
-    const handleChangeAmount = (event) => {
-        const onlyNums = event.target.value.replace(/[^0-9]/g, '');
-        setAmount(onlyNums);
-    }
+    const [string, setString] = useState('');
+    const handleChangeAmount = (event) => setString(event.target.value);
 
     const theme = createTheme({
         direction: 'rtl',
@@ -30,20 +25,19 @@ function AccountDialog({onClose, open, onCharge, isPC}) {
 
     return (
         <>
-            <Dialog onClose={handleClose} open={open} fullWidth={!isPC}>
+            <Dialog onClose={handleClose} open={open} fullWidth>
                 <div className="account-dialog-root">
                     <div className="account-dialog-header">
-                        <span className="account-dialog-title">افزایش اعتبار</span>
+                        <span className="account-dialog-title">جستجو</span>
                     </div>
                     <div className="account-dialog-body">
                         <CacheProvider value={cacheRtl}>
                             <ThemeProvider theme={theme}>
                                 <div dir="rtl">
-                                    <span>مبلغ موردنظر (تومان):</span>
                                     <TextField sx={{width: '100%', marginBlock: '25px'}}
                                                inputProps={{style: {fontFamily: 'Segoe UI Light'}}} variant="outlined"
-                                               name="name" value={amount} onChange={handleChangeAmount}
-                                               label="مبلغ موردنظر را وارد نمایید"/>
+                                               name="name" value={string} onChange={handleChangeAmount}
+                                               label="چی میخوای به خودم بگو"/>
                                     <div className="account-dialog-btn-section">
                                         <Button style={{
                                             width: '25%',
@@ -58,8 +52,8 @@ function AccountDialog({onClose, open, onCharge, isPC}) {
                                             color: '#0080FF',
                                             fontFamily: '"B Yekan"',
                                         }} startIcon={<AccountBalanceWalletIcon style={{marginLeft: 20}}/>}
-                                                variant="contained" onClick={() => onCharge(amount)}>
-                                            پرداخت
+                                                variant="contained" onClick={() => onTrigger(string)}>
+                                            جستجو
                                         </Button>
                                     </div>
                                 </div>
@@ -72,4 +66,4 @@ function AccountDialog({onClose, open, onCharge, isPC}) {
     );
 }
 
-export default AccountDialog;
+export default SearchDialog;

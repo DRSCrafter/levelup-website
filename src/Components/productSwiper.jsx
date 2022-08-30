@@ -3,6 +3,7 @@ import "swiper/css/pagination";
 import "swiper/css";
 
 import React from "react";
+import {Buy, Like} from "../Utils/productHandling";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import {useMediaQuery} from "@mui/material";
@@ -16,7 +17,7 @@ function ProductSwiper({title, data}) {
         <>
             <div className="product-swiper-container">
                 <div className="product-swiper-header">
-                    <span className="product-swiper-header-inner"><h4>تازه های بازی</h4></span>
+                    <span className="product-swiper-header-inner"><h4>{title}</h4></span>
                 </div>
                 <Swiper
                     slidesPerView={matches ? 5 : 3}
@@ -26,14 +27,11 @@ function ProductSwiper({title, data}) {
                     preventClicksPropagation={false}
                     noSwipingSelector={"button"}
                 >
-                    <SwiperSlide><ProductCard/></SwiperSlide>
-                    <SwiperSlide><ProductCard/></SwiperSlide>
-                    <SwiperSlide><ProductCard/></SwiperSlide>
-                    <SwiperSlide><ProductCard/></SwiperSlide>
-                    <SwiperSlide><ProductCard/></SwiperSlide>
-                    <SwiperSlide><ProductCard/></SwiperSlide>
-                    <SwiperSlide><ProductCard/></SwiperSlide>
-                    <SwiperSlide><ProductCard/></SwiperSlide>
+                    {data.map(item => (
+                    <SwiperSlide>
+                        <ProductCard info={item} onBuy={Buy} onLike={Like}/>
+                    </SwiperSlide>
+                    ))}
                 </Swiper>
             </div>
         </>

@@ -1,12 +1,26 @@
 import '../Styles/Components/ProductPlate.css';
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 
 import {Button} from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import Counter from "../Components/counter";
+import {Buy} from "../Utils/productHandling";
+import UserContext from "../Context/userContext";
 
-function ProductPlate() {
+function ProductPlate({product}) {
     const [count, setCount] = useState(0);
+
+    const {user, handleUpdateUser} = useContext(UserContext);
+
+    const handleBuy = async () => {
+        const backup = count;
+        try {
+            setCount(0);
+            await Buy(user, handleUpdateUser, product, count);
+        } catch (ex) {
+            setCount(backup);
+        }
+    }
 
     return (
         <>
@@ -14,17 +28,20 @@ function ProductPlate() {
                 <div className="product-plate-container-outer">
                     <div className="product-plate-container-inner">
                         <span className="product-plate-left-side">
-                        <img src={require('../Assets/product.jpg')} className="product-title-image" alt="product"/>
+                        <img src={product && `http://localhost:3001/${product.productImage}`}
+                             className="product-title-image" alt="product"/>
                         <div className="product-info-container">
                             <div>
-                                <div className="product-title">Paper Mario the Origami King</div>
-                                <div>Nintendo</div>
+                                <div className="product-title">{product && product.name}</div>
+                                <div>{product.company && product.company.name}</div>
                             </div>
                             <div className="product-controls">
                                 <div>تعداد:</div>
                                 <div style={{width: "100%", display: 'flex', justifyContent: 'space-between'}}>
-                                    <Counter value={count} onChange={setCount}/>
-                                    <span className="product-info-price">1,300,000 تومان</span>
+                                    <Counter value={count} onChange={setCount} maxValue={product && product.stock}/>
+                                    <span className="product-info-price">
+                                        {product && (count !== 0 ? product.price * count : product.price)} تومان
+                                    </span>
                                 </div>
                                 <Button style={{
                                     color: 'white',
@@ -35,7 +52,10 @@ function ProductPlate() {
                                     padding: 10
                                 }}
                                         variant="contained"
-                                        endIcon={<ShoppingCartOutlinedIcon style={{minWidth: 30}}/>}>
+                                        endIcon={<ShoppingCartOutlinedIcon style={{minWidth: 30}}/>}
+                                        onClick={handleBuy}
+                                        disabled={count === 0}
+                                >
                                     افزودن به سبدخرید
                                 </Button>
                             </div>
@@ -43,10 +63,21 @@ function ProductPlate() {
                         </span>
                         <span className="product-plate-right-side">
                             <div className="product-exp">توضیحات</div>
-                            ماجراجویی جدید ماریو که با کاغذ ساخته شده است در نینتندو سوییچ آشکار می شود.
-این پادشاهی توسط یک تهدید اریگامی ویران شده است. به ماریو و شریک جدیدش، اولیویا بپیوندید تا در این ماجراجویی پر از کمدی، با سربازان شرور مبارزه کنند، منظره آسیب دیده را تعمیر کنند، و سعی کنند قلعه پرنسس هلو را از چنگ پادشاه اولی آزاد کنند.
-در نبردهای استراتژیک و بر پایه حلقه مسلط شوید - دشمنان پراکنده را صف آرایی کنید و حمله خود را برای به حداکثر رساندن آسیب برنامه ریزی کنید با سیستم نبرد جدید و مبتنی بر حلقه که هم به مهارت های حل پازل و هم به مهارت سریع نیاز دارد.
+                            {product && product.description}
                         </span>
+                    </div>
+                    <div className="product-details-root">
+                        <div className="product-details-header-outer">
+                            <span className="product-details-header-inner">جزئیات</span>
+                        </div>
+                        <div className="product-details-container">
+                            {product.details && Object.keys(product.details).map(key => (
+                                <div className="product-details">
+                                    <span>{key}</span>
+                                    <span>{product.details[key]}</span>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>

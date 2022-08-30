@@ -1,5 +1,6 @@
 .product-counter {
-    width: 130px;
+    width: 110px;
+    margin-left: 20px;
     height: 30px;
     display: flex;
     justify-content: space-between;

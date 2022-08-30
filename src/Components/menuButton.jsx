@@ -4,6 +4,7 @@ import React, {useState} from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from "@mui/material/MenuItem";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import {useNavigate} from "react-router-dom";
 
 function MenuButton({title, list}) {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -16,6 +17,12 @@ function MenuButton({title, list}) {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const navigate = useNavigate();
+    const handleClickMenu = (event) => {
+        navigate(`./${event.currentTarget.dataset.myValue}`);
+        handleClose();
+    }
 
     return (
         <>
@@ -43,10 +50,10 @@ function MenuButton({title, list}) {
                 }}
             >
                 {list.map(item => (
-                    <MenuItem onClick={handleClose} key={item.name}>
-                    <span className="navbar-menu-btn-inner">
-                        {item.name}
-                    </span>
+                    <MenuItem onClick={handleClickMenu} key={item.name} data-my-value={item.link}>
+                        <span className="navbar-menu-btn-inner">
+                            {item.name}
+                        </span>
                     </MenuItem>
                 ))}
             </Menu>
