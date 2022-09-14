@@ -5,6 +5,9 @@ import Products from "../Components/products";
 import Footer from "../Components/Footer";
 import ContentContainer from "../Components/ContentContainer";
 import {getProducts} from "../Utils/productHandling";
+import httpConnection from "../Utils/httpConnection";
+
+const {apiEndpoint} = require('../config.json');
 
 function ProductsPage() {
     const [string, setString] = useState("");
@@ -27,6 +30,11 @@ function ProductsPage() {
         });
     }, [string, companies, isAvailable, selectedSort])
 
+    const handleGetCategories = async () => {
+        const {data} = await httpConnection.get(`${apiEndpoint}/api/companies/${category}`);
+        setCompanies(data);
+    }
+
     const handleCheckboxChange = event => {
         let newArray = [...companies, event.target.value];
         if (companies.includes(event.target.value)) {
@@ -43,20 +51,14 @@ function ProductsPage() {
         setSelectedSort(value);
     };
 
-    const [page, setPage] = React.useState(1);
-    const handleTogglePage = (event, value) => {
-        setPage(value);
-    };
-
     const handleSubmitString = str => setString(str);
 
     return (
         <>
             <ContentContainer>
-                <Products items={items} onCheckboxChange={handleCheckboxChange} pageValue={page}
-                          onPageChange={handleTogglePage} radioValue={isAvailable} onRadioChange={handleChange}
+                <Products items={items} onCheckboxChange={handleCheckboxChange} radioValue={isAvailable} onRadioChange={handleChange}
                           filterValue={selectedSort} onFilterChange={handleSelect} onSubmitString={handleSubmitString}
-                          maxPrice={maxPrice.current}/>
+                          maxPrice={maxPrice.current} companies={companies}/>
                 <Footer/>
             </ContentContainer>
         </>

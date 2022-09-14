@@ -28,7 +28,8 @@ function ProductCard({info, onBuy, onLike, shadow = false}) {
                     <div className="product-info">
                         <div className="product-name">{name}</div>
                         <div
-                            className={`product-price ${!isAvailable ? "text-danger" : ''}`}>{isAvailable ? `${price} تومان` : 'ناموجود'}</div>
+                            className={`product-price ${!isAvailable ? "text-danger" : ''}`}>{isAvailable ? `${price} تومان` : 'ناموجود'}
+                        </div>
                         <div className="product-commands">
                             <Checkbox style={{color: "#FF5D5D"}} icon={<FavoriteBorder htmlColor="#FF5D5D"/>}
                                       checkedIcon={<Favorite htmlColor="#FF5D5D"/>}

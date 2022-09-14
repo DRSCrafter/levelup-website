@@ -1,5 +1,6 @@
 import '../Styles/Components/products.css';
 import React, {useEffect, useState} from "react";
+import lodash from 'lodash';
 
 import {Buy, Like} from "../Utils/productHandling";
 import SideFilter from "../Components/sideFilter";
@@ -13,19 +14,17 @@ import {Fab, Pagination, Slider, useMediaQuery} from "@mui/material";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterDialog from "./filterDialog";
 import NotFound from "./notFound";
-import {handlePagination} from "../Utils/paginationHandling";
 
 function Products({
                       items,
                       onCheckboxChange,
                       radioValue,
                       onRadioChange,
-                      pageValue,
-                      onPageChange,
                       filterValue,
                       onFilterChange,
                       maxPrice,
-                      onSubmitString
+                      onSubmitString,
+                      companies
                   }) {
     const [string, setString] = useState('');
 
@@ -42,6 +41,16 @@ function Products({
 
     const handlePriceChange = (event, newValue) => {
         setPrice(newValue);
+    }
+
+    const [page, setPage] = React.useState(1);
+    const handleTogglePage = (event, value) => {
+        setPage(value);
+    };
+
+    const handlePagination = (items, pageNumber) => {
+        const startIndex = (pageNumber - 1) * 12;
+        return lodash(items).slice(startIndex).take(12).value();
     }
 
     const [scrollPos, setScrollPos] = useState(0);
@@ -75,7 +84,26 @@ function Products({
 
     const filteredItems = items.length !== 0 && range !== -1 ? items.filter(item => item.price <= price) : items;
     const sortedItems = handleAvailableFirst(filteredItems);
-    const paginatedItems = handlePagination(sortedItems, pageValue, 12);
+    const paginatedItems = handlePagination(sortedItems, page);
+
+    const sortChoices = [
+        {
+            label: 'جدید ترین',
+            value: 'dateCreated'
+        },
+        {
+            label: 'محبوب ترین',
+            value: 'likes'
+        },
+        {
+            label: 'ارزان ترین',
+            value: 'price'
+        },
+        {
+            label: 'گران ترین',
+            value: '-price'
+        },
+    ]
 
     return (
         <>
@@ -84,19 +112,11 @@ function Products({
                     <div className="products-top-filter-root">
                         <div className="products-top-filter-container">
                             <span className="products-top-filter-title">مرتب سازی بر اساس:</span>
-                            <RadioButton value={'dateCreated'} selectedValue={filterValue}
-                                         onSelect={onFilterChange}>
-                                جدیدترین
-                            </RadioButton>
-                            <RadioButton value={'likes'} selectedValue={filterValue} onSelect={onFilterChange}>
-                                محبوب ترین
-                            </RadioButton>
-                            <RadioButton value={'-price'} selectedValue={filterValue} onSelect={onFilterChange}>
-                                ارزان ترین
-                            </RadioButton>
-                            <RadioButton value={'price'} selectedValue={filterValue} onSelect={onFilterChange}>
-                                گران ترین
-                            </RadioButton>
+                            {sortChoices.map(choice => (
+                                <RadioButton value={choice.value} selectedValue={filterValue} onSelect={onFilterChange}>
+                                    {choice.label}
+                                </RadioButton>
+                            ))}
                         </div>
                     </div>
                     {paginatedItems && paginatedItems.length !== 0 ?
@@ -112,7 +132,7 @@ function Products({
                             </div>
                             {(paginatedItems / 12) >= 1 ?
                                 <div className="products-pagination">
-                                    <Pagination count={paginatedItems / 12} page={pageValue} onChange={onPageChange}/>
+                                    <Pagination count={paginatedItems / 12} page={page} onChange={handleTogglePage}/>
                                 </div> : <></>}
                         </> :
                         <NotFound/>
@@ -122,10 +142,9 @@ function Products({
                     <SearchBar placeholder="نام محصول را جستجو کنید" isSideBar value={string}
                                onChange={handleChangeString} onSubmit={() => onSubmitString(string)}/>
                     <SideFilter label="برند ها">
-                        <CheckBox label="Nintendo" onChanged={onCheckboxChange}/>
-                        <CheckBox label="Microsoft" onChanged={onCheckboxChange}/>
-                        <CheckBox label="Sony" onChanged={onCheckboxChange}/>
-                        <CheckBox label="CD Projekt" onChanged={onCheckboxChange}/>
+                        {companies.map(company => (
+                            <CheckBox label={company} onChanged={onCheckboxChange}/>
+                        ))}
                     </SideFilter>
                     <SideFilter label="موجودی">
                         <RadioBox label="همه" onChange={onRadioChange} selectedValue={radioValue} value={"0"}/>

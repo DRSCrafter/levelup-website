@@ -9,7 +9,7 @@ import httpConnection from "../Utils/httpConnection";
 
 import {Pagination} from "@mui/material";
 import NotFound from "../Components/notFound";
-import {handlePagination} from "../Utils/paginationHandling";
+import lodash from "lodash";
 
 const {apiEndpoint} = require('../config.json');
 
@@ -23,6 +23,11 @@ function SearchPage() {
     const handleTogglePage = (event, value) => {
         setPage(value);
     };
+
+    const handlePagination = (items, pageNumber) => {
+        const startIndex = (pageNumber - 1) * 12;
+        return lodash(items).slice(startIndex).take(12).value();
+    }
 
     const handleGetData = async () => {
         const response = await httpConnection.get(`${apiEndpoint}products/search/${str}`);
@@ -48,7 +53,7 @@ function SearchPage() {
     }, [])
 
     const sortedItems = products && handleAvailableFirst(products);
-    const paginatedItems = handlePagination(sortedItems, page, 12);
+    const paginatedItems = handlePagination(sortedItems, page);
 
     return (
         <>

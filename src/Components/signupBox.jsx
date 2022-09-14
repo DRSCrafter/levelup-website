@@ -10,7 +10,9 @@ import {prefixer} from 'stylis';
 import {CacheProvider} from '@emotion/react';
 import createCache from '@emotion/cache';
 
-import {Submit} from "../Utils/userHandling";
+import httpConnection from "../Utils/httpConnection";
+
+const {apiEndpoint} = require('../config.json');
 
 class SignUpBox extends Component {
 
@@ -72,6 +74,29 @@ class SignUpBox extends Component {
         data[input.name] = input.value;
 
         this.setState({data, errors});
+    };
+
+    handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const errors = this.validate();
+        this.setState({errors: errors || {}});
+        if (errors) return;
+
+        const {data, profileImage} = this.state;
+        const formData = new FormData();
+        formData.append('name', data.name);
+        formData.append('email', data.email);
+        formData.append('password', data.password);
+        formData.append('userImage', profileImage);
+
+        try {
+            const request = await httpConnection.post(`${apiEndpoint}users/`, formData);
+            localStorage.setItem("token", request.headers['x-auth-token']);
+            window.location = '/';
+        } catch (ex) {
+            console.log(ex.response.message);
+        }
     };
 
     theme = createTheme({
@@ -145,7 +170,7 @@ class SignUpBox extends Component {
                                                 color: 'white',
                                                 boxShadow: '0 10px 20px -10px #0080FF',
                                                 fontFamily: '"B Yekan"'
-                                            }} variant="contained" onClick={Submit}>ثبت نام</Button>
+                                            }} variant="contained" onClick={this.handleSubmit}>ثبت نام</Button>
                                         </div>
                                     </div>
                                 </div>

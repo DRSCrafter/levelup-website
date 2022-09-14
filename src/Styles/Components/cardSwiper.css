@@ -1,7 +1,8 @@
 .card-swiper-container {
     width: 100%;
-    height: 100%;
+    height: 400px;
     grid-column: 1 / span 2;
+    z-index: 0!important;
 }
 
 .card-swiper-container .swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction {

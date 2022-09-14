@@ -13,6 +13,7 @@ import ProductCard from "../Components/productCard";
 function ProductSwiper({title, data}) {
     const matches = useMediaQuery('(min-width: 1024px)');
 
+    console.log(data);
     return (
         <>
             <div className="product-swiper-container">
@@ -27,8 +28,8 @@ function ProductSwiper({title, data}) {
                     preventClicksPropagation={false}
                     noSwipingSelector={"button"}
                 >
-                    {data.map(item => (
-                    <SwiperSlide>
+                    {data && data.map((item, index) => (
+                    <SwiperSlide key={index}>
                         <ProductCard info={item} onBuy={Buy} onLike={Like}/>
                     </SwiperSlide>
                     ))}

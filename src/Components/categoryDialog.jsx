@@ -58,7 +58,7 @@ function CategoryDialog({onClose, open, onTrigger, data}) {
                                 </Toolbar>
                             </AppBar>
                             <List>
-                                {data.map(category => (
+                                {data.map((category) => (
                                     <>
                                         <ListItemButton onClick={() => handleToggleCategory(category.tag)}>
                                             <ListItemIcon>
