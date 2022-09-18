@@ -6,7 +6,7 @@ export const getProducts = async (string, companies, isAvailable, category, sort
         name: string,
         companies: companies,
         isAvailable: isAvailable,
-        type: category,
+        category: category,
         sort: sort
     });
     const resBody = await httpConnection.put(`${apiEndpoint}products/filter/`, reqBody, {
@@ -15,9 +15,7 @@ export const getProducts = async (string, companies, isAvailable, category, sort
     return resBody.data;
 };
 
-export const Like = async (event, user, handleUpdateUser, id) => {
-    event.stopPropagation();
-
+export const Like = async (user, handleUpdateUser, id) => {
     let likes = [...user.likes];
 
     if (user.likes.includes(id)) {
@@ -47,9 +45,7 @@ export const Like = async (event, user, handleUpdateUser, id) => {
     handleUpdateUser('likes', likes);
 }
 
-export const Buy = async (event, user, handleUpdateUser, info, quantity = 1) => {
-    event.stopPropagation();
-
+export const Buy = async (user, handleUpdateUser, info, quantity = 1) => {
     let shoppingCart = [...user.shoppingCart];
     let backupCart = [...user.shoppingCart];
     try {

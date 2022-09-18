@@ -2,7 +2,6 @@ import '../Styles/Components/products.css';
 import React, {useEffect, useState} from "react";
 import lodash from 'lodash';
 
-import {Buy, Like} from "../Utils/productHandling";
 import SideFilter from "../Components/sideFilter";
 import SearchBar from "../Components/searchBar";
 import CheckBox from "../Components/checkBox";
@@ -125,7 +124,7 @@ function Products({
                                 {
                                     paginatedItems.map(item => (
                                         <div className="products-grid-item" key={item.name}>
-                                            <ProductCard info={item} onBuy={Buy} onLike={Like} shadow/>
+                                            <ProductCard info={item} shadow/>
                                         </div>
                                     ))
                                 }

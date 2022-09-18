@@ -4,7 +4,6 @@ import {useLocation} from "react-router-dom";
 
 import ContentContainer from "../Components/ContentContainer";
 import ProductCard from "../Components/productCard";
-import {Buy, Like} from "../Utils/productHandling";
 import httpConnection from "../Utils/httpConnection";
 
 import {Pagination} from "@mui/material";
@@ -64,7 +63,7 @@ function SearchPage() {
                             <div className="products-grid">
                                 {paginatedItems && paginatedItems.map(item => (
                                     <div className="products-grid-item" key={item.name}>
-                                        <ProductCard info={item} onBuy={Buy} onLike={Like} shadow/>
+                                        <ProductCard info={item} shadow/>
                                     </div>
                                 ))}
                             </div>

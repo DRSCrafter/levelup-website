@@ -5,13 +5,14 @@ import IconPopOver from "./iconPopOver";
 import {Button, IconButton} from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
+import LoginIcon from '@mui/icons-material/Login';
 import PersonIcon from "@mui/icons-material/Person";
 import UserContext from "../Context/userContext";
 import {useNavigate} from "react-router-dom";
 import {handleLogOut} from "../Utils/userHandling";
 
 function UserPopover() {
-    const currentUser = useContext(UserContext).user;
+    const {user, isLoggedIn} = useContext(UserContext);
 
     const navigate = useNavigate();
 
@@ -36,51 +37,52 @@ function UserPopover() {
                 <div className="user-popover-container">
                     <div className="user-popover-topside">
                         <div className="user-popover-topside-info">
-                            <img src={currentUser && 'http://localhost:3001/' + currentUser.userImage} style={{
-                                width: 70,
-                                height: 70,
-                                borderRadius: '50%',
-                                position: "absolute",
-                                top: -15,
-                                right: 5
-                            }} alt="User"/>
+                            <img src={user && user.userImage}
+                                 className="user-popover-image" alt="User"/>
                             <div className="user-popover-topside-info-inner">
-                                <div>{currentUser && currentUser.name}</div>
-                                <div className="font-sm">{currentUser && currentUser.email}</div>
+                                <div>{user && user.name}</div>
+                                <div className="font-sm">{user && user.email}</div>
                             </div>
                         </div>
-                        <div className="user-popover-topside-account">
-                            {`مانده اعتبار: ${currentUser && currentUser.account} تومان`}
-                        </div>
+                        {isLoggedIn && <div className="user-popover-topside-account">
+                            {`مانده اعتبار: ${user && user.account} تومان`}
+                        </div>}
                     </div>
                     <div className="user-popover-downside">
-                        <Button style={{
-                            padding: 10,
-                            width: '100%',
-                            display: "flex",
-                            justifyContent: "flex-start",
-                            color: '#707070',
-                            fontFamily: 'Segoe UI Light'
-                        }} variant="text" onClick={() => navigate('../account')}>
-                            <ShoppingCartOutlinedIcon style={{marginLeft: 15}}/>
-                            سفارشات من
-                        </Button>
-                        <Button style={{
-                            padding: 10,
-                            width: '100%',
-                            display: "flex",
-                            justifyContent: "flex-start",
-                            color: '#707070',
-                            fontFamily: 'Segoe UI Light',
-                        }} variant="text" onClick={handleLogOut}>
-                            <LogoutIcon style={{marginLeft: 15}}/>
-                            خروج از حساب کاربری
-                        </Button>
+                        {isLoggedIn ?
+                            <>
+                                <Button style={styles.button} variant="text" onClick={() => navigate('../account')}>
+                                    <ShoppingCartOutlinedIcon style={{marginLeft: 15}}/>
+                                    سفارشات من
+                                </Button>
+                                <Button style={styles.button} variant="text" onClick={handleLogOut}>
+                                    <LogoutIcon style={{marginLeft: 15}}/>
+                                    خروج از حساب کاربری
+                                </Button>
+                            </> :
+                            <>
+                                <Button style={styles.button} variant="text" onClick={() => navigate('../login')}>
+                                    <LoginIcon style={{marginLeft: 15}}/>
+                                    ورود و یا ثبت نام
+                                </Button>
+                            </>
+                        }
                     </div>
                 </div>
             </IconPopOver>
         </>
     );
+}
+
+const styles = {
+    button: {
+        padding: 10,
+        width: '100%',
+        display: "flex",
+        justifyContent: "flex-start",
+        color: '#707070',
+        fontFamily: 'Segoe UI Light',
+    }
 }
 
 export default UserPopover;

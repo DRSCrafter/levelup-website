@@ -28,7 +28,7 @@ function AccountPopover() {
     const trimString = (string, length = 16) =>
         string.length > length ? string.substring(0, length) + '...' : string;
 
-    const {user, handleUpdateUser} = useContext(UserContext);
+    const {user, handleUpdateUser, isLoggedIn} = useContext(UserContext);
 
     const shoppingList = user && user.shoppingCart;
     const totalCost = shoppingList && shoppingList.reduce((a, b) => a + b.totalPrice, 0);
@@ -82,7 +82,7 @@ function AccountPopover() {
                     :
                     <div className="account-popover-container">
                         <div className="account-popover-empty">
-                            سبد خرید شما خالی است
+                            {isLoggedIn ? 'سبد خرید شما خالی است' : 'لطفا با حساب کاربری وارد شوید'}
                         </div>
                     </div>
                 }

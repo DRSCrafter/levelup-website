@@ -1,14 +1,17 @@
 import '../Styles/Components/navbar.css';
 import React, {useContext, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
+
 import UserContext from "../Context/userContext";
 import SearchBar from "./searchBar";
 import SearchDialog from "./searchDialog";
-import DarkModeButton from "./darkModeButton";
 import MenuButton from "./menuButton";
 import UserPopover from "./userPopover";
 import AccountPopover from "./accountPopover";
 import CategoryDialog from "./categoryDialog";
+
+import LoginIcon from '@mui/icons-material/Login';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
 import {
     Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, useMediaQuery
@@ -95,13 +98,13 @@ function NavBar() {
 
     const isPC = useMediaQuery('(min-width: 1024px)');
 
-    const {user} = useContext(UserContext);
+    const {user, isLoggedIn} = useContext(UserContext);
 
     const navigate = useNavigate();
     const handleNavigate = (destination) => navigate(`./${destination}`);
     const handleSearch = () => window.location = `/search?str=${string}`;
 
-    const drawerList1 = [
+    const drawerProducts = [
         {
             text: 'دسته بندی',
             icon: <ListIcon/>,
@@ -113,7 +116,7 @@ function NavBar() {
             onClick: handleOpenSearch
         }
     ];
-    const drawerList2 = [
+    const drawerUser = [
         {
             text: 'حساب کاربری',
             icon: <PersonIcon/>,
@@ -125,6 +128,19 @@ function NavBar() {
             link: 'shoppingCart'
         }
     ]
+    const drawerDefault = [
+        {
+            text: 'ورود',
+            icon: <LoginIcon/>,
+            link: 'login'
+        },
+        {
+            text: 'ثبت نام',
+            icon: <PersonAddIcon/>,
+            link: 'signup'
+        },
+    ]
+    const drawerSecond = isLoggedIn ? drawerUser : drawerDefault;
 
     return (
         <>
@@ -174,7 +190,7 @@ function NavBar() {
                 >
                     <div className="drawer-info-container">
                         <div className="user-personal-info">
-                            <img src={user && `http://localhost:3001/${user.userImage}`}
+                            <img src={user && user.userImage}
                                  style={{width: 150, height: 150, borderRadius: '50%'}} alt="تصویر کاربر"/>
                             <div className="user-info-name">{user && user.name}</div>
                             <div className="user-info-email">{user && user.email}</div>
@@ -182,7 +198,7 @@ function NavBar() {
                     </div>
                     <Divider/>
                     <List>
-                        {drawerList1.map((item, index) => (
+                        {drawerProducts.map((item, index) => (
                             <ListItem key={index} disablePadding>
                                 <ListItemButton onClick={() => item.onClick()}>
                                     <ListItemIcon>
@@ -195,7 +211,7 @@ function NavBar() {
                     </List>
                     <Divider/>
                     <List>
-                        {drawerList2.map((item, index) => (
+                        {drawerSecond.map((item, index) => (
                             <ListItem key={index} disablePadding>
                                 <ListItemButton onClick={() => handleNavigate(item.link)}>
                                     <ListItemIcon>

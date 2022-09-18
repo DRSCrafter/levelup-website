@@ -17,23 +17,31 @@ import SearchPage from "./Pages/searchPage";
 function App() {
     const [user, setUser] = useState(null);
 
-    useEffect(() => {
-        async function loginUser() {
-            const jwtToken = localStorage.getItem('token');
-            if (!jwtToken) return;
-            const userID = jwtDecode(jwtToken)._id;
-            const user = await httpConnection.get('http://localhost:3001/api/users/' + userID);
-            setUser(user.data);
+    const handleLoginUser = async () => {
+        const jwtToken = localStorage.getItem('token');
+        if (!jwtToken) {
+            const defaultUser = {
+                name: "کاربر میهمان",
+                userImage: require('./Assets/defaultUser.png'),
+            }
+            return setUser(defaultUser);
         }
+        const userID = jwtDecode(jwtToken)._id;
+        const user = await httpConnection.get('http://localhost:3001/api/users/' + userID);
+        setUser({...user.data, userImage: `http://localhost:3001/${user.data.userImage}`});
+    }
 
-        loginUser();
+    useEffect(() => {
+        handleLoginUser();
     }, []);
 
     const handleUpdateUser = (key, value) => setUser({...user, [key]: value});
 
+    const isLoggedIn = Boolean(localStorage.getItem('token'));
+
     return (
         <>
-            <UserContext.Provider value={{user, handleUpdateUser}}>
+            <UserContext.Provider value={{user, handleUpdateUser, isLoggedIn}}>
                 <NavBar/>
                 <Routes>
                     <Route path="/" force element={<MainPage/>}/>

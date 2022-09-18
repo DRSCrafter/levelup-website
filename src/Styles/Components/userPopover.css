@@ -23,6 +23,15 @@
     height: 60%;
 }
 
+.user-popover-image {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    position: absolute;
+    top: -15px;
+    right: 5px;
+}
+
 .user-popover-topside-info-inner {
     position: absolute;
     left: 20px;

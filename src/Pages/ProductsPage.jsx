@@ -12,6 +12,7 @@ const {apiEndpoint} = require('../config.json');
 function ProductsPage() {
     const [string, setString] = useState("");
     const [companies, setCompanies] = useState([]);
+    const [companyList, setCompanyList] = useState([]);
     const [isAvailable, setIsAvailable] = useState('0');
 
     const [selectedSort, setSelectedSort] = React.useState('name');
@@ -28,12 +29,15 @@ function ProductsPage() {
             prices.current = res.map(item => item.price);
             maxPrice.current = res.length !== 0 ? Math.max.apply(Math, prices.current) : 0;
         });
-    }, [string, companies, isAvailable, selectedSort])
+    }, [string, companies, isAvailable, selectedSort, category])
 
     const handleGetCategories = async () => {
-        const {data} = await httpConnection.get(`${apiEndpoint}/api/companies/${category}`);
-        setCompanies(data);
+        const {data} = await httpConnection.get(`${apiEndpoint}companies/${category}`);
+        setCompanyList(data);
     }
+    useEffect(() => {
+        handleGetCategories();
+    }, [category])
 
     const handleCheckboxChange = event => {
         let newArray = [...companies, event.target.value];
@@ -56,9 +60,10 @@ function ProductsPage() {
     return (
         <>
             <ContentContainer>
-                <Products items={items} onCheckboxChange={handleCheckboxChange} radioValue={isAvailable} onRadioChange={handleChange}
+                <Products items={items} onCheckboxChange={handleCheckboxChange} radioValue={isAvailable}
+                          onRadioChange={handleChange}
                           filterValue={selectedSort} onFilterChange={handleSelect} onSubmitString={handleSubmitString}
-                          maxPrice={maxPrice.current} companies={companies}/>
+                          maxPrice={maxPrice.current} companies={companyList}/>
                 <Footer/>
             </ContentContainer>
         </>

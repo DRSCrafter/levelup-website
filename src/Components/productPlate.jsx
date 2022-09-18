@@ -10,13 +10,13 @@ import UserContext from "../Context/userContext";
 function ProductPlate({product}) {
     const [count, setCount] = useState(0);
 
-    const {user, handleUpdateUser} = useContext(UserContext);
+    const {user, handleUpdateUser, isLoggedIn} = useContext(UserContext);
 
-    const handleBuy = async () => {
+    const handleBuy = async (event) => {
         const backup = count;
         try {
             setCount(0);
-            await Buy(user, handleUpdateUser, product, count);
+            await Buy(event, user, handleUpdateUser, product, count);
         } catch (ex) {
             setCount(backup);
         }
@@ -41,9 +41,14 @@ function ProductPlate({product}) {
                                 <div>تعداد:</div>
                                 <div style={{width: "100%", display: 'flex', justifyContent: 'space-between'}}>
                                     <Counter value={count} onChange={setCount} maxValue={product && product.stock}/>
-                                    <span className={`product-info-price ${!isAvailable ? 'text-danger' : ''}`}>
-                                        {product && isAvailable ? (count !== 0 ? product.price * count : product.price + "تومان")
-                                            : "کالا موجود نمی باشد"}
+                                    <span
+                                        className={`product-info-price ${!isAvailable || !isLoggedIn ? 'text-danger' : ''}`}>
+                                        {isLoggedIn ?
+                                            (product && isAvailable ?
+                                                `${product.price} تومان`
+                                                : "کالا موجود نمی باشد") :
+                                            'لطفا با حساب کاربری وارد شوید'
+                                        }
                                     </span>
                                 </div>
                                 <Button style={{
@@ -57,7 +62,7 @@ function ProductPlate({product}) {
                                         variant="contained"
                                         endIcon={<ShoppingCartOutlinedIcon style={{minWidth: 30}}/>}
                                         onClick={handleBuy}
-                                        disabled={count === 0}
+                                        disabled={count === 0 || !isLoggedIn}
                                 >
                                     افزودن به سبدخرید
                                 </Button>
