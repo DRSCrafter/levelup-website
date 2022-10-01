@@ -12,11 +12,11 @@ function ProductPlate({product}) {
 
     const {user, handleUpdateUser, isLoggedIn} = useContext(UserContext);
 
-    const handleBuy = async (event) => {
+    const handleBuy = async () => {
         const backup = count;
         try {
             setCount(0);
-            await Buy(event, user, handleUpdateUser, product, count);
+            await Buy(user, handleUpdateUser, product, count);
         } catch (ex) {
             setCount(backup);
         }

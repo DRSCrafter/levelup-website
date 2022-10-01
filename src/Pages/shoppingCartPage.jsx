@@ -11,7 +11,7 @@ import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import httpConnection from "../Utils/httpConnection";
 import {useNavigate} from "react-router-dom";
 
-const {apiEndpoint} = require('../config.json');
+const {apiEndpoint} = require('../config/config.json');
 
 function ShoppingCartPage() {
     const navigate = useNavigate();

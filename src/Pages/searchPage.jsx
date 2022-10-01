@@ -10,7 +10,7 @@ import {Pagination} from "@mui/material";
 import NotFound from "../Components/notFound";
 import lodash from "lodash";
 
-const {apiEndpoint} = require('../config.json');
+const {apiEndpoint} = require('../config/config.json');
 
 function SearchPage() {
     const [products, setProducts] = useState([]);

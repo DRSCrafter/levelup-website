@@ -8,9 +8,8 @@ import Footer from "../Components/Footer";
 import {useParams} from "react-router-dom";
 import httpConnection from "../Utils/httpConnection";
 import "react-toastify/ReactToastify.min.css";
-import {ToastContainer} from "react-toastify";
 
-const {apiEndpoint} = require('../config.json');
+const {apiEndpoint} = require('../config/config.json');
 
 function ItemPage() {
     const [product, setProduct] = useState({});
@@ -33,14 +32,13 @@ function ItemPage() {
 
     useEffect(() => {
         handleGetData();
-    }, []);
+    }, [id]);
 
     return (
         <>
             <ContentContainer>
                 <ProductPlate product={product}/>
                 <ProductSwiper title="محصولات مرتبط" data={relatedList}/>
-            <ToastContainer position="bottom-right" newestOnTop/>
             </ContentContainer>
             <Footer/>
         </>

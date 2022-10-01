@@ -1,5 +1,5 @@
 import httpConnection from "./httpConnection";
-const {apiEndpoint} = require('../config.json');
+const {apiEndpoint} = require('../config/config.json');
 
 export const DeleteOrder = async (user, handleUpdateUser, order) => {
     const {productID, quantity} = order;

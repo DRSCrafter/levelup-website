@@ -17,7 +17,12 @@ function ProductCard({info, shadow = false}) {
     const matches = useMediaQuery('(min-width: 1024px)');
     const navigate = useNavigate();
 
-    const handleClick = () => navigate(`../products/${_id}`);
+    const isAvailable = stock !== 0;
+
+    const handleClick = () => {
+        if (isAvailable)
+            navigate(`../products/${_id}`);
+    }
 
     const handleBuy = (event) => {
         event.stopPropagation();
@@ -36,8 +41,6 @@ function ProductCard({info, shadow = false}) {
         else
             navigate('../../signup');
     }
-
-    const isAvailable = stock !== 0;
 
     return (
         <>

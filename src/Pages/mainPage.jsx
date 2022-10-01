@@ -6,7 +6,7 @@ import ProductSwiper from "../Components/productSwiper";
 import Banner from "../Components/banner";
 import Footer from "../Components/Footer";
 
-const {apiEndpoint} = require('../config.json');
+const {apiEndpoint} = require('../config/config.json');
 
 function MainPage() {
     const [swiperList, setSwiperList] = useState([]);

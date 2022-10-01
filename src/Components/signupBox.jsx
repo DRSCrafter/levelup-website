@@ -12,7 +12,7 @@ import createCache from '@emotion/cache';
 
 import httpConnection from "../Utils/httpConnection";
 
-const {apiEndpoint} = require('../config.json');
+const {apiEndpoint} = require('../config/config.json');
 
 class SignUpBox extends Component {
 

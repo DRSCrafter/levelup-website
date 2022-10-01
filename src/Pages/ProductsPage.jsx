@@ -7,7 +7,7 @@ import ContentContainer from "../Components/ContentContainer";
 import {getProducts} from "../Utils/productHandling";
 import httpConnection from "../Utils/httpConnection";
 
-const {apiEndpoint} = require('../config.json');
+const {apiEndpoint} = require('../config/config.json');
 
 function ProductsPage() {
     const [string, setString] = useState("");

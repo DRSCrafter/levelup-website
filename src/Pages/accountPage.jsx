@@ -10,7 +10,7 @@ import UserContext from "../Context/userContext";
 import AccountDialog from "../Components/accountDialog";
 import httpConnection from "../Utils/httpConnection";
 
-const {apiEndpoint} = require('../config.json');
+const {apiEndpoint} = require('../config/config.json');
 
 function AccountPage() {
     const {user, handleUpdateUser} = useContext(UserContext);
@@ -73,7 +73,7 @@ function AccountPage() {
                     </div>
                     <div className="user-info-container">
                         <div className="user-personal-info">
-                            <img src={user && `http://localhost:3001/${user.userImage}`} style={{width: 150, height: 150, borderRadius: '50%'}}/>
+                            <img src={user && `${user.userImage}`} style={{width: 150, height: 150, borderRadius: '50%'}}/>
                             <div className="user-info-name">{user && user.name}</div>
                             <div className="user-info-email">{user && user.email}</div>
                         </div>

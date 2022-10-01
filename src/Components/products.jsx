@@ -14,17 +14,19 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterDialog from "./filterDialog";
 import NotFound from "./notFound";
 
-function Products({
-                      items,
-                      onCheckboxChange,
-                      radioValue,
-                      onRadioChange,
-                      filterValue,
-                      onFilterChange,
-                      maxPrice,
-                      onSubmitString,
-                      companies
-                  }) {
+function Products(props) {
+    const {
+        items,
+        onCheckboxChange,
+        radioValue,
+        onRadioChange,
+        filterValue,
+        onFilterChange,
+        maxPrice,
+        onSubmitString,
+        companies
+    } = props;
+
     const [string, setString] = useState('');
 
     const handleChangeString = event => {

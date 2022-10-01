@@ -1,5 +1,5 @@
 import httpConnection from "./httpConnection";
-const {apiEndpoint} = require('../config.json');
+const {apiEndpoint} = require('../config/config.json');
 
 export const getProducts = async (string, companies, isAvailable, category, sort) => {
     const reqBody = JSON.stringify({

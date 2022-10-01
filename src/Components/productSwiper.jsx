@@ -28,7 +28,7 @@ function ProductSwiper({title, data}) {
                 >
                     {data && data.map((item, index) => (
                         <SwiperSlide key={index}>
-                            <ProductCard info={item} />
+                            <ProductCard info={item}/>
                         </SwiperSlide>
                     ))}
                 </Swiper>
