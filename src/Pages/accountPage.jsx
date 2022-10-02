@@ -34,7 +34,7 @@ function AccountPage() {
         try {
             handleUpdateUser('account', currentAmount + amount);
 
-            await httpConnection.put(`${apiEndpoint}users/${user._id}/account`, request, {
+            await httpConnection.put(`${apiEndpoint}/api/users/${user._id}/account`, request, {
                 headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
             });
         } catch (ex) {

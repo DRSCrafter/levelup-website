@@ -1,21 +1,22 @@
-import React from 'react';
-import {createTheme} from "@mui/material/styles";
+import React, {useState} from 'react';
+
+import {CacheProvider, ThemeProvider} from "@emotion/react";
 import createCache from "@emotion/cache";
 import {prefixer} from "stylis";
 import rtlPlugin from "stylis-plugin-rtl";
+
+import {createTheme} from "@mui/material/styles";
 import {Button, Dialog, TextField} from "@mui/material";
-import {CacheProvider, ThemeProvider} from "@emotion/react";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 
-function SearchDialog({onClose, open, value, onChange, onSubmit}) {
-    const handleClose = () => {
+function SearchDialog({onClose, open}) {
+    const [searchStr, setSearchStr] = useState('');
+
+    const handleSearch = () => {
+        window.location = `../../search?str=${searchStr}`
         onClose();
     };
-
-    const handleTrigger = () => {
-        onSubmit(value);
-        onClose();
-    }
+    const handleSetString = (event) => setSearchStr(event.target.value);
 
     const theme = createTheme({
         direction: 'rtl',
@@ -28,7 +29,7 @@ function SearchDialog({onClose, open, value, onChange, onSubmit}) {
 
     return (
         <>
-            <Dialog onClose={handleClose} open={open} fullWidth>
+            <Dialog onClose={onClose} open={open} fullWidth>
                 <div className="account-dialog-root">
                     <div className="account-dialog-header">
                         <span className="account-dialog-title">جستجو</span>
@@ -39,7 +40,7 @@ function SearchDialog({onClose, open, value, onChange, onSubmit}) {
                                 <div dir="rtl">
                                     <TextField sx={{width: '100%', marginBlock: '25px'}}
                                                inputProps={{style: {fontFamily: 'Segoe UI Light'}}} variant="outlined"
-                                               name="name" value={value} onChange={onChange}
+                                               name="name" value={searchStr} onChange={handleSetString}
                                                label="چی میخوای به خودم بگو"/>
                                     <div className="account-dialog-btn-section">
                                         <Button style={{
@@ -55,7 +56,7 @@ function SearchDialog({onClose, open, value, onChange, onSubmit}) {
                                             color: '#0080FF',
                                             fontFamily: '"B Yekan"',
                                         }} startIcon={<AccountBalanceWalletIcon style={{marginLeft: 20}}/>}
-                                                variant="contained" onClick={handleTrigger}>
+                                                variant="contained" onClick={handleSearch}>
                                             جستجو
                                         </Button>
                                     </div>

@@ -10,6 +10,8 @@ import Favorite from '@mui/icons-material/Favorite';
 import {useNavigate} from "react-router-dom";
 import {Buy, Like} from "../Utils/productHandling";
 
+const {apiEndpoint} = require('../config/config.json');
+
 function ProductCard({info, shadow = false}) {
     const {_id, name, price, thumbnailImage, stock} = info;
     const {user, handleUpdateUser, isLoggedIn} = useContext(UserContext);
@@ -46,7 +48,7 @@ function ProductCard({info, shadow = false}) {
         <>
             <div className={`card-root ${shadow ? 'card-shadow' : ''}`} onClick={handleClick}>
                 <div className="card-container">
-                    <img src={'http://localhost:3001/' + thumbnailImage} className="product-image" alt="product"/>
+                    <img src={`${apiEndpoint}/${thumbnailImage}`} className="product-image" alt="product"/>
                     <div className="product-info">
                         <div className="product-name">{name}</div>
                         <div className={`product-price ${!isAvailable ? "text-danger" : ''}`}>

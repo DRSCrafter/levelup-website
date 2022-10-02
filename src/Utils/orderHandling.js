@@ -15,7 +15,7 @@ export const DeleteOrder = async (user, handleUpdateUser, order) => {
 
         const request = JSON.stringify({productID: productID, quantity: quantity});
 
-        await httpConnection.put(`${apiEndpoint}users/${user._id}/order/delete`, request, {
+        await httpConnection.put(`${apiEndpoint}/api/users/${user._id}/order/delete`, request, {
             headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
         });
 

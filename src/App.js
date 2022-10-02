@@ -14,6 +14,8 @@ import UserContext from "./Context/userContext";
 import ShoppingCartPage from "./Pages/shoppingCartPage";
 import SearchPage from "./Pages/searchPage";
 
+const {apiEndpoint} = require('./config/config.json');
+
 function App() {
     const [user, setUser] = useState(null);
 
@@ -27,8 +29,8 @@ function App() {
             return setUser(defaultUser);
         }
         const userID = jwtDecode(jwtToken)._id;
-        const user = await httpConnection.get('http://localhost:3001/api/users/' + userID);
-        setUser({...user.data, userImage: `http://localhost:3001/${user.data.userImage}`});
+        const user = await httpConnection.get(`${apiEndpoint}/api/users/${userID}`);
+        setUser({...user.data, userImage: `${apiEndpoint}/${user.data.userImage}`});
     }
 
     useEffect(() => {

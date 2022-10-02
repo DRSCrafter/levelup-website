@@ -9,6 +9,7 @@ import Footer from "../Components/Footer";
 const {apiEndpoint} = require('../config/config.json');
 
 function MainPage() {
+    const [bannerList, setBannerList] = useState([]);
     const [swiperList, setSwiperList] = useState([]);
     const {user} = useContext(UserContext);
 
@@ -20,7 +21,7 @@ function MainPage() {
         ];
         for (let topic of topics) {
             const request = {type: topic.type};
-            const {data} = await httpConnection.put(`${apiEndpoint}products/related`, JSON.stringify(request), {
+            const {data} = await httpConnection.put(`${apiEndpoint}/api/products/related`, JSON.stringify(request), {
                 headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
             });
             list.push({title: topic.title, data: data});
@@ -28,15 +29,21 @@ function MainPage() {
         setSwiperList(list);
     }
 
+    const handleGetBanners = async () => {
+        const {data} = await httpConnection.get(`${apiEndpoint}/api/banners`);
+        setBannerList(data);
+    }
+
     useEffect(() => {
         handleGetData();
+        handleGetBanners();
     }, [user])
     return (
         <>
             <ContentContainer>
-                <Banner/>
+                <Banner data={bannerList}/>
                 {swiperList && swiperList.map((list, index) => (
-                    <ProductSwiper title={list.title} data={list.data} key={index}/>
+                    <ProductSwiper {...list} key={index}/>
                 ))}
             </ContentContainer>
             <Footer/>

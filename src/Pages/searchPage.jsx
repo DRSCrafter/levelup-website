@@ -29,7 +29,7 @@ function SearchPage() {
     }
 
     const handleGetData = async () => {
-        const response = await httpConnection.get(`${apiEndpoint}products/search/${str}`);
+        const response = await httpConnection.get(`${apiEndpoint}/api/products/search/${str}`);
         setProducts(response.data);
     }
 

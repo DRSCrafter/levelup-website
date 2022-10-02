@@ -7,6 +7,8 @@ import Counter from "../Components/counter";
 import {Buy} from "../Utils/productHandling";
 import UserContext from "../Context/userContext";
 
+const {apiEndpoint} = require('../config/config.json');
+
 function ProductPlate({product}) {
     const [count, setCount] = useState(0);
 
@@ -30,7 +32,7 @@ function ProductPlate({product}) {
                 <div className="product-plate-container-outer">
                     <div className="product-plate-container-inner">
                         <span className="product-plate-left-side">
-                        <img src={product && `http://localhost:3001/${product.productImage}`}
+                        <img src={product && `${apiEndpoint}/${product.productImage}`}
                              className="product-title-image" alt="product"/>
                         <div className="product-info-container">
                             <div>

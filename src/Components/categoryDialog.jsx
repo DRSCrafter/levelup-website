@@ -1,37 +1,42 @@
 import React, {useState} from 'react';
 
+import {CacheProvider, ThemeProvider} from "@emotion/react";
+import createCache from "@emotion/cache";
+import {prefixer} from "stylis";
+import rtlPlugin from "stylis-plugin-rtl";
+
 import {
     AppBar,
     Collapse,
     Dialog,
     IconButton,
     List,
-    ListItemButton, ListItemIcon,
+    ListItemButton,
+    ListItemIcon,
     ListItemText,
     Toolbar,
     Typography
 } from "@mui/material";
-import CloseIcon from '@mui/icons-material/Close';
 import {createTheme} from "@mui/material/styles";
-import createCache from "@emotion/cache";
-import {prefixer} from "stylis";
-import rtlPlugin from "stylis-plugin-rtl";
-import {CacheProvider, ThemeProvider} from "@emotion/react";
+import CloseIcon from '@mui/icons-material/Close';
 import {ExpandLess, ExpandMore} from "@mui/icons-material";
 
-function CategoryDialog({onClose, open, onTrigger, data}) {
+import categories from "../Data/categories";
+import {useNavigate} from "react-router-dom";
+
+function CategoryDialog({onClose, open}) {
     const [openCategory, setOpenCategory] = useState({
         console: false,
         game: false,
         other: false
     })
 
-    const handleToggleCategory = (category) => setOpenCategory({...openCategory, [category]: !openCategory[category]})
-
-    const handleClick = (link) => {
-        onClose();
-        onTrigger(link);
-    }
+    const handleToggleCategory = (category) => setOpenCategory({...openCategory, [category]: !openCategory[category]});
+    const navigate = useNavigate();
+    const handleNavigate = (destination) => {
+        navigate(`./${destination}`);
+        onClose()
+    };
 
     const theme = createTheme({
         direction: 'rtl',
@@ -58,7 +63,7 @@ function CategoryDialog({onClose, open, onTrigger, data}) {
                                 </Toolbar>
                             </AppBar>
                             <List>
-                                {data.map((category) => (
+                                {categories.map((category) => (
                                     <>
                                         <ListItemButton onClick={() => handleToggleCategory(category.tag)}>
                                             <ListItemIcon>
@@ -71,7 +76,7 @@ function CategoryDialog({onClose, open, onTrigger, data}) {
                                             <List component="div" disablePadding>
                                                 {category.list.map(subCategory => (
                                                     <ListItemButton sx={{pl: 4}}
-                                                                    onClick={() => handleClick(subCategory.link, category.tag)}>
+                                                                    onClick={() => handleNavigate(subCategory.link, category.tag)}>
                                                         <ListItemText primary={subCategory.name}/>
                                                     </ListItemButton>
                                                 ))}

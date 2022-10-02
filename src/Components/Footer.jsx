@@ -31,8 +31,8 @@ function Footer() {
                     <span className="footer-list-container">
                         <span className="footer-list-title"><h4>ارتباط با توسعه دهنده</h4></span>
                         <ul className="footer-list">
-                            <li><a href="mailto:drsprogrammgin2020@gmail.com"><AlternateEmailIcon/> drsprogrammgin2020@gmail.com</a></li>
-                            <li><a href="https://t.me/Codesman/"><TelegramIcon/> Codesman</a></li>
+                            <li><a href="mailto:drsprogrammgin2020@gmail.com"><AlternateEmailIcon/> drsprogramming2020@gmail.com</a></li>
+                            <li><a href="https://t.me/Codesman/"><TelegramIcon/> Codesman@</a></li>
                             <li><a href="https://zil.ink/arasteh0012"><LinkIcon/> zil.ink/arasteh0012</a></li>
                         </ul>
                     </span>

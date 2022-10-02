@@ -91,7 +91,7 @@ class SignUpBox extends Component {
         formData.append('userImage', profileImage);
 
         try {
-            const request = await httpConnection.post(`${apiEndpoint}users/`, formData);
+            const request = await httpConnection.post(`${apiEndpoint}/api/users/`, formData);
             localStorage.setItem("token", request.headers['x-auth-token']);
             window.location = '/';
         } catch (ex) {

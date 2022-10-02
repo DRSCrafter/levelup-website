@@ -9,7 +9,7 @@ export const getProducts = async (string, companies, isAvailable, category, sort
         category: category,
         sort: sort
     });
-    const resBody = await httpConnection.put(`${apiEndpoint}products/filter/`, reqBody, {
+    const resBody = await httpConnection.put(`${apiEndpoint}/api/products/filter/`, reqBody, {
         headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
     });
     return resBody.data;
@@ -22,7 +22,7 @@ export const Like = async (user, handleUpdateUser, id) => {
         const dislike = JSON.stringify({userID: user._id, isIncrement: false});
         try {
             likes = likes.filter(productID => productID !== id);
-            await httpConnection.put(`${apiEndpoint}products/${id}/like`, dislike, {
+            await httpConnection.put(`${apiEndpoint}/api/products/${id}/like`, dislike, {
                 headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
             });
         } catch (ex) {
@@ -33,7 +33,7 @@ export const Like = async (user, handleUpdateUser, id) => {
         try {
             likes.push(id);
             const like = JSON.stringify({userID: user._id, isIncrement: true});
-            await httpConnection.put(`http://localhost:3001/api/products/${id}/like`, like, {
+            await httpConnection.put(`${apiEndpoint}/api/products/${id}/like`, like, {
                 headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
             });
         } catch (ex) {
@@ -69,7 +69,7 @@ export const Buy = async (user, handleUpdateUser, info, quantity = 1) => {
         }
         handleUpdateUser('shoppingCart', shoppingCart);
 
-        await httpConnection.post('http://localhost:3001/api/users/' + user._id + '/order', JSON.stringify({
+        await httpConnection.post(`${apiEndpoint}/api/users/${user._id}/order`, JSON.stringify({
             ...order,
             itemExists: itemExists
         }), {

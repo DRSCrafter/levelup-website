@@ -32,7 +32,7 @@ function ProductsPage() {
     }, [string, companies, isAvailable, selectedSort, category])
 
     const handleGetCategories = async () => {
-        const {data} = await httpConnection.get(`${apiEndpoint}companies/${category}`);
+        const {data} = await httpConnection.get(`${apiEndpoint}/api/companies/${category}`);
         setCompanyList(data);
     }
     useEffect(() => {

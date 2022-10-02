@@ -23,7 +23,7 @@ function ShoppingCartPage() {
         const backup = [...user.shoppingCart];
         try {
             handleUpdateUser('shoppingCart', []);
-            await httpConnection.put(`${apiEndpoint}users/${user._id}/shoppingCart`, {});
+            await httpConnection.put(`${apiEndpoint}/api/users/${user._id}/shoppingCart`, {});
             navigate('../');
         } catch (ex) {
             handleUpdateUser('shoppingCart', backup);
@@ -34,7 +34,7 @@ function ShoppingCartPage() {
         const backup = [...user.shoppingCart];
         try {
             handleUpdateUser('shoppingCart', []);
-            await httpConnection.delete(`${apiEndpoint}users/${user._id}/shoppingCart`);
+            await httpConnection.delete(`${apiEndpoint}/api/users/${user._id}/shoppingCart`);
             navigate('../');
         } catch (ex) {
             handleUpdateUser('shoppingCart', backup);

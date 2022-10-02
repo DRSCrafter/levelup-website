@@ -17,14 +17,14 @@ function ItemPage() {
     const {id} = useParams();
 
     const handleGetData = async () => {
-        const item = await httpConnection.get(`${apiEndpoint}products/${id}`, {});
+        const item = await httpConnection.get(`${apiEndpoint}/api/products/${id}`, {});
         setProduct(item.data);
 
         const request = JSON.stringify({
             type: item.data.type,
             category: item.data.category
         })
-        const related = await httpConnection.put(`${apiEndpoint}products/related`, request, {
+        const related = await httpConnection.put(`${apiEndpoint}/api/products/related`, request, {
             headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
         });
         setRelatedList(related.data);
