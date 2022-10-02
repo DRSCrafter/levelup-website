@@ -15,6 +15,20 @@ export const getProducts = async (string, companies, isAvailable, category, sort
     return resBody.data;
 };
 
+export const getFullProduct = async (id, setProduct, setRelatedList) => {
+    const item = await httpConnection.get(`${apiEndpoint}/api/products/${id}`, {});
+    setProduct(item.data);
+
+    const request = JSON.stringify({
+        type: item.data.type,
+        category: item.data.category
+    })
+    const related = await httpConnection.put(`${apiEndpoint}/api/products/related`, request, {
+        headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
+    });
+    setRelatedList(related.data);
+}
+
 export const Like = async (user, handleUpdateUser, id) => {
     let likes = [...user.likes];
 

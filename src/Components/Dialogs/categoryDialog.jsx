@@ -21,7 +21,7 @@ import {createTheme} from "@mui/material/styles";
 import CloseIcon from '@mui/icons-material/Close';
 import {ExpandLess, ExpandMore} from "@mui/icons-material";
 
-import categories from "../Data/categories";
+import categories from "../../Data/categories";
 import {useNavigate} from "react-router-dom";
 
 function CategoryDialog({onClose, open}) {

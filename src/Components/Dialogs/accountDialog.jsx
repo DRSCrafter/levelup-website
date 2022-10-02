@@ -1,4 +1,4 @@
-import '../Styles/Components/accountDialog.css';
+import '../../Styles/Components/accountDialog.css';
 import React, {useState} from 'react';
 
 import {Button, Dialog, TextField} from "@mui/material";

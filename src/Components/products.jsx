@@ -11,7 +11,7 @@ import ProductCard from "../Components/productCard";
 
 import {Fab, Pagination, Slider, useMediaQuery} from "@mui/material";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import FilterDialog from "./filterDialog";
+import FilterDialog from "./Dialogs/filterDialog";
 import NotFound from "./notFound";
 
 function Products(props) {

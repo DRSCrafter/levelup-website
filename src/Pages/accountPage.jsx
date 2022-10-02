@@ -7,7 +7,7 @@ import {Button, useMediaQuery} from "@mui/material";
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import LogoutIcon from '@mui/icons-material/Logout';
 import UserContext from "../Context/userContext";
-import AccountDialog from "../Components/accountDialog";
+import AccountDialog from "../Components/Dialogs/accountDialog";
 import httpConnection from "../Utils/httpConnection";
 
 const {apiEndpoint} = require('../config/config.json');
@@ -73,7 +73,8 @@ function AccountPage() {
                     </div>
                     <div className="user-info-container">
                         <div className="user-personal-info">
-                            <img src={user && `${user.userImage}`} style={{width: 150, height: 150, borderRadius: '50%'}}/>
+                            <img src={user && `${user.userImage}`}
+                                 style={{width: 150, height: 150, borderRadius: '50%'}} alt="user image"/>
                             <div className="user-info-name">{user && user.name}</div>
                             <div className="user-info-email">{user && user.email}</div>
                         </div>

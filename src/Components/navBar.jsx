@@ -8,8 +8,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 import SearchBar from "./searchBar";
 import MenuButton from "./menuButton";
-import UserPopover from "./userPopover";
-import AccountPopover from "./accountPopover";
+import UserPopover from "./Popovers/userPopover";
+import AccountPopover from "./Popovers/accountPopover";
 import categories from '../Data/categories';
 import Drawer from "./drawer";
 

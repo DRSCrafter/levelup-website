@@ -1,9 +1,9 @@
 import React from 'react';
 import {AppBar, Dialog, IconButton, Slider, Toolbar, Typography} from "@mui/material";
-import SearchBar from "./searchBar";
-import SideFilter from "./sideFilter";
-import CheckBox from "./checkBox";
-import RadioBox from "./radioBox";
+import SearchBar from "../searchBar";
+import SideFilter from "../sideFilter";
+import CheckBox from "../checkBox";
+import RadioBox from "../radioBox";
 import CloseIcon from "@mui/icons-material/Close";
 
 function FilterDialog({

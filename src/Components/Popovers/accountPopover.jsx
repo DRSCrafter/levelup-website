@@ -1,14 +1,14 @@
-import '../Styles/Components/accountPopover.css';
+import '../../Styles/Components/accountPopover.css';
 import React, {useContext, useState} from 'react';
 import {useNavigate} from "react-router-dom";
-import IconPopOver from "./iconPopOver";
+import IconPopover from "./iconPopover";
 
 import {Button, IconButton} from "@mui/material";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import DeleteIcon from '@mui/icons-material/Delete';
-import UserContext from "../Context/userContext";
+import UserContext from "../../Context/userContext";
 import ShopIcon from '@mui/icons-material/Shop';
-import {DeleteOrder} from "../Utils/orderHandling";
+import {DeleteOrder} from "../../Utils/orderHandling";
 
 function AccountPopover() {
     const navigate = useNavigate();
@@ -43,7 +43,7 @@ function AccountPopover() {
             <IconButton className="navbar-icon-btn" aria-describedby={shoppingCardID} onClick={handlePopOver2}>
                 <AccountBalanceWalletIcon htmlColor="#0080FF"/>
             </IconButton>
-            <IconPopOver anchorEl={popAnchorEl2} onClose={handleClosePopOver2} open={openCart} id={shoppingCardID}>
+            <IconPopover anchorEl={popAnchorEl2} onClose={handleClosePopOver2} open={openCart} id={shoppingCardID}>
                 {shoppingList && shoppingList.length !== 0 ?
                     <div className="account-popover-container">
                         <div className="account-popover-topside">
@@ -86,7 +86,7 @@ function AccountPopover() {
                         </div>
                     </div>
                 }
-            </IconPopOver>
+            </IconPopover>
         </>
     );
 }

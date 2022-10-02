@@ -1,7 +1,7 @@
 import httpConnection from "./httpConnection";
 const {apiEndpoint} = require('../config/config.json');
 
-export const handleLogOut = () => {
+export const Logout = () => {
     localStorage.removeItem('token');
     window.location = '/';
 }

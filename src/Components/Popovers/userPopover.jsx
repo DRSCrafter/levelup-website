@@ -1,15 +1,15 @@
-import '../Styles/Components/userPopover.css';
+import '../../Styles/Components/userPopover.css';
 import React, {useContext, useState} from 'react';
-import IconPopOver from "./iconPopOver";
+import IconPopover from "./iconPopover";
 
 import {Button, IconButton} from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LoginIcon from '@mui/icons-material/Login';
 import PersonIcon from "@mui/icons-material/Person";
-import UserContext from "../Context/userContext";
+import UserContext from "../../Context/userContext";
 import {useNavigate} from "react-router-dom";
-import {handleLogOut} from "../Utils/userHandling";
+import {Logout} from "../../Utils/userHandling";
 
 function UserPopover() {
     const {user, isLoggedIn} = useContext(UserContext);
@@ -33,7 +33,7 @@ function UserPopover() {
                         onClick={handlePopOver1}>
                 <PersonIcon htmlColor="#0080FF"/>
             </IconButton>
-            <IconPopOver anchorEl={popAnchorEl1} onClose={handleClosePopOver1} open={openUser} id={userID}>
+            <IconPopover anchorEl={popAnchorEl1} onClose={handleClosePopOver1} open={openUser} id={userID}>
                 <div className="user-popover-container">
                     <div className="user-popover-topside">
                         <div className="user-popover-topside-info">
@@ -55,7 +55,7 @@ function UserPopover() {
                                     <ShoppingCartOutlinedIcon style={{marginLeft: 15}}/>
                                     سفارشات من
                                 </Button>
-                                <Button style={styles.button} variant="text" onClick={handleLogOut}>
+                                <Button style={styles.button} variant="text" onClick={Logout}>
                                     <LogoutIcon style={{marginLeft: 15}}/>
                                     خروج از حساب کاربری
                                 </Button>
@@ -69,7 +69,7 @@ function UserPopover() {
                         }
                     </div>
                 </div>
-            </IconPopOver>
+            </IconPopover>
         </>
     );
 }
