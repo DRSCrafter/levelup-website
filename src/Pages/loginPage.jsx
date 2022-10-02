@@ -1,4 +1,4 @@
-import '../Styles/Components/login.css';
+import '../Styles/Pages/loginPage.css';
 import React, {useState} from 'react';
 import {Button, TextField} from "@mui/material";
 

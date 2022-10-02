@@ -1,24 +1,24 @@
-import '../Styles/Components/footer.css';
+import '../Styles/layout/footer.css';
 import React from "react";
 
 import TelegramIcon from '@mui/icons-material/Telegram';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import LinkIcon from '@mui/icons-material/Link';
-import SmallForm from "../Components/smallForm";
+import Survey from "./survey";
 
 function Footer() {
     return (
         <>
             <div className="footer-root">
-                <SmallForm/>
+                <Survey/>
                 <div className="footer-container">
                     <span className="footer-list-container">
                         <span className="footer-list-title"><h4>اجتماع</h4></span>
                         <ul className="footer-list">
-                            <li><a href="https://t.me/Codesman/">تلگرام</a></li>
-                            <li><a href="https://t.me/Codesman/">واتساپ</a></li>
-                            <li><a href="https://t.me/Codesman/">لینکداین</a></li>
-                            <li><a href="https://t.me/Codesman/">گیت هاب</a></li>
+                            <li><a href="src/layout/footer.jsx">تلگرام</a></li>
+                            <li><a href="src/layout/footer.jsx">واتساپ</a></li>
+                            <li><a href="src/layout/footer.jsx">لینکداین</a></li>
+                            <li><a href="src/layout/footer.jsx">گیت هاب</a></li>
                         </ul>
                     </span>
                     <span className="footer-list-container">
@@ -32,7 +32,7 @@ function Footer() {
                         <span className="footer-list-title"><h4>ارتباط با توسعه دهنده</h4></span>
                         <ul className="footer-list">
                             <li><a href="mailto:drsprogrammgin2020@gmail.com"><AlternateEmailIcon/> drsprogramming2020@gmail.com</a></li>
-                            <li><a href="https://t.me/Codesman/"><TelegramIcon/> Codesman@</a></li>
+                            <li><a href="src/layout/footer.jsx"><TelegramIcon/> Codesman@</a></li>
                             <li><a href="https://zil.ink/arasteh0012"><LinkIcon/> zil.ink/arasteh0012</a></li>
                         </ul>
                     </span>

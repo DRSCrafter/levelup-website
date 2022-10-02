@@ -12,8 +12,8 @@ import {
 import drawerList from "../Data/drawerList";
 import UserContext from "../Context/userContext";
 import {useNavigate} from "react-router-dom";
-import SearchDialog from "./Dialogs/searchDialog";
-import CategoryDialog from "./Dialogs/categoryDialog";
+import SearchDialog from "../Components/Dialogs/searchDialog";
+import CategoryDialog from "../Components/Dialogs/categoryDialog";
 
 function Drawer({open, onDrawerToggle}) {
     const {user, isLoggedIn} = useContext(UserContext);

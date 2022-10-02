@@ -1,4 +1,4 @@
-import '../Styles/Components/navbar.css';
+import '../Styles/layout/navbar.css';
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 
@@ -6,10 +6,10 @@ import {useMediaQuery} from "@mui/material";
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
-import SearchBar from "./searchBar";
-import MenuButton from "./menuButton";
-import UserPopover from "./Popovers/userPopover";
-import AccountPopover from "./Popovers/accountPopover";
+import SearchBar from "../Components/searchBar";
+import MenuButton from "../Components/menuButton";
+import UserPopover from "../Components/Popovers/userPopover";
+import AccountPopover from "../Components/Popovers/accountPopover";
 import categories from '../Data/categories';
 import Drawer from "./drawer";
 

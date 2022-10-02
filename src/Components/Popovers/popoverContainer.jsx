@@ -1,8 +1,8 @@
-import '../../Styles/Components/iconPopOver.css';
+import '../../Styles/Components/Popovers/popoverContainer.css';
 import React from 'react';
 import {Popover} from "@mui/material";
 
-function IconPopover({anchorEl, onClose, id, open, children}) {
+function PopoverContainer({anchorEl, onClose, id, open, children}) {
 
     return (
         <>
@@ -23,4 +23,4 @@ function IconPopover({anchorEl, onClose, id, open, children}) {
     );
 }
 
-export default IconPopover;
+export default PopoverContainer;

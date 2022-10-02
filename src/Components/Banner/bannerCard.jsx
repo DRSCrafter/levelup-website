@@ -1,8 +1,8 @@
-import '../Styles/Components/bannerCard.css';
+import '../../Styles/Components/Banner/bannerCard.css';
 import React from 'react';
 import {useNavigate} from "react-router-dom";
 
-const {apiEndpoint} = require('../config/config.json');
+const {apiEndpoint} = require('../../config/config.json');
 
 function BannerCard({data}) {
     const navigate = useNavigate();

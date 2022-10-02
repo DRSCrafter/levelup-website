@@ -1,10 +1,10 @@
-import '../Styles/Components/ProductPlate.css';
+import '../Styles/Pages/itemPage.css';
 import React, {useEffect, useState} from "react";
 
 import ProductPlate from "../Components/productPlate";
 import ProductSwiper from "../Components/productSwiper";
-import ContentContainer from "../Components/ContentContainer";
-import Footer from "../Components/Footer";
+import ContentContainer from "../layout/contentContainer";
+import Footer from "../layout/footer";
 import {useParams} from "react-router-dom";
 import "react-toastify/ReactToastify.min.css";
 import {getFullProduct} from "../Utils/productHandling";

@@ -1,7 +1,7 @@
-import '../Styles/Components/account.css';
+import '../Styles/Pages/accountPage.css';
 import React, {useContext} from 'react';
-import ContentContainer from "../Components/ContentContainer";
-import Footer from "../Components/Footer";
+import ContentContainer from "../layout/contentContainer";
+import Footer from "../layout/footer";
 
 import {Button, useMediaQuery} from "@mui/material";
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';

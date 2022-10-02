@@ -1,10 +1,10 @@
-import '../Styles/Components/smallForm.css';
+import '../Styles/layout/survey.css';
 import React from "react";
 
 import {IconButton} from "@mui/material";
 import TelegramIcon from '@mui/icons-material/Telegram';
 
-function SmallForm() {
+function Survey() {
     return (
         <>
             <div className="small-form-root">
@@ -22,4 +22,4 @@ function SmallForm() {
     );
 }
 
-export default SmallForm;
+export default Survey;

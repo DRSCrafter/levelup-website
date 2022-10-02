@@ -1,20 +1,18 @@
-import '../Styles/Components/shoppingCart.css';
+import '../Styles/Pages/cartPage.css';
 import React, {useContext} from 'react';
 import UserContext from "../Context/userContext";
 import {DeleteOrder} from "../Utils/orderHandling";
-import ContentContainer from "../Components/ContentContainer";
+import ContentContainer from "../layout/contentContainer";
 
 import {Button, IconButton} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import httpConnection from "../Utils/httpConnection";
-import {useNavigate} from "react-router-dom";
 
 const {apiEndpoint} = require('../config/config.json');
 
-function ShoppingCartPage() {
-    const navigate = useNavigate();
+function CartPage() {
     const {user, handleUpdateUser} = useContext(UserContext);
 
     const shoppingCart = user && user.shoppingCart;
@@ -24,7 +22,7 @@ function ShoppingCartPage() {
         try {
             handleUpdateUser('shoppingCart', []);
             await httpConnection.put(`${apiEndpoint}/api/users/${user._id}/shoppingCart`, {});
-            navigate('../');
+            window.location = '/';
         } catch (ex) {
             handleUpdateUser('shoppingCart', backup);
         }
@@ -35,7 +33,7 @@ function ShoppingCartPage() {
         try {
             handleUpdateUser('shoppingCart', []);
             await httpConnection.delete(`${apiEndpoint}/api/users/${user._id}/shoppingCart`);
-            navigate('../');
+            window.location = '/';
         } catch (ex) {
             handleUpdateUser('shoppingCart', backup);
         }
@@ -104,4 +102,4 @@ function ShoppingCartPage() {
     );
 }
 
-export default ShoppingCartPage;
+export default CartPage;

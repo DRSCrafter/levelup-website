@@ -1,6 +1,6 @@
-import '../../Styles/Components/userPopover.css';
+import '../../Styles/Components/Popovers/userPopover.css';
 import React, {useContext, useState} from 'react';
-import IconPopover from "./iconPopover";
+import PopoverContainer from "./popoverContainer";
 
 import {Button, IconButton} from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
@@ -33,7 +33,7 @@ function UserPopover() {
                         onClick={handlePopOver1}>
                 <PersonIcon htmlColor="#0080FF"/>
             </IconButton>
-            <IconPopover anchorEl={popAnchorEl1} onClose={handleClosePopOver1} open={openUser} id={userID}>
+            <PopoverContainer anchorEl={popAnchorEl1} onClose={handleClosePopOver1} open={openUser} id={userID}>
                 <div className="user-popover-container">
                     <div className="user-popover-topside">
                         <div className="user-popover-topside-info">
@@ -69,7 +69,7 @@ function UserPopover() {
                         }
                     </div>
                 </div>
-            </IconPopover>
+            </PopoverContainer>
         </>
     );
 }

@@ -1,10 +1,10 @@
 import React, {useContext, useEffect, useState} from 'react';
-import ContentContainer from "../Components/ContentContainer";
+import ContentContainer from "../layout/contentContainer";
 import UserContext from "../Context/userContext";
 import httpConnection from "../Utils/httpConnection";
 import ProductSwiper from "../Components/productSwiper";
-import Banner from "../Components/banner";
-import Footer from "../Components/Footer";
+import Banner from "../Components/Banner/banner";
+import Footer from "../layout/footer";
 
 const {apiEndpoint} = require('../config/config.json');
 

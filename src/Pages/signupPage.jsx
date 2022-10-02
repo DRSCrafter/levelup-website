@@ -1,4 +1,4 @@
-import '../Styles/Components/login.css';
+import '../Styles/Pages/loginPage.css';
 import React, {Component} from 'react';
 import Joi from 'joi';
 
@@ -15,7 +15,7 @@ import httpConnection from "../Utils/httpConnection";
 import signupFields from "../Data/signupFields";
 const {apiEndpoint} = require('../config/config.json');
 
-class SignUpPage extends Component {
+class SignupPage extends Component {
 
     state = {
         data: {
@@ -165,4 +165,4 @@ class SignUpPage extends Component {
     }
 }
 
-export default SignUpPage;
+export default SignupPage;

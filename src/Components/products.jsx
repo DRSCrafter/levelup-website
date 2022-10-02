@@ -12,7 +12,8 @@ import ProductCard from "../Components/productCard";
 import {Fab, Pagination, Slider, useMediaQuery} from "@mui/material";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterDialog from "./Dialogs/filterDialog";
-import NotFound from "./notFound";
+import NotFound from "../layout/notFound";
+import sortChoices from "../Data/sortChoices";
 
 function Products(props) {
     const {
@@ -86,25 +87,6 @@ function Products(props) {
     const filteredItems = items.length !== 0 && range !== -1 ? items.filter(item => item.price <= price) : items;
     const sortedItems = handleAvailableFirst(filteredItems);
     const paginatedItems = handlePagination(sortedItems, page);
-
-    const sortChoices = [
-        {
-            label: 'جدید ترین',
-            value: 'dateCreated'
-        },
-        {
-            label: 'محبوب ترین',
-            value: 'likes'
-        },
-        {
-            label: 'ارزان ترین',
-            value: 'price'
-        },
-        {
-            label: 'گران ترین',
-            value: '-price'
-        },
-    ]
 
     return (
         <>

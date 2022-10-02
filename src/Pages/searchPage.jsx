@@ -2,12 +2,12 @@ import React, {useEffect, useState} from 'react';
 import queryString from 'query-string';
 import {useLocation} from "react-router-dom";
 
-import ContentContainer from "../Components/ContentContainer";
+import ContentContainer from "../layout/contentContainer";
 import ProductCard from "../Components/productCard";
 import httpConnection from "../Utils/httpConnection";
 
 import {Pagination} from "@mui/material";
-import NotFound from "../Components/notFound";
+import NotFound from "../layout/notFound";
 import lodash from "lodash";
 
 const {apiEndpoint} = require('../config/config.json');

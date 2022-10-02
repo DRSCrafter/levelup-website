@@ -1,4 +1,4 @@
-import '../Styles/Components/contentContainer.css';
+import '../Styles/layout/contentContainer.css';
 import React from 'react';
 
 function ContentContainer({children}) {

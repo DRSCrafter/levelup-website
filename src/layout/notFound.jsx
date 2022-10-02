@@ -1,4 +1,4 @@
-import '../Styles/Components/notFound.css';
+import '../Styles/layout/notFound.css';
 import React from 'react';
 import MoodBadIcon from "@mui/icons-material/MoodBad";
 

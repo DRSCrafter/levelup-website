@@ -2,18 +2,18 @@ import React, {useEffect, useRef, useState} from "react";
 import {useParams} from "react-router-dom";
 
 import Products from "../Components/products";
-import Footer from "../Components/Footer";
-import ContentContainer from "../Components/ContentContainer";
+import Footer from "../layout/footer";
+import ContentContainer from "../layout/contentContainer";
 import {getProducts} from "../Utils/productHandling";
 import httpConnection from "../Utils/httpConnection";
 
 const {apiEndpoint} = require('../config/config.json');
 
 function ProductsPage() {
-    const [string, setString] = useState("");
+    const [searchStr, setSearchStr] = useState("");
     const [companies, setCompanies] = useState([]);
     const [companyList, setCompanyList] = useState([]);
-    const [isAvailable, setIsAvailable] = useState('0');
+    const [radio, setRadio] = useState('0');
 
     const [selectedSort, setSelectedSort] = React.useState('name');
     const [items, setItems] = useState([]);
@@ -24,12 +24,12 @@ function ProductsPage() {
     const maxPrice = useRef(0);
 
     useEffect(() => {
-        getProducts(string, companies, isAvailable, category, selectedSort).then(res => {
+        getProducts(searchStr, companies, radio, category, selectedSort).then(res => {
             setItems(res);
             prices.current = res.map(item => item.price);
             maxPrice.current = res.length !== 0 ? Math.max.apply(Math, prices.current) : 0;
         });
-    }, [string, companies, isAvailable, selectedSort, category])
+    }, [searchStr, companies, radio, selectedSort, category])
 
     const handleGetCategories = async () => {
         const {data} = await httpConnection.get(`${apiEndpoint}/api/companies/${category}`);
@@ -47,21 +47,21 @@ function ProductsPage() {
         setCompanies(newArray);
     };
 
-    const handleChange = (e) => {
-        setIsAvailable(e.target.value);
+    const handleChangeRadio = (e) => {
+        setRadio(e.target.value);
     };
 
     const handleSelect = (value) => {
         setSelectedSort(value);
     };
 
-    const handleSubmitString = str => setString(str);
+    const handleSubmitString = str => setSearchStr(str);
 
     return (
         <>
             <ContentContainer>
-                <Products items={items} onCheckboxChange={handleCheckboxChange} radioValue={isAvailable}
-                          onRadioChange={handleChange}
+                <Products items={items} onCheckboxChange={handleCheckboxChange} radioValue={radio}
+                          onRadioChange={handleChangeRadio}
                           filterValue={selectedSort} onFilterChange={handleSelect} onSubmitString={handleSubmitString}
                           maxPrice={maxPrice.current} companies={companyList}/>
                 <Footer/>

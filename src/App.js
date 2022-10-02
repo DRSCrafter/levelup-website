@@ -1,17 +1,17 @@
 import {Route, Routes} from 'react-router-dom';
 import React, {useEffect, useState} from 'react';
 
-import NavBar from "./Components/navBar";
+import NavBar from "./layout/navBar";
 import MainPage from "./Pages/mainPage";
-import ProductsPage from "./Pages/ProductsPage";
+import ProductsPage from "./Pages/productsPage";
 import ItemPage from "./Pages/itemPage";
 import LoginPage from "./Pages/loginPage";
-import SignUpPage from "./Pages/signUpPage";
+import SignupPage from "./Pages/signupPage";
 import AccountPage from "./Pages/accountPage";
 import httpConnection from "./Utils/httpConnection";
 import jwtDecode from "jwt-decode";
 import UserContext from "./Context/userContext";
-import ShoppingCartPage from "./Pages/shoppingCartPage";
+import CartPage from "./Pages/cartPage";
 import SearchPage from "./Pages/searchPage";
 
 const {apiEndpoint} = require('./config/config.json');
@@ -29,8 +29,9 @@ function App() {
             return setUser(defaultUser);
         }
         const userID = jwtDecode(jwtToken)._id;
-        const user = await httpConnection.get(`${apiEndpoint}/api/users/${userID}`);
-        setUser({...user.data, userImage: `${apiEndpoint}/${user.data.userImage}`});
+        const {data} = await httpConnection.get(`${apiEndpoint}/api/users/${userID}`);
+        const userImage = data.userImage ? `${apiEndpoint}/${data.userImage}` : require('./Assets/defaultUser.png');
+        setUser({...data, userImage});
     }
 
     useEffect(() => {
@@ -50,9 +51,9 @@ function App() {
                     <Route path="/cat/:category" element={<ProductsPage/>}/>
                     <Route path="/products/:id" element={<ItemPage/>}/>
                     <Route path="/login" element={<LoginPage/>}/>
-                    <Route path="/signup" element={<SignUpPage/>}/>
+                    <Route path="/signup" element={<SignupPage/>}/>
                     <Route path="/account" element={<AccountPage/>}/>
-                    <Route path="/shoppingCart" element={<ShoppingCartPage/>}/>
+                    <Route path="/shoppingCart" element={<CartPage/>}/>
                     <Route path="/search" element={<SearchPage/>}/>
                 </Routes>
             </UserContext.Provider>
