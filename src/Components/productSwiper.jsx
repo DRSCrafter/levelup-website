@@ -19,7 +19,7 @@ function ProductSwiper({title, data}) {
                     <span className="product-swiper-header-inner"><h4>{title}</h4></span>
                 </div>
                 <Swiper
-                    slidesPerView={matches ? 5 : 3}
+                    slidesPerView={matches ? 5 : 2}
                     spaceBetween={3}
                     className="product-swiper"
                     preventClicks={false}

@@ -7,13 +7,13 @@
 
 .products-items-container {
     flex-basis: 100%;
-    padding: 15px;
+    padding-block: 15px;
     box-sizing: border-box;
 }
 
 .products-top-filter-root {
     display: flex;
-    padding: 15px;
+    padding-block: 15px;
     align-items: center;
     justify-content: flex-end;
     border-radius: 10px;
@@ -24,7 +24,6 @@
 .products-top-filter-container {
     direction: rtl;
     display: flex;
-    column-gap: 30px;
     color: #8d8d8d;
 }
 
@@ -76,6 +75,10 @@
 
     .products-items-container {
         flex-basis: 80%;
+    }
+
+    .products-top-filter-container {
+        column-gap: 30px;
     }
 
     .products-side-container {
