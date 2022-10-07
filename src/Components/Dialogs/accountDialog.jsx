@@ -47,7 +47,7 @@ function AccountDialog({onClose, open, onCharge, isPC}) {
                                     <div className="account-dialog-btn-section">
                                         <Button style={{
                                             width: '25%',
-                                            fontFamily: '"B Yekan"',
+                                            fontFamily: '"Yekan"',
                                             color: '#707070'
                                         }} variant="text" onClick={onClose}>
                                             لغو
@@ -56,7 +56,7 @@ function AccountDialog({onClose, open, onCharge, isPC}) {
                                             width: '70%',
                                             backgroundColor: '#98CCFF',
                                             color: '#0080FF',
-                                            fontFamily: '"B Yekan"',
+                                            fontFamily: '"Yekan"',
                                         }} startIcon={<AccountBalanceWalletIcon style={{marginLeft: 20}}/>}
                                                 variant="contained" onClick={() => onCharge(amount)}>
                                             پرداخت

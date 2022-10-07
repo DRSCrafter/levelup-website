@@ -35,3 +35,32 @@ code {
   background-color: rgba(121, 121, 121, 0.6);
 }
 
+@font-face {
+  font-family: SegoeUI;
+  src:
+          local("Segoe UI Light"),
+          url(../fonts/segoeuilight/light.woff2) format("woff2"),
+          url(../fonts/segoeuilight/light.woff) format("woff"),
+          url(../fonts/segoeuilight/light.ttf) format("truetype");
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: 'Yekan';
+  src:
+          local("Yekan"),
+          url(../fonts/yekan/Yekan.woff2) format('woff2'),
+          url(../fonts/yekan/Yekan.woff) format('woff'),
+          url(../fonts/yekan/Yekan.ttf) format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'IRMehr';
+  src:
+          local("IRMehr"),
+          url(../fonts/mehr/mehr.woff2) format('woff2'), /* Modern Browsers */
+          url(../fonts/mehr/mehr.woff) format('woff'), /* Modern Browsers */
+          url(../fonts/mehr/mehr.ttf) format('truetype'); /* Safari, Android, iOS */
+  font-weight: normal;
+}

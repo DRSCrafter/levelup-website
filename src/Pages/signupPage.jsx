@@ -13,6 +13,7 @@ import createCache from '@emotion/cache';
 import httpConnection from "../Utils/httpConnection";
 
 import signupFields from "../Data/signupFields";
+
 const {apiEndpoint} = require('../config/config.json');
 
 class SignupPage extends Component {
@@ -89,15 +90,12 @@ class SignupPage extends Component {
         formData.append('name', data.name);
         formData.append('email', data.email);
         formData.append('password', data.password);
-        formData.append('userImage', profileImage);
+        if (profileImage)
+            formData.append('userImage', profileImage);
 
-        try {
-            const request = await httpConnection.post(`${apiEndpoint}/api/users/`, formData);
-            localStorage.setItem("token", request.headers['x-auth-token']);
-            window.location = '/';
-        } catch (ex) {
-            console.log(ex.response.message);
-        }
+        const request = await httpConnection.post(`${apiEndpoint}/api/users/`, formData);
+        localStorage.setItem("token", request.headers['x-auth-token']);
+        window.location = '/';
     };
 
     theme = createTheme({
@@ -130,7 +128,8 @@ class SignupPage extends Component {
                                                 <TextField sx={{width: '100%', marginBlock: '5px'}}
                                                            inputProps={{style: {fontFamily: 'Segoe UI Light'}}}
                                                            variant="outlined"
-                                                           name={field.tag} value={data[field.tag]} onChange={this.handleChange}
+                                                           name={field.tag} value={data[field.tag]}
+                                                           onChange={this.handleChange}
                                                            label={errors[field.tag] ? "خطا" : field.label}
                                                            error={errors[field.tag]} helperText={errors[field.tag]}/>
                                             ))}
@@ -151,7 +150,7 @@ class SignupPage extends Component {
                                                 backgroundColor: '#0080FF',
                                                 color: 'white',
                                                 boxShadow: '0 10px 20px -10px #0080FF',
-                                                fontFamily: '"B Yekan"'
+                                                fontFamily: '"Yekan"'
                                             }} variant="contained" onClick={this.handleSubmit}>ثبت نام</Button>
                                         </div>
                                     </div>

@@ -87,7 +87,7 @@ function AccountPage() {
                                 width: '100%',
                                 backgroundColor: '#98CCFF',
                                 color: '#0080FF',
-                                fontFamily: '"B Yekan"'
+                                fontFamily: '"Yekan"'
                             }} startIcon={<AccountBalanceWalletIcon style={{marginLeft: 10}}/>} variant="contained"
                                     onClick={handleClickOpen}>
                                 افزایش اعتبار
@@ -97,7 +97,7 @@ function AccountPage() {
                             width: '75%',
                             backgroundColor: '#FF9797',
                             color: '#FF0000',
-                            fontFamily: '"B Yekan"'
+                            fontFamily: '"Yekan"'
                         }} startIcon={<LogoutIcon style={{marginLeft: 10}}/>} variant="contained">
                             خروج از حساب کاربری
                         </Button>

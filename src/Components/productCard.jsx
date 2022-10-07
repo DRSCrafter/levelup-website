@@ -10,8 +10,6 @@ import Favorite from '@mui/icons-material/Favorite';
 import {useNavigate} from "react-router-dom";
 import {Buy, Like} from "../Utils/productHandling";
 
-const {apiEndpoint} = require('../config/config.json');
-
 function ProductCard({info, shadow = false}) {
     const {_id, name, price, thumbnailImage, stock} = info;
     const {user, handleUpdateUser, isLoggedIn} = useContext(UserContext);
@@ -48,7 +46,7 @@ function ProductCard({info, shadow = false}) {
         <>
             <div className={`card-root ${shadow ? 'card-shadow' : ''}`} onClick={handleClick}>
                 <div className="card-container">
-                    <img src={`${apiEndpoint}/${thumbnailImage}`} className="product-image" alt="product"/>
+                    <img src={thumbnailImage} className="product-image" alt="product"/>
                     <div className="product-info">
                         <div className="product-name">{name}</div>
                         <div className={`product-price ${!isAvailable ? "text-danger" : ''}`}>
@@ -62,7 +60,7 @@ function ProductCard({info, shadow = false}) {
                                 onClick={handleLike}/>
                             {matches ?
                                 <Button
-                                    style={{borderRadius: 10, fontFamily: '"B Yekan", sans-serif', color: '#0080FF'}}
+                                    style={{borderRadius: 10, fontFamily: '"Yekan", sans-serif', color: '#0080FF'}}
                                     variant="outlined"
                                     endIcon={<ShoppingCartOutlinedIcon style={{minWidth: 30}}/>}
                                     onClick={handleBuy}

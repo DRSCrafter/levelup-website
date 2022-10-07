@@ -60,13 +60,13 @@ function LoginPage() {
                                             backgroundColor: '#0080FF',
                                             color: 'white',
                                             boxShadow: '0 10px 20px -10px #0080FF',
-                                            fontFamily: '"B Yekan"'
+                                            fontFamily: '"Yekan"'
                                         }} variant="contained" onClick={(event) => Login(event, email, password)}>ورود</Button>
                                         <Button style={{
                                             width: '100%',
                                             paddingBlock: 15,
                                             color: '#0080FF',
-                                            fontFamily: '"B Yekan"',
+                                            fontFamily: '"Yekan"',
                                             marginTop: 10
                                         }} variant="text" onClick={handleNavigation}>ثبت نام</Button>
                                     </div>

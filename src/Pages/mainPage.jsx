@@ -16,8 +16,8 @@ function MainPage() {
     const handleGetData = async () => {
         const list = [];
         const topics = [
-            {title: "تازه های بازی", type: 'game'},
             {title: "تازه های کنسول", type: 'console'},
+            {title: "تازه های بازی", type: 'game'},
         ];
         for (let topic of topics) {
             const request = {type: topic.type};

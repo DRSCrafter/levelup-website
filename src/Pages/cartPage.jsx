@@ -73,7 +73,7 @@ function CartPage() {
                                 width: '100%',
                                 height: '50px',
                                 color: 'rgba(255,0,0,0.55)',
-                                fontFamily: '"B Yekan"',
+                                fontFamily: '"Yekan"',
                                 borderRadius: 0,
                                 boxShadow: "none"
                             }} startIcon={<RemoveShoppingCartIcon style={{marginLeft: 20}} onClick={handleClearCart}/>}
@@ -87,7 +87,7 @@ function CartPage() {
                                 height: '50px',
                                 backgroundColor: '#98CCFF',
                                 color: '#0080FF',
-                                fontFamily: '"B Yekan"',
+                                fontFamily: '"Yekan"',
                                 borderRadius: 0,
                                 boxShadow: "none"
                             }} startIcon={<AccountBalanceWalletIcon style={{marginLeft: 20}}/>}

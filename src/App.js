@@ -30,7 +30,7 @@ function App() {
         }
         const userID = jwtDecode(jwtToken)._id;
         const {data} = await httpConnection.get(`${apiEndpoint}/api/users/${userID}`);
-        const userImage = data.userImage ? `${apiEndpoint}/${data.userImage}` : require('./Assets/defaultUser.png');
+        const userImage = data.userImage ? data.userImage : require('./Assets/defaultUser.png');
         setUser({...data, userImage});
     }
 

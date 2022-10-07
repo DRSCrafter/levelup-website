@@ -70,7 +70,7 @@ function AccountPopover() {
                                 style={{
                                     width: '60%',
                                     borderRadius: 10,
-                                    fontFamily: '"B Yekan", sans-serif',
+                                    fontFamily: '"Yekan", sans-serif',
                                     color: '#ffffff',
                                     position: "relative"
                                 }}
