@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Route, Routes, useLoadingContext} from 'react-router-loading';
+import {Route, Routes} from 'react-router-loading';
 
 import NavBar from "./layout/navBar";
 import MainPage from "./Pages/mainPage";
@@ -14,7 +14,7 @@ import UserContext from "./Context/userContext";
 import CartPage from "./Pages/cartPage";
 import SearchPage from "./Pages/searchPage";
 import Loading from "./layout/loading";
-import {toast, ToastContainer} from "react-toastify";
+import {ToastContainer} from "react-toastify";
 
 const {apiEndpoint} = require('./config/config.json');
 
@@ -58,7 +58,7 @@ function App() {
                         <Route path="/signup" element={<SignupPage/>}/>
                         <Route path="/account" element={<AccountPage/>} loading/>
                         <Route path="/shoppingCart" element={<CartPage/>} loading/>
-                        <Route path="/search" element={<SearchPage/>} loading/>
+                        <Route path="/search" element={<SearchPage/>}/>
                     </Routes>
                     <ToastContainer/>
                 </UserContext.Provider>

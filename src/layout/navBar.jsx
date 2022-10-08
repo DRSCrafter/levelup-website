@@ -37,7 +37,10 @@ function NavBar() {
 
     const handleDrawerToggle = (value) => setDrawer(value);
     const handleSetString = (event) => setSearch(event.target.value);
-    const handleSearch = () => window.location = `../../search?str=${search}`;
+    const handleSearch = () => {
+        if (search !== '')
+            window.location = `../../search?str=${search}`
+    };
 
     return (
         <>

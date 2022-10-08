@@ -9,7 +9,6 @@ import httpConnection from "../Utils/httpConnection";
 import {Pagination} from "@mui/material";
 import NotFound from "../layout/notFound";
 import lodash from "lodash";
-import {useLoadingContext} from "react-router-loading";
 
 const {apiEndpoint} = require('../config/config.json');
 
@@ -18,8 +17,6 @@ function SearchPage() {
 
     const location = useLocation();
     const {str} = queryString.parse(location.search);
-
-    const loadingContext = useLoadingContext();
 
     const [page, setPage] = React.useState(1);
     const handleTogglePage = (event, value) => {
@@ -50,10 +47,7 @@ function SearchPage() {
     }
 
     useEffect(() => {
-        handleGetData().then(() => {
-            setProducts(products);
-            loadingContext.done();
-        });
+        handleGetData();
     }, [])
 
     const sortedItems = products && handleAvailableFirst(products);
