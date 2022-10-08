@@ -41,7 +41,6 @@ export const Like = async (user, handleUpdateUser, id) => {
             });
         } catch (ex) {
             likes.push(id);
-            console.log(ex.response.message);
         }
     } else {
         try {
@@ -52,7 +51,6 @@ export const Like = async (user, handleUpdateUser, id) => {
             });
         } catch (ex) {
             likes = likes.filter(productID => productID !== id);
-            console.log(ex.response.message);
         }
     }
 

@@ -1,5 +1,5 @@
-import {Route, Routes} from 'react-router-dom';
 import React, {useEffect, useState} from 'react';
+import {Route, Routes, useLoadingContext} from 'react-router-loading';
 
 import NavBar from "./layout/navBar";
 import MainPage from "./Pages/mainPage";
@@ -13,11 +13,14 @@ import jwtDecode from "jwt-decode";
 import UserContext from "./Context/userContext";
 import CartPage from "./Pages/cartPage";
 import SearchPage from "./Pages/searchPage";
+import Loading from "./layout/loading";
+import {toast, ToastContainer} from "react-toastify";
 
 const {apiEndpoint} = require('./config/config.json');
 
 function App() {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const handleLoginUser = async () => {
         const jwtToken = localStorage.getItem('token');
@@ -35,7 +38,7 @@ function App() {
     }
 
     useEffect(() => {
-        handleLoginUser();
+        handleLoginUser().then(() => setLoading(false));
     }, []);
 
     const handleUpdateUser = (key, value) => setUser({...user, [key]: value});
@@ -44,19 +47,21 @@ function App() {
 
     return (
         <>
-            <UserContext.Provider value={{user, handleUpdateUser, isLoggedIn}}>
-                <NavBar/>
-                <Routes>
-                    <Route path="/" force element={<MainPage/>}/>
-                    <Route path="/cat/:category" element={<ProductsPage/>}/>
-                    <Route path="/products/:id" element={<ItemPage/>}/>
-                    <Route path="/login" element={<LoginPage/>}/>
-                    <Route path="/signup" element={<SignupPage/>}/>
-                    <Route path="/account" element={<AccountPage/>}/>
-                    <Route path="/shoppingCart" element={<CartPage/>}/>
-                    <Route path="/search" element={<SearchPage/>}/>
-                </Routes>
-            </UserContext.Provider>
+                <UserContext.Provider value={{user, handleUpdateUser, isLoggedIn}}>
+                    <Loading isLoading={loading}/>
+                    <NavBar/>
+                    <Routes>
+                        <Route path="/" element={<MainPage/>}/>
+                        <Route path="/cat/:category" element={<ProductsPage/>} loading/>
+                        <Route path="/products/:id" element={<ItemPage/>} loading/>
+                        <Route path="/login" element={<LoginPage/>}/>
+                        <Route path="/signup" element={<SignupPage/>}/>
+                        <Route path="/account" element={<AccountPage/>} loading/>
+                        <Route path="/shoppingCart" element={<CartPage/>} loading/>
+                        <Route path="/search" element={<SearchPage/>} loading/>
+                    </Routes>
+                    <ToastContainer/>
+                </UserContext.Provider>
         </>
     );
 }

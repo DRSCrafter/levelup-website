@@ -21,6 +21,5 @@ export const Login = async (e, email, password) => {
         localStorage.setItem("token", request.headers['x-auth-token']);
         window.location = '/';
     } catch (ex) {
-        console.log(ex.response.message);
     }
 };

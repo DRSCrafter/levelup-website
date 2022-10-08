@@ -51,8 +51,8 @@ function AccountPopover() {
                             <span>{user && totalCost} تومان</span>
                         </div>
                         <div className="account-popover-downside">
-                            {user && shoppingList.map(order => (
-                                <div className="account-order-container">
+                            {user && shoppingList.map((order, index) => (
+                                <div className="account-order-container" key={index}>
                                     <IconButton style={{color: '#FF9797'}} size="small"
                                                 onClick={() => DeleteOrder(user, handleUpdateUser, order)}>
                                         <DeleteIcon htmlColor="#FF0000"/>

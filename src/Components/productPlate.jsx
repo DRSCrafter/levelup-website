@@ -1,4 +1,3 @@
-import '../Styles/Pages/itemPage.css';
 import React, {useContext, useState} from "react";
 
 import {Button} from "@mui/material";

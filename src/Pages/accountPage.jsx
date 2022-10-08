@@ -1,5 +1,5 @@
 import '../Styles/Pages/accountPage.css';
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import ContentContainer from "../layout/contentContainer";
 import Footer from "../layout/footer";
 
@@ -9,6 +9,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import UserContext from "../Context/userContext";
 import AccountDialog from "../Components/Dialogs/accountDialog";
 import httpConnection from "../Utils/httpConnection";
+import {useLoadingContext} from "react-router-loading";
 
 const {apiEndpoint} = require('../config/config.json');
 
@@ -16,6 +17,8 @@ function AccountPage() {
     const {user, handleUpdateUser} = useContext(UserContext);
 
     const [open, setOpen] = React.useState(false);
+
+    const loadingContext = useLoadingContext();
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -45,6 +48,8 @@ function AccountPage() {
     }
 
     const isPC = useMediaQuery('(min-width: 1024px)');
+
+    useEffect(() => loadingContext.done(), []);
 
     return (
         <>

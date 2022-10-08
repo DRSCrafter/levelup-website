@@ -8,14 +8,18 @@ import Footer from "../layout/footer";
 import {useParams} from "react-router-dom";
 import "react-toastify/ReactToastify.min.css";
 import {getFullProduct} from "../Utils/productHandling";
+import {useLoadingContext} from "react-router-loading";
 
 function ItemPage() {
     const [product, setProduct] = useState({});
     const [relatedList, setRelatedList] = useState([]);
+
     const {id} = useParams();
 
+    const loadingContext = useLoadingContext();
+
     useEffect(() => {
-        getFullProduct(id, setProduct, setRelatedList);
+        getFullProduct(id, setProduct, setRelatedList).then(() => loadingContext.done());
     }, [id]);
 
     return (

@@ -46,7 +46,7 @@ function ProductCard({info, shadow = false}) {
         <>
             <div className={`card-root ${shadow ? 'card-shadow' : ''}`} onClick={handleClick}>
                 <div className="card-container">
-                    <img src={thumbnailImage} className="product-image" alt="product"/>
+                    <img src={thumbnailImage} className="product-image" alt="product" loading="lazy"/>
                     <div className="product-info">
                         <div className="product-name">{name}</div>
                         <div className={`product-price ${!isAvailable ? "text-danger" : ''}`}>

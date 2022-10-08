@@ -6,6 +6,7 @@ import Footer from "../layout/footer";
 import ContentContainer from "../layout/contentContainer";
 import {getProducts} from "../Utils/productHandling";
 import httpConnection from "../Utils/httpConnection";
+import {useLoadingContext} from "react-router-loading";
 
 const {apiEndpoint} = require('../config/config.json');
 
@@ -20,6 +21,8 @@ function ProductsPage() {
 
     const {category} = useParams();
 
+    const loadingContext = useLoadingContext();
+
     const prices = useRef(0);
     const maxPrice = useRef(0);
 
@@ -28,6 +31,7 @@ function ProductsPage() {
             setItems(res);
             prices.current = res.map(item => item.price);
             maxPrice.current = res.length !== 0 ? Math.max.apply(Math, prices.current) : 0;
+            loadingContext.done();
         });
     }, [searchStr, companies, radio, selectedSort, category])
 

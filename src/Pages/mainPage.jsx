@@ -5,6 +5,7 @@ import httpConnection from "../Utils/httpConnection";
 import ProductSwiper from "../Components/productSwiper";
 import Banner from "../Components/Banner/banner";
 import Footer from "../layout/footer";
+import {toast} from "react-toastify";
 
 const {apiEndpoint} = require('../config/config.json');
 
@@ -35,8 +36,8 @@ function MainPage() {
     }
 
     useEffect(() => {
-        handleGetData();
         handleGetBanners();
+        handleGetData();
     }, [user])
     return (
         <>

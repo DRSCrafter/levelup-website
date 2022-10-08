@@ -1,5 +1,5 @@
 import '../Styles/Pages/cartPage.css';
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import UserContext from "../Context/userContext";
 import {DeleteOrder} from "../Utils/orderHandling";
 import ContentContainer from "../layout/contentContainer";
@@ -9,11 +9,14 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import httpConnection from "../Utils/httpConnection";
+import {useLoadingContext} from "react-router-loading";
 
 const {apiEndpoint} = require('../config/config.json');
 
 function CartPage() {
     const {user, handleUpdateUser} = useContext(UserContext);
+
+    const loadingContext = useLoadingContext();
 
     const shoppingCart = user && user.shoppingCart;
 
@@ -38,6 +41,8 @@ function CartPage() {
             handleUpdateUser('shoppingCart', backup);
         }
     }
+
+    useEffect(() => loadingContext.done(), []);
 
     return (
         <>
