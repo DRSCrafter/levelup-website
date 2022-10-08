@@ -1,3 +1,4 @@
+import './Styles/global.css';
 import React, {useEffect, useState} from 'react';
 import {Route, Routes} from 'react-router-loading';
 
@@ -14,7 +15,7 @@ import UserContext from "./Context/userContext";
 import CartPage from "./Pages/cartPage";
 import SearchPage from "./Pages/searchPage";
 import Loading from "./layout/loading";
-import {ToastContainer} from "react-toastify";
+import {toast, ToastContainer} from "react-toastify";
 
 const {apiEndpoint} = require('./config/config.json');
 
@@ -25,6 +26,7 @@ function App() {
     const handleLoginUser = async () => {
         const jwtToken = localStorage.getItem('token');
         if (!jwtToken) {
+            toast.warn('برای بهره مندی از خدمات سایت وارد شوید');
             const defaultUser = {
                 name: "کاربر میهمان",
                 userImage: require('./Assets/defaultUser.png'),
@@ -60,7 +62,7 @@ function App() {
                         <Route path="/shoppingCart" element={<CartPage/>} loading/>
                         <Route path="/search" element={<SearchPage/>}/>
                     </Routes>
-                    <ToastContainer/>
+                    <ToastContainer toastClassName="toast-style"/>
                 </UserContext.Provider>
         </>
     );

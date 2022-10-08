@@ -35,6 +35,10 @@ code {
   background-color: rgba(121, 121, 121, 0.6);
 }
 
+.toast-style {
+    font-family: Yekan, "Segoe UI Light", sans-serif!important;
+}
+
 @font-face {
   font-family: SegoeUI;
   src:
