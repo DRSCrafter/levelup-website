@@ -1,5 +1,4 @@
 import httpConnection from "./httpConnection";
-const {apiEndpoint} = require('../config/config.json');
 
 export const Logout = () => {
     localStorage.removeItem('token');
@@ -15,7 +14,7 @@ export const Login = async (e, email, password) => {
     })
 
     try {
-        const request = await httpConnection.put(`${apiEndpoint}/api/users/login`, reqBody, {
+        const request = await httpConnection.put('/users/login', reqBody, {
             headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
         });
         localStorage.setItem("token", request.headers['x-auth-token']);

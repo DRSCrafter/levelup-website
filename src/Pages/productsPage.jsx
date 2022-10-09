@@ -8,8 +8,6 @@ import {getProducts} from "../Utils/productHandling";
 import httpConnection from "../Utils/httpConnection";
 import {useLoadingContext} from "react-router-loading";
 
-const {apiEndpoint} = require('../config/config.json');
-
 function ProductsPage() {
     const [searchStr, setSearchStr] = useState("");
     const [companies, setCompanies] = useState([]);
@@ -36,7 +34,7 @@ function ProductsPage() {
     }, [searchStr, companies, radio, selectedSort, category])
 
     const handleGetCategories = async () => {
-        const {data} = await httpConnection.get(`${apiEndpoint}/api/companies/${category}`);
+        const {data} = await httpConnection.get(`/companies/${category}`);
         setCompanyList(data);
     }
     useEffect(() => {

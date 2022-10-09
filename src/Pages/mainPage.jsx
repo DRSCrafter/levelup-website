@@ -6,8 +6,6 @@ import ProductSwiper from "../Components/productSwiper";
 import Banner from "../Components/Banner/banner";
 import Footer from "../layout/footer";
 
-const {apiEndpoint} = require('../config/config.json');
-
 function MainPage() {
     const [bannerList, setBannerList] = useState([]);
     const [swiperList, setSwiperList] = useState([]);
@@ -21,7 +19,7 @@ function MainPage() {
         ];
         for (let topic of topics) {
             const request = {type: topic.type};
-            const {data} = await httpConnection.put(`${apiEndpoint}/api/products/related`, JSON.stringify(request), {
+            const {data} = await httpConnection.put('/products/related', JSON.stringify(request), {
                 headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
             });
             list.push({title: topic.title, data: data});
@@ -30,7 +28,7 @@ function MainPage() {
     }
 
     const handleGetBanners = async () => {
-        const {data} = await httpConnection.get(`${apiEndpoint}/api/banners`);
+        const {data} = await httpConnection.get('/banners');
         setBannerList(data);
     }
 

@@ -11,8 +11,6 @@ import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import httpConnection from "../Utils/httpConnection";
 import {useLoadingContext} from "react-router-loading";
 
-const {apiEndpoint} = require('../config/config.json');
-
 function CartPage() {
     const {user, handleUpdateUser} = useContext(UserContext);
 
@@ -24,7 +22,7 @@ function CartPage() {
         const backup = [...user.shoppingCart];
         try {
             handleUpdateUser('shoppingCart', []);
-            await httpConnection.put(`${apiEndpoint}/api/users/${user._id}/shoppingCart`, {});
+            await httpConnection.put(`/users/${user._id}/shoppingCart`, {});
             window.location = '/';
         } catch (ex) {
             handleUpdateUser('shoppingCart', backup);
@@ -35,7 +33,7 @@ function CartPage() {
         const backup = [...user.shoppingCart];
         try {
             handleUpdateUser('shoppingCart', []);
-            await httpConnection.delete(`${apiEndpoint}/api/users/${user._id}/shoppingCart`);
+            await httpConnection.delete(`/users/${user._id}/shoppingCart`);
             window.location = '/';
         } catch (ex) {
             handleUpdateUser('shoppingCart', backup);

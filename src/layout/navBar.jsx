@@ -65,7 +65,7 @@ function NavBar() {
               </span>
                     <SearchBar placeholder="چی میخوای بیا به خودم بگو" value={search} onChange={handleSetString}
                                onSubmit={handleSearch}/>
-                    <img className="navbar-logo" src={require('../Assets/logo.png')} alt="logo"
+                    <img className="navbar-logo" src={require('../Assets/title.png')} alt="logo"
                          onClick={() => navigate('./')}/>
                 </div>
                 <div className={`sub-navbar-container ${visible ? "active" : "hidden"}`}>

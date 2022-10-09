@@ -10,8 +10,6 @@ import {Pagination} from "@mui/material";
 import NotFound from "../layout/notFound";
 import lodash from "lodash";
 
-const {apiEndpoint} = require('../config/config.json');
-
 function SearchPage() {
     const [products, setProducts] = useState([]);
 
@@ -29,7 +27,7 @@ function SearchPage() {
     }
 
     const handleGetData = async () => {
-        const response = await httpConnection.get(`${apiEndpoint}/api/products/search/${str}`);
+        const response = await httpConnection.get(`/products/search/${str}`);
         setProducts(response.data);
     }
 

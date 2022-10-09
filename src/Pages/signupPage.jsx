@@ -14,8 +14,6 @@ import httpConnection from "../Utils/httpConnection";
 
 import signupFields from "../Data/signupFields";
 
-const {apiEndpoint} = require('../config/config.json');
-
 class SignupPage extends Component {
 
     state = {
@@ -93,7 +91,7 @@ class SignupPage extends Component {
         if (profileImage)
             formData.append('userImage', profileImage);
 
-        const request = await httpConnection.post(`${apiEndpoint}/api/users/`, formData);
+        const request = await httpConnection.post('/users/', formData);
         localStorage.setItem("token", request.headers['x-auth-token']);
         window.location = '/';
     };

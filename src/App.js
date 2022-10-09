@@ -17,8 +17,6 @@ import SearchPage from "./Pages/searchPage";
 import Loading from "./layout/loading";
 import {toast, ToastContainer} from "react-toastify";
 
-const {apiEndpoint} = require('./config/config.json');
-
 function App() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -34,7 +32,7 @@ function App() {
             return setUser(defaultUser);
         }
         const userID = jwtDecode(jwtToken)._id;
-        const {data} = await httpConnection.get(`${apiEndpoint}/api/users/${userID}`);
+        const {data} = await httpConnection.get(`/users/${userID}`);
         const userImage = data.userImage ? data.userImage : require('./Assets/defaultUser.png');
         setUser({...data, userImage});
     }

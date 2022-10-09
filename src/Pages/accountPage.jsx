@@ -11,8 +11,6 @@ import AccountDialog from "../Components/Dialogs/accountDialog";
 import httpConnection from "../Utils/httpConnection";
 import {useLoadingContext} from "react-router-loading";
 
-const {apiEndpoint} = require('../config/config.json');
-
 function AccountPage() {
     const {user, handleUpdateUser} = useContext(UserContext);
 
@@ -37,7 +35,7 @@ function AccountPage() {
         try {
             handleUpdateUser('account', currentAmount + amount);
 
-            await httpConnection.put(`${apiEndpoint}/api/users/${user._id}/account`, request, {
+            await httpConnection.put(`/users/${user._id}/account`, request, {
                 headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
             });
         } catch (ex) {
