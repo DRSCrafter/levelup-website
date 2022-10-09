@@ -23,7 +23,7 @@ function Banner({data}) {
                 modules={[Autoplay, Pagination]}
                 className="card-swiper-container"
             >
-                {data.map(item => (<SwiperSlide><BannerCard data={item}/></SwiperSlide>))}
+                {data.map((item, index) => (<SwiperSlide key={index}><BannerCard data={item}/></SwiperSlide>))}
             </Swiper>
         </>
     );

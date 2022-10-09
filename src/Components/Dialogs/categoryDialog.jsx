@@ -63,8 +63,8 @@ function CategoryDialog({onClose, open}) {
                                 </Toolbar>
                             </AppBar>
                             <List>
-                                {categories.map((category) => (
-                                    <>
+                                {categories.map((category, index) => (
+                                    <span key={index}>
                                         <ListItemButton onClick={() => handleToggleCategory(category.tag)}>
                                             <ListItemIcon>
                                                 {category.icon}
@@ -74,15 +74,17 @@ function CategoryDialog({onClose, open}) {
                                         </ListItemButton>
                                         <Collapse in={openCategory[category.tag]} timeout="auto" unmountOnExit>
                                             <List component="div" disablePadding>
-                                                {category.list.map(subCategory => (
-                                                    <ListItemButton sx={{pl: 4}}
-                                                                    onClick={() => handleNavigate(subCategory.link, category.tag)}>
+                                                {category.list.map((subCategory, index) => (
+                                                    <ListItemButton
+                                                        sx={{pl: 4}}
+                                                        onClick={() => handleNavigate(subCategory.link, category.tag)}
+                                                        key={index}>
                                                         <ListItemText primary={subCategory.name}/>
                                                     </ListItemButton>
                                                 ))}
                                             </List>
                                         </Collapse>
-                                    </>
+                                    </span>
                                 ))}
                             </List>
                         </Dialog>
