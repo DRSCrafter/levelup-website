@@ -8,12 +8,14 @@ import rtlPlugin from "stylis-plugin-rtl";
 import {createTheme} from "@mui/material/styles";
 import {Button, Dialog, TextField} from "@mui/material";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import {useNavigate} from "react-router-dom";
 
 function SearchDialog({onClose, open}) {
     const [searchStr, setSearchStr] = useState('');
+    const navigate = useNavigate();
 
     const handleSearch = () => {
-        window.location = `../../search?str=${searchStr}`
+        navigate(`../../search?str=${searchStr}`);
         onClose();
     };
     const handleSetString = (event) => setSearchStr(event.target.value);

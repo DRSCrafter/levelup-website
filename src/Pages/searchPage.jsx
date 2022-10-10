@@ -46,7 +46,7 @@ function SearchPage() {
 
     useEffect(() => {
         handleGetData();
-    }, [])
+    }, [str])
 
     const sortedItems = products && handleAvailableFirst(products);
     const paginatedItems = handlePagination(sortedItems, page);

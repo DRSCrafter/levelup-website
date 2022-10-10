@@ -39,7 +39,7 @@ function NavBar() {
     const handleSetString = (event) => setSearch(event.target.value);
     const handleSearch = () => {
         if (search !== '')
-            window.location = `../../search?str=${search}`
+            navigate(`../../search?str=${search}`);
     };
 
     return (

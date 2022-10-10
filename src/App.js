@@ -16,6 +16,7 @@ import CartPage from "./Pages/cartPage";
 import SearchPage from "./Pages/searchPage";
 import Loading from "./layout/loading";
 import {toast, ToastContainer} from "react-toastify";
+import NotFoundPage from "./Pages/notFoundPage";
 
 function App() {
     const [user, setUser] = useState(null);
@@ -47,21 +48,22 @@ function App() {
 
     return (
         <>
-                <UserContext.Provider value={{user, handleUpdateUser, isLoggedIn}}>
-                    <Loading isLoading={loading}/>
-                    <NavBar/>
-                    <Routes>
-                        <Route path="/" element={<MainPage/>}/>
-                        <Route path="/cat/:category" element={<ProductsPage/>} loading/>
-                        <Route path="/products/:id" element={<ItemPage/>} loading/>
-                        <Route path="/login" element={<LoginPage/>}/>
-                        <Route path="/signup" element={<SignupPage/>}/>
-                        <Route path="/account" element={<AccountPage/>} loading/>
-                        <Route path="/shoppingCart" element={<CartPage/>} loading/>
-                        <Route path="/search" element={<SearchPage/>}/>
-                    </Routes>
-                    <ToastContainer toastClassName="toast-style"/>
-                </UserContext.Provider>
+            <UserContext.Provider value={{user, handleUpdateUser, isLoggedIn}}>
+                <Loading isLoading={loading}/>
+                <NavBar/>
+                <Routes>
+                    <Route path="*" element={<NotFoundPage/>}/>
+                    <Route path="/" element={<MainPage/>}/>
+                    <Route path="/cat/:category" element={<ProductsPage/>} loading/>
+                    <Route path="/products/:id" element={<ItemPage/>} loading/>
+                    <Route path="/login" element={<LoginPage/>}/>
+                    <Route path="/signup" element={<SignupPage/>}/>
+                    <Route path="/account" element={<AccountPage/>} loading/>
+                    <Route path="/shoppingCart" element={<CartPage/>} loading/>
+                    <Route path="/search" element={<SearchPage/>}/>
+                </Routes>
+                <ToastContainer toastClassName="toast-style"/>
+            </UserContext.Provider>
         </>
     );
 }
