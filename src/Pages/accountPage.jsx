@@ -47,7 +47,9 @@ function AccountPage() {
 
     const isPC = useMediaQuery('(min-width: 1024px)');
 
-    useEffect(() => loadingContext.done(), []);
+    useEffect(() => {
+        loadingContext.done()
+    }, []);
 
     return (
         <>

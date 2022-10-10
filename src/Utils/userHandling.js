@@ -5,8 +5,9 @@ export const Logout = () => {
     window.location = '/';
 }
 
-export const Login = async (e, email, password) => {
+export const Login = async (e, email, password, setLoading) => {
     e.preventDefault();
+    setLoading(true);
 
     const reqBody = JSON.stringify({
         email: email,
@@ -21,4 +22,5 @@ export const Login = async (e, email, password) => {
         window.location = '/';
     } catch (ex) {
     }
+    setLoading(false);
 };

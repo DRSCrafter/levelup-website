@@ -9,17 +9,21 @@ import {CacheProvider} from '@emotion/react';
 import createCache from '@emotion/cache';
 import {useNavigate} from "react-router-dom";
 import {Login} from "../Utils/userHandling";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 function LoginPage() {
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleNavigation = () => navigate('../signup');
 
     const handleChangeEmail = event => setEmail(event.target.value);
     const handleChangePassword = event => setPassword(event.target.value);
+
+    const handleLogin = (e) => Login(e, email, password, setLoading);
 
     const theme = createTheme({
         direction: 'rtl',
@@ -35,7 +39,7 @@ function LoginPage() {
                 <ThemeProvider theme={theme}>
                     <div dir="rtl">
                         <div className="login-root">
-                            <div className="login-container">
+                            <form className="login-container" onSubmit={handleLogin}>
                                 <div className="login-header">
                                     <div className="login-header-inner"><h4>ورود یا ثبت نام</h4></div>
                                 </div>
@@ -54,24 +58,30 @@ function LoginPage() {
                                                    value={password} onChange={handleChangePassword}/>
                                     </div>
                                     <div>
-                                        <Button style={{
-                                            width: '100%',
-                                            paddingBlock: 15,
-                                            backgroundColor: '#0080FF',
-                                            color: 'white',
-                                            boxShadow: '0 10px 20px -10px #0080FF',
-                                            fontFamily: '"Yekan"'
-                                        }} variant="contained" onClick={(event) => Login(event, email, password)}>ورود</Button>
+                                        <LoadingButton
+                                            loading={loading}
+                                            style={{
+                                                width: '100%',
+                                                paddingBlock: 15,
+                                                color: `${loading ? 'rgba(0,0,0,0)' : 'white'}`,
+                                                boxShadow: `0 10px 20px -10px ${loading ? 'gray' : '#0080FF'}`,
+                                                fontFamily: '"Yekan"'
+                                            }} variant="contained"
+                                            type="submit">
+                                            ورود
+                                        </LoadingButton>
                                         <Button style={{
                                             width: '100%',
                                             paddingBlock: 15,
                                             color: '#0080FF',
                                             fontFamily: '"Yekan"',
                                             marginTop: 10
-                                        }} variant="text" onClick={handleNavigation}>ثبت نام</Button>
+                                        }} variant="text" onClick={handleNavigation}>
+                                            ثبت نام
+                                        </Button>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </ThemeProvider>

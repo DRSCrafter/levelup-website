@@ -40,7 +40,9 @@ function CartPage() {
         }
     }
 
-    useEffect(() => loadingContext.done(), []);
+    useEffect(() => {
+        loadingContext.done()
+    }, []);
 
     return (
         <>

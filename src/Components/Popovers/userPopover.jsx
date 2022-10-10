@@ -27,6 +27,11 @@ function UserPopover() {
     const openUser = Boolean(popAnchorEl1);
     const userID = openUser ? 'user-popover' : undefined;
 
+    const handleNavigate = (section) => {
+        handleClosePopOver1();
+        navigate(section);
+    }
+
     return (
         <>
             <IconButton style={{marginRight: 10}} className="navbar-icon-btn" aria-describedby={userID}
@@ -51,7 +56,7 @@ function UserPopover() {
                     <div className="user-popover-downside">
                         {isLoggedIn ?
                             <>
-                                <Button style={styles.button} variant="text" onClick={() => navigate('../account')}>
+                                <Button style={styles.button} variant="text" onClick={() => handleNavigate('../account')}>
                                     <ShoppingCartOutlinedIcon style={{marginLeft: 15}}/>
                                     سفارشات من
                                 </Button>
@@ -61,7 +66,7 @@ function UserPopover() {
                                 </Button>
                             </> :
                             <>
-                                <Button style={styles.button} variant="text" onClick={() => navigate('../login')}>
+                                <Button style={styles.button} variant="text" onClick={() => handleNavigate('../login')}>
                                     <LoginIcon style={{marginLeft: 15}}/>
                                     ورود و یا ثبت نام
                                 </Button>

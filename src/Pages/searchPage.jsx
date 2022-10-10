@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import queryString from 'query-string';
 import {useLocation} from "react-router-dom";
 
@@ -9,6 +9,7 @@ import httpConnection from "../Utils/httpConnection";
 import {Pagination} from "@mui/material";
 import NotFound from "../layout/notFound";
 import lodash from "lodash";
+import UserContext from "../Context/userContext";
 
 function SearchPage() {
     const [products, setProducts] = useState([]);
@@ -44,9 +45,12 @@ function SearchPage() {
         return result;
     }
 
+    const {scrollTop} = useContext(UserContext);
+    useEffect(() => scrollTop(), []);
+
     useEffect(() => {
-        handleGetData();
-    }, [str])
+        handleGetData()
+    }, [str]);
 
     const sortedItems = products && handleAvailableFirst(products);
     const paginatedItems = handlePagination(sortedItems, page);

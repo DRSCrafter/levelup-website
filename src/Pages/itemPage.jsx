@@ -19,7 +19,7 @@ function ItemPage() {
     const loadingContext = useLoadingContext();
 
     useEffect(() => {
-        getFullProduct(id, setProduct, setRelatedList).then(() => loadingContext.done());
+        getFullProduct(id, setProduct, setRelatedList).then(() => loadingContext.done())
     }, [id]);
 
     return (

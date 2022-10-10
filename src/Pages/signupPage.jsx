@@ -2,7 +2,8 @@ import '../Styles/Pages/loginPage.css';
 import React, {Component} from 'react';
 import Joi from 'joi';
 
-import {Button, IconButton, TextField} from "@mui/material";
+import {IconButton, TextField} from "@mui/material";
+import LoadingButton from '@mui/lab/LoadingButton';
 import {PhotoCamera} from "@mui/icons-material";
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import rtlPlugin from 'stylis-plugin-rtl';
@@ -24,7 +25,8 @@ class SignupPage extends Component {
             passwordConfirm: "",
         },
         profileImage: null,
-        errors: {}
+        errors: {},
+        loading: false
     }
 
     handleFileChange = event => this.setState({profileImage: event.target.files[0]});
@@ -78,6 +80,7 @@ class SignupPage extends Component {
 
     handleSubmit = async (e) => {
         e.preventDefault();
+        this.setState({loading: true});
 
         const errors = this.validate();
         this.setState({errors: errors || {}});
@@ -93,6 +96,7 @@ class SignupPage extends Component {
 
         const request = await httpConnection.post('/users/', formData);
         localStorage.setItem("token", request.headers['x-auth-token']);
+        this.setState({loading: false});
         window.location = '/';
     };
 
@@ -105,7 +109,7 @@ class SignupPage extends Component {
     });
 
     render() {
-        const {data, errors} = this.state;
+        const {data, errors, loading} = this.state;
 
         return (
             <>
@@ -113,7 +117,7 @@ class SignupPage extends Component {
                     <ThemeProvider theme={this.theme}>
                         <div dir="rtl">
                             <div className="login-root">
-                                <div className="login-container">
+                                <form className="login-container" onSubmit={this.handleSubmit}>
                                     <div className="login-header">
                                         <div className="login-header-inner"><h4>ثبت نام</h4></div>
                                     </div>
@@ -142,17 +146,21 @@ class SignupPage extends Component {
                                             </div>
                                         </div>
                                         <div>
-                                            <Button style={{
-                                                width: '100%',
-                                                paddingBlock: 15,
-                                                backgroundColor: '#0080FF',
-                                                color: 'white',
-                                                boxShadow: '0 10px 20px -10px #0080FF',
-                                                fontFamily: '"Yekan"'
-                                            }} variant="contained" onClick={this.handleSubmit}>ثبت نام</Button>
+                                            <LoadingButton
+                                                loading={loading}
+                                                style={{
+                                                    width: '100%',
+                                                    paddingBlock: 15,
+                                                    color: `${loading ? 'rgba(0,0,0,0)' : 'white'}`,
+                                                    boxShadow: `0 10px 20px -10px ${loading ? 'gray' : '#0080FF'}`,
+                                                    fontFamily: '"Yekan"'
+                                                }} variant="contained"
+                                                type="submit">
+                                                ثبت نام
+                                            </LoadingButton>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </ThemeProvider>

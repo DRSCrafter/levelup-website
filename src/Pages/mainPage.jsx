@@ -36,6 +36,7 @@ function MainPage() {
         handleGetBanners();
         handleGetData();
     }, [user])
+
     return (
         <>
             <ContentContainer>
