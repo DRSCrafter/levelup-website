@@ -50,6 +50,10 @@ function Products(props) {
         setPage(value);
     };
 
+    useEffect(() => {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }, [page]);
+
     const handlePagination = (items, pageNumber) => {
         const startIndex = (pageNumber - 1) * 12;
         return lodash(items).slice(startIndex).take(12).value();
@@ -102,21 +106,28 @@ function Products(props) {
                             ))}
                         </div>
                     </div>
-                    {paginatedItems && paginatedItems.length !== 0 ?
+                    {paginatedItems ?
                         <>
                             <div className="products-grid">
                                 {
                                     paginatedItems.map(item => (
-                                        <div className="products-grid-item" key={item.name}>
+                                        <div className="products-grid-item" key={item._id}>
                                             <ProductCard info={item} shadow/>
                                         </div>
                                     ))
                                 }
                             </div>
-                            {(paginatedItems / 12) >= 1 ?
+                            {Math.ceil(sortedItems.length / 12) > 1 ?
                                 <div className="products-pagination">
-                                    <Pagination count={paginatedItems / 12} page={page} onChange={handleTogglePage}/>
-                                </div> : <></>}
+                                    <Pagination
+                                        count={Math.ceil(sortedItems.length / 12)}
+                                        page={page}
+                                        onChange={handleTogglePage}
+                                    />
+                                </div>
+                                :
+                                <></>
+                            }
                         </> :
                         <NotFound/>
                     }
