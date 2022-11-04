@@ -9,6 +9,7 @@ import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 import {useNavigate} from "react-router-dom";
 import {Buy, Like} from "../Utils/productHandling";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 
 function ProductCard({info, shadow = false}) {
     const {_id, name, price, thumbnailImage, stock} = info;
@@ -46,7 +47,12 @@ function ProductCard({info, shadow = false}) {
         <>
             <div className={`card-root ${shadow ? 'card-shadow' : ''}`} onClick={handleClick}>
                 <div className="card-container">
-                    <img src={thumbnailImage} className="product-image" alt="product" loading="lazy"/>
+                    <LazyLoadImage
+                        src={thumbnailImage}
+                        placeholderSrc={require('../Assets/itemholder.jpg')}
+                        className="product-image"
+                        alt="product"
+                    />
                     <div className="product-info">
                         <div className="product-name">{name}</div>
                         <div className={`product-price ${!isAvailable ? "text-danger" : ''}`}>

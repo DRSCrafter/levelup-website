@@ -1,6 +1,7 @@
 import '../../Styles/Components/Banner/bannerCard.css';
 import React from 'react';
 import {useNavigate} from "react-router-dom";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 
 function BannerCard({data}) {
     const navigate = useNavigate();
@@ -11,7 +12,15 @@ function BannerCard({data}) {
     return (
         <>
             <div className="banner-card-container" onClick={handleNavigate}>
-                <img src={bannerImage} className="ban" alt="banner"/>
+                <div className="banner-card-image-container">
+                <LazyLoadImage
+                    src={bannerImage}
+                    placeholderSrc={require('../../Assets/bannerholder.jpg')}
+                    width={'100%'}
+                    height={'100%'}
+                    alt="banner"
+                />
+                </div>
                 <div className="banner-card-footer">
                     <span className="banner-card-footer-title">{name}</span>
                 </div>

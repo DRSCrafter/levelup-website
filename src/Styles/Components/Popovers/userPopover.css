@@ -26,6 +26,7 @@
 .user-popover-image {
     width: 70px;
     height: 70px;
+    display: block!important;
     border-radius: 50%;
     position: absolute;
     top: -15px;

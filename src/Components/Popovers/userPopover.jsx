@@ -42,15 +42,18 @@ function UserPopover() {
                 <div className="user-popover-container">
                     <div className="user-popover-topside">
                         <div className="user-popover-topside-info">
-                            <img src={user && user.userImage}
-                                 className="user-popover-image" alt="User"/>
+                            <img
+                                src={user?.userImage}
+                                className="user-popover-image"
+                                alt="User"
+                            />
                             <div className="user-popover-topside-info-inner">
-                                <div>{user && user.name}</div>
+                                <div>{user?.name}</div>
                                 <div className="font-sm">{user && user.email}</div>
                             </div>
                         </div>
                         {isLoggedIn && <div className="user-popover-topside-account">
-                            {`مانده اعتبار: ${user && user.account} تومان`}
+                            {`مانده اعتبار: ${user?.account} تومان`}
                         </div>}
                     </div>
                     <div className="user-popover-downside">

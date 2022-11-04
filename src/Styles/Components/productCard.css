@@ -29,6 +29,7 @@
 }
 
 .product-image {
+    display: block!important;
     width: 150px;
     height: 200px;
     margin-inline: auto;

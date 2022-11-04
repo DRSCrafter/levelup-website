@@ -6,11 +6,17 @@
     box-shadow: 0 5px 8px -3px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     position: relative;
+    cursor: pointer;
 }
 
-.banner-card-container img {
+.banner-card-image-container {
     width: 100%;
     height: 100%;
+    transition: transform 0.5s;
+}
+
+.banner-card-image-container:hover {
+    transform: scale(1.1);
 }
 
 .banner-card-footer {
