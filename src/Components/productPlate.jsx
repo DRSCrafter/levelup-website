@@ -73,19 +73,21 @@ function ProductPlate({product}) {
                             {product && product.description}
                         </span>
                     </div>
-                    <div className="product-details-root">
-                        <div className="product-details-header-outer">
-                            <span className="product-details-header-inner">جزئیات</span>
+                    {product.details &&
+                        <div className="product-details-root">
+                            <div className="product-details-header-outer">
+                                <span className="product-details-header-inner">جزئیات</span>
+                            </div>
+                            <div className="product-details-container">
+                                {product.details && Object.keys(product.details).map(key => (
+                                    <div className="product-details">
+                                        <span>{key}</span>
+                                        <span>{product.details[key]}</span>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                        <div className="product-details-container">
-                            {product.details && Object.keys(product.details).map(key => (
-                                <div className="product-details">
-                                    <span>{key}</span>
-                                    <span>{product.details[key]}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
         </>

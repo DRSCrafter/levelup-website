@@ -133,8 +133,13 @@ function Products(props) {
                     }
                 </div>
                 <div className={`products-side-container ${!visible ? 'side-up' : ''}`}>
-                    <SearchBar placeholder="نام محصول را جستجو کنید" isSideBar value={string}
-                               onChange={handleChangeString} onSubmit={() => onSubmitString(string)}/>
+                    <SearchBar
+                        placeholder="نام محصول را جستجو کنید"
+                        isSideBar
+                        value={string}
+                        onChange={handleChangeString}
+                        onSubmit={() => onSubmitString(string)}
+                    />
                     <SideFilter label="برند ها">
                         {companies.map(company => (
                             <CheckBox label={company} onChanged={onCheckboxChange}/>
@@ -146,21 +151,33 @@ function Products(props) {
                     </SideFilter>
                     <SideFilter label="محدوده قیمت" overFlowVisible>
                         <div style={{padding: 20}}>
-                            <Slider step={100000} min={0} max={maxPrice} valueLabelDisplay="auto" marks value={range}
-                                    onChange={handleRange} onChangeCommitted={handlePriceChange}/>
+                            <Slider
+                                step={100000}
+                                min={0}
+                                max={maxPrice}
+                                valueLabelDisplay="auto"
+                                value={range}
+                                onChange={handleRange}
+                                onChangeCommitted={handlePriceChange}
+                            />
                         </div>
                     </SideFilter>
                 </div>
             </div>
             {!isPC ?
-                <Fab color="primary" style={{position: 'fixed', bottom: '20px', right: '20px'}} aria-label="add"
-                     onClick={handleOpenFilter}>
+                <Fab
+                    color="primary"
+                    style={{position: 'fixed', bottom: '20px', right: '20px'}}
+                    aria-label="add"
+                    onClick={handleOpenFilter}
+                >
                     <FilterAltIcon/>
                 </Fab> : <></>}
             <FilterDialog onClose={handleCloseFilter} open={openFilter} onSubmitString={onSubmitString}
                           onRadioChange={onRadioChange} radioValue={radioValue} onCheckboxChange={onCheckboxChange}
                           maxPrice={maxPrice} onPriceChange={handlePriceChange} onRangeChange={handleRange}
-                          onStringChange={handleChangeString} range={range} string={string}/>
+                          onStringChange={handleChangeString} range={range} string={string}
+            />
         </>
     );
 }

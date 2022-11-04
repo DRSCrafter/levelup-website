@@ -29,8 +29,14 @@ function FilterDialog({
                     </Toolbar>
                 </AppBar>
                 <div style={{display: 'flex', flexDirection: 'column', rowGap: '20px'}}>
-                    <SearchBar placeholder="نام محصول را جستجو کنید" isSideBar value={string}
-                               onChange={onStringChange} onSubmit={() => handleSearch(string)} isFilterDialog/>
+                    <SearchBar
+                        placeholder="نام محصول را جستجو کنید"
+                        isSideBar
+                        value={string}
+                        onChange={onStringChange}
+                        onSubmit={() => handleSearch(string)}
+                        isFilterDialog
+                    />
                     <SideFilter label="برند ها">
                         <CheckBox label="Nintendo" onChanged={onCheckboxChange}/>
                         <CheckBox label="Microsoft" onChanged={onCheckboxChange}/>
@@ -43,8 +49,15 @@ function FilterDialog({
                     </SideFilter>
                     <SideFilter label="محدوده قیمت" overFlowVisible>
                         <div style={{padding: 20}}>
-                            <Slider step={100000} min={0} max={maxPrice} valueLabelDisplay="auto" marks value={range}
-                                    onChange={onRangeChange} onChangeCommitted={onPriceChange}/>
+                            <Slider
+                                step={100000}
+                                min={0}
+                                max={maxPrice}
+                                valueLabelDisplay="auto"
+                                value={range}
+                                onChange={onRangeChange}
+                                onChangeCommitted={onPriceChange}
+                            />
                         </div>
                     </SideFilter>
                 </div>

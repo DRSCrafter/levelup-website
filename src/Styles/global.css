@@ -68,3 +68,13 @@ code {
           url(../fonts/mehr/mehr.ttf) format('truetype'); /* Safari, Android, iOS */
   font-weight: normal;
 }
+
+@font-face {
+    font-family: 'B Nazanin';
+    src:
+            local("B Nazanin"),
+            url(../fonts/nazanin/nazanin.woff2) format('woff2'), /* Modern Browsers */
+            url(../fonts/nazanin/nazanin.woff) format('woff'), /* Modern Browsers */
+            url(../fonts/nazanin/nazanin.ttf) format('truetype'); /* Safari, Android, iOS */
+    font-weight: normal;
+}
