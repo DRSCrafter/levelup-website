@@ -12,6 +12,7 @@ function PopoverContainer({anchorEl, onClose, id, open, children}) {
                 open={open}
                 anchorEl={anchorEl}
                 onClose={onClose}
+                sx={{overflow: 'visible!important'}}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'left',

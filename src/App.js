@@ -49,8 +49,8 @@ function App() {
 
     return (
         <>
+            <Loading isLoading={loading}/>
             <UserContext.Provider value={{user, handleUpdateUser, isLoggedIn}}>
-                <Loading isLoading={loading}/>
                 <NavBar/>
                 <ScrollToTop>
                     <Routes>
