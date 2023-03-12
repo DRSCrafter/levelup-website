@@ -1,4 +1,4 @@
-import '../Styles/layout/navbar.css';
+import '../Styles/layout/navbar.scss';
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 
@@ -45,8 +45,8 @@ function NavBar() {
 
     return (
         <>
-            <div className="navbar-root">
-                <div className="navbar-container">
+            <div className="navbar">
+                <div className="navbar__content">
               <span className="navbar-icon-container">
                   {isPC ?
                       <>
@@ -72,14 +72,14 @@ function NavBar() {
                         onSubmit={handleSearch}
                     />
                     <img
-                        className="navbar-logo"
+                        className="navbar__logo"
                         src={title}
                         alt="logo"
                         onClick={() => navigate('./')}
                     />
                 </div>
-                <div className={`sub-navbar-container ${visible ? "active" : "hidden"}`}>
-                    <span className="sub-navbar-btn-container">
+                <div className={`sub-navbar ${visible ? "sub-navbar--active" : "sub-navbar--hidden"}`}>
+                    <span className="sub-navbar__button">
                         {categories.map(menu => (
                             <MenuButton title={menu.name} list={menu.list} key={menu.name}/>
                         ))}

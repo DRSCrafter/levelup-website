@@ -1,4 +1,4 @@
-import '../Styles/Pages/accountPage.css';
+import '../Styles/Pages/accountPage.scss';
 import React, {useContext, useEffect} from 'react';
 import ContentContainer from "../layout/contentContainer.js";
 import Footer from "../layout/footer.js";
@@ -10,6 +10,8 @@ import UserContext from "../Context/userContext.js";
 import AccountDialog from "../Components/Dialogs/accountDialog.js";
 import httpConnection from "../Utils/http";
 import {useLoadingContext} from "react-router-loading";
+
+import buttonStyles from '../Styles/MUI/button.style';
 
 function AccountPage() {
     const {user, handleUpdateUser} = useContext(UserContext);
@@ -52,12 +54,12 @@ function AccountPage() {
     return (
         <>
             <ContentContainer>
-                <div className="user-root">
-                    <div className="orders-table-container-outer">
-                        <div className="orders-table-header">
-                            <div className="orders-table-header-inner"><h4>سفارشات من</h4></div>
+                <div className="user__root">
+                    <div className="orders__table--outer">
+                        <div className="orders__table__header">
+                            <div className="orders__table__header--inner"><h4>سفارشات من</h4></div>
                         </div>
-                        <table className="orders-table-container-inner">
+                        <table className="orders__table--inner">
                             <tr>
                                 <th>نام سفارش</th>
                                 <th>تاریخ</th>
@@ -74,34 +76,38 @@ function AccountPage() {
                             ))}
                         </table>
                     </div>
-                    <div className="user-info-container">
-                        <div className="user-personal-info">
-                            <img src={user && `${user.userImage}`}
-                                 style={{width: 150, height: 150, borderRadius: '50%'}} alt="user image"/>
-                            <div className="user-info-name">{user && user.name}</div>
-                            <div className="user-info-email">{user && user.email}</div>
+                    <div className="account__user__info">
+                        <div className="account__user__details">
+                            <img src={user && `${user.userImage}`} className="account__user__image" alt="user image"/>
+                            <div className="account__user__name">{user && user.name}</div>
+                            <div className="account__user__email">{user && user.email}</div>
                         </div>
-                        <div className="user-wallet-container">
-                            <div className="user-wallet-container-inner">
+                        <div className="user__wallet">
+                            <div className="user__wallet--inner">
                                 <span>اعتبار فعلی شما:</span>
                                 <span>{user && user.account} تومان</span>
                             </div>
-                            <Button style={{
-                                width: '100%',
-                                backgroundColor: '#98CCFF',
-                                color: '#0080FF',
-                                fontFamily: '"Yekan"'
-                            }} startIcon={<AccountBalanceWalletIcon style={{marginLeft: 10}}/>} variant="contained"
-                                    onClick={handleClickOpen}>
+                            <Button
+                                variant="contained"
+                                style={{
+                                    ...buttonStyles.base,
+                                    ...buttonStyles.dialogPrimary,
+                                    ...{width: '100%'}
+                                }}
+                                startIcon={<AccountBalanceWalletIcon style={{marginLeft: 10}}/>}
+                                onClick={handleClickOpen}
+                            >
                                 افزایش اعتبار
                             </Button>
                         </div>
-                        <Button style={{
-                            width: '75%',
-                            backgroundColor: '#FF9797',
-                            color: '#FF0000',
-                            fontFamily: '"Yekan"'
-                        }} startIcon={<LogoutIcon style={{marginLeft: 10}}/>} variant="contained">
+                        <Button
+                            variant="contained"
+                            style={{
+                                ...buttonStyles.base,
+                                ...buttonStyles.dangerButton
+                            }}
+                            startIcon={<LogoutIcon style={{marginLeft: 10}}/>}
+                        >
                             خروج از حساب کاربری
                         </Button>
                     </div>

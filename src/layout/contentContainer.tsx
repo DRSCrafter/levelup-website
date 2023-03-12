@@ -1,9 +1,9 @@
-import '../Styles/layout/contentContainer.css';
+import '../Styles/layout/contentContainer.scss';
 import React from 'react';
 
 function ContentContainer({children}: { children: React.ReactNode }) {
     return (
-        <div className="content-container">
+        <div className="content">
             {children}
         </div>
     );

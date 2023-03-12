@@ -57,10 +57,12 @@ function ProductsPage() {
     return (
         <>
             <ContentContainer>
-                <Products items={items} onCheckboxChange={handleCheckboxChange} radioValue={radio}
-                          onRadioChange={handleChangeRadio}
-                          filterValue={selectedSort} onFilterChange={handleSelect} onSubmitString={handleSubmitString}
-                          maxPrice={maxPrice.current} companies={companyList}/>
+                <Products
+                    items={items} onCheckboxChange={handleCheckboxChange} radioValue={radio}
+                    onRadioChange={handleChangeRadio}
+                    filterValue={selectedSort} onFilterChange={handleSelect} onSubmitString={handleSubmitString}
+                    maxPrice={maxPrice.current} companies={companyList}
+                />
                 <Footer/>
             </ContentContainer>
         </>

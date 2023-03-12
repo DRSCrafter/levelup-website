@@ -1,4 +1,4 @@
-import '../../Styles/Components/Banner/bannerCard.css';
+import '../../Styles/Components/Banner/bannerCard.scss';
 import React from 'react';
 import {useNavigate} from "react-router-dom";
 import {LazyLoadImage} from "react-lazy-load-image-component";
@@ -13,8 +13,8 @@ function BannerCard({data}: { data: Banner }) {
 
     return (
         <>
-            <div className="banner-card-container" onClick={handleNavigate}>
-                <div className="banner-card-image-container">
+            <div className="banner__card" onClick={handleNavigate}>
+                <div className="banner__image">
                     <LazyLoadImage
                         src={bannerImage}
                         placeholderSrc={placeholder}
@@ -23,8 +23,8 @@ function BannerCard({data}: { data: Banner }) {
                         alt="banner"
                     />
                 </div>
-                <div className="banner-card-footer">
-                    <span className="banner-card-footer-title">{name}</span>
+                <div className="banner__footer">
+                    <span className="banner__footer__title">{name}</span>
                 </div>
             </div>
         </>

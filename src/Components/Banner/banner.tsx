@@ -1,4 +1,4 @@
-import '../../Styles/Components/cardSwiper.css';
+import '../../Styles/Components/cardSwiper.scss';
 import React from "react";
 import BannerCard from "./bannerCard";
 
@@ -22,7 +22,7 @@ function Banner({data}: BannerProps) {
                     clickable: true,
                 }}
                 modules={[Autoplay, Pagination]}
-                className="card-swiper-container"
+                className="card__swiper"
             >
                 {data.map((item, index) => (<SwiperSlide key={index}><BannerCard data={item}/></SwiperSlide>))}
             </Swiper>

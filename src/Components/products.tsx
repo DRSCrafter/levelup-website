@@ -1,4 +1,4 @@
-import '../Styles/Components/products.css';
+import '../Styles/Components/products.scss';
 import React, {useEffect, useState} from "react";
 import lodash from 'lodash';
 
@@ -89,11 +89,11 @@ function Products({
 
     return (
         <>
-            <div className="products-root">
-                <div className="products-items-container">
-                    <div className="products-top-filter-root">
-                        <div className="products-top-filter-container">
-                            <span className="products-top-filter-title">مرتب سازی بر اساس:</span>
+            <div className="products">
+                <div className="products__list">
+                    <div className="products__filter__root">
+                        <div className="products__filter">
+                            <span className="products__filter__title">مرتب سازی بر اساس:</span>
                             {sortChoices.map(choice => (
                                 <RadioButton value={choice.value} selectedValue={filterValue} onSelect={onFilterChange}>
                                     {choice.label}
@@ -103,7 +103,7 @@ function Products({
                     </div>
                     {paginatedItems ?
                         <>
-                            <div className="products-grid">
+                            <div className="products__grid">
                                 {
                                     paginatedItems.map(item => (
                                         <div className="products-grid-item" key={item._id}>
@@ -113,7 +113,7 @@ function Products({
                                 }
                             </div>
                             {Math.ceil(sortedItems.length / 12) > 1 ?
-                                <div className="products-pagination">
+                                <div className="products__pagination">
                                     <Pagination
                                         count={Math.ceil(sortedItems.length / 12)}
                                         page={page}
@@ -127,7 +127,7 @@ function Products({
                         <NotFound/>
                     }
                 </div>
-                <div className={`products-side-container ${!visible ? 'side-up' : ''}`}>
+                <div className={`products__side ${!visible ? 'side--up' : ''}`}>
                     <SearchBar
                         placeholder="نام محصول را جستجو کنید"
                         isSideBar
@@ -162,7 +162,7 @@ function Products({
             {!isPC ?
                 <Fab
                     color="primary"
-                    style={{position: 'fixed', bottom: '20px', right: '20px'}}
+                    style={styles.fab as React.CSSProperties}
                     aria-label="add"
                     onClick={handleOpenFilter}
                 >
@@ -175,6 +175,14 @@ function Products({
             />
         </>
     );
+}
+
+const styles = {
+    fab: {
+        position: 'fixed',
+        bottom: '20px',
+        right: '20px'
+    }
 }
 
 export default Products;

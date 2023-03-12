@@ -1,4 +1,4 @@
-import '../../Styles/Components/Popovers/accountPopover.css';
+import '../../Styles/Components/Popovers/accountPopover.scss';
 import React, {SetStateAction, useContext, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import PopoverContainer from "./popoverContainer";
@@ -10,6 +10,9 @@ import UserContext from "../../Context/userContext";
 import ShopIcon from '@mui/icons-material/Shop';
 import {DeleteOrder} from "../../Utils/orderHandling";
 import Order from "../../types/context/order";
+
+import buttonStyles from '../../Styles/MUI/button.style';
+import iconStyles from '../../Styles/MUI/icon.style';
 
 function AccountPopover() {
     const {user, handleUpdateUser, isLoggedIn} = useContext(UserContext);
@@ -26,6 +29,7 @@ function AccountPopover() {
         string.length > length ? string.substring(0, length) + '...' : string;
 
     const shoppingList = user && user.shoppingCart;
+    // @ts-ignore
     const totalCost = shoppingList && shoppingList.reduce((a: number, b: Order) => a + b.totalPrice, 0);
 
     const handleNavigate = () => {
@@ -38,16 +42,22 @@ function AccountPopover() {
             <IconButton className="navbar-icon-btn" aria-describedby={shoppingCardID} onClick={handlePopOver2}>
                 <AccountBalanceWalletIcon htmlColor="#0080FF"/>
             </IconButton>
-            <PopoverContainer anchorEl={popAnchorEl2} onClose={handleClosePopOver2} open={openCart} id={shoppingCardID}>
+            <PopoverContainer
+                anchorEl={popAnchorEl2}
+                onClose={handleClosePopOver2}
+                open={openCart}
+                id={shoppingCardID!}
+            >
                 {shoppingList && shoppingList.length !== 0 ?
-                    <div className="account-popover-container">
-                        <div className="account-popover-topside">
+                    <div className="account__popover">
+                        <div className="account__popover__header">
                             <span>جمع کل سفارش ها:</span>
-                            <span>{user && totalCost} تومان</span>
+                            <span><>{user && totalCost} تومان</></span>
                         </div>
-                        <div className="account-popover-downside">
+                        <div className="account__popover__footer">
+                            {/*@ts-ignore*/}
                             {user && shoppingList.map((order: Order, index: number) => (
-                                <div className="account-order-container" key={index}>
+                                <div className="account__order" key={index}>
                                     <IconButton
                                         style={{color: '#FF9797'}}
                                         size="small"
@@ -63,23 +73,20 @@ function AccountPopover() {
                                 </div>
                             ))}
                         </div>
-                        <div className="account-popover-btn-container">
+                        <div className="account__popover__button">
                             <Button
-                                style={{
-                                    width: '60%',
-                                    borderRadius: 10,
-                                    fontFamily: '"Yekan", sans-serif',
-                                    color: '#ffffff',
-                                    position: "relative"
-                                }}
+                                style={({
+                                    ...buttonStyles.base,
+                                    ...buttonStyles.popoverButton
+                                }) as React.CSSProperties}
                                 variant="contained"
-                                endIcon={<ShopIcon style={{position: "absolute", left: 30, top: 10}}/>}
+                                endIcon={<ShopIcon style={(iconStyles.buttonEnd as React.CSSProperties)}/>}
                                 onClick={handleNavigate}>تکمیل خرید</Button>
                         </div>
                     </div>
                     :
-                    <div className="account-popover-container">
-                        <div className="account-popover-empty">
+                    <div className="account__popover">
+                        <div className="account__popover--empty">
                             {isLoggedIn ? 'سبد خرید شما خالی است' : 'لطفا با حساب کاربری وارد شوید'}
                         </div>
                     </div>

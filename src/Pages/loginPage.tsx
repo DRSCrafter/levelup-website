@@ -1,4 +1,4 @@
-import '../Styles/Pages/loginPage.css';
+import '../Styles/Pages/loginPage.scss';
 import React, {useState} from 'react';
 import {Button, TextField} from "@mui/material";
 
@@ -10,6 +10,9 @@ import createCache from '@emotion/cache';
 import {useNavigate} from "react-router-dom";
 import {Login} from "../Utils/userHandling";
 import LoadingButton from "@mui/lab/LoadingButton";
+
+import buttonStyles from '../Styles/MUI/button.style';
+import textFieldStyles from '../Styles/MUI/textField.style';
 
 function LoginPage() {
     const navigate = useNavigate();
@@ -38,45 +41,49 @@ function LoginPage() {
             <CacheProvider value={cacheRtl}>
                 <ThemeProvider theme={theme}>
                     <div dir="rtl">
-                        <div className="login-root">
-                            <form className="login-container" onSubmit={handleLogin}>
-                                <div className="login-header">
-                                    <div className="login-header-inner"><h4>ورود یا ثبت نام</h4></div>
+                        <div className="login">
+                            <form className="login__content" onSubmit={handleLogin}>
+                                <div className="login__header">
+                                    <div className="login__header--inner"><h4>ورود یا ثبت نام</h4></div>
                                 </div>
-                                <div className="login-body">
-                                    <div className="login-title">
+                                <div className="login__body">
+                                    <div className="login__title">
                                         لطفا ایمیل و رمز عبور خود را وارد نمایید
                                     </div>
                                     <div>
-                                        <TextField sx={{width: '100%', marginBlock: '5px'}}
-                                                   inputProps={{style: {fontFamily: 'Segoe UI Light'}}}
-                                                   variant="outlined" label="ایمیل"
-                                                   value={email} onChange={handleChangeEmail}/>
-                                        <TextField sx={{width: '100%', marginBlock: '5px'}}
-                                                   inputProps={{style: {fontFamily: 'Segoe UI Light'}}}
-                                                   variant="outlined" label="رمز عبور"
-                                                   value={password} onChange={handleChangePassword}/>
+                                        <TextField
+                                            sx={textFieldStyles.formField}
+                                            inputProps={{style: {fontFamily: 'Segoe UI Light'}}}
+                                            variant="outlined" label="ایمیل"
+                                            value={email} onChange={handleChangeEmail}
+                                        />
+                                        <TextField
+                                            sx={textFieldStyles.formField}
+                                            inputProps={{style: {fontFamily: 'Segoe UI Light'}}}
+                                            variant="outlined" label="رمز عبور"
+                                            value={password} onChange={handleChangePassword}
+                                        />
                                     </div>
                                     <div>
                                         <LoadingButton
                                             loading={loading}
+                                            variant="contained"
                                             style={{
-                                                width: '100%',
-                                                paddingBlock: 15,
-                                                color: `${loading ? 'rgba(0,0,0,0)' : 'white'}`,
-                                                boxShadow: `0 10px 20px -10px ${loading ? 'gray' : '#0080FF'}`,
-                                                fontFamily: '"Yekan"'
-                                            }} variant="contained"
-                                            type="submit">
+                                                ...buttonStyles.base,
+                                                ...buttonStyles.formPrimaryButton(loading)
+                                            }}
+                                            type="submit"
+                                        >
                                             ورود
                                         </LoadingButton>
-                                        <Button style={{
-                                            width: '100%',
-                                            paddingBlock: 15,
-                                            color: '#0080FF',
-                                            fontFamily: '"Yekan"',
-                                            marginTop: 10
-                                        }} variant="text" onClick={handleNavigation}>
+                                        <Button
+                                            variant="text"
+                                            style={{
+                                                ...buttonStyles.base,
+                                                ...buttonStyles.formSecondaryButton
+                                            }}
+                                            onClick={handleNavigation}
+                                        >
                                             ثبت نام
                                         </Button>
                                     </div>

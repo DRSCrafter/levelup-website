@@ -1,0 +1,10 @@
+@import '../mixins';
+
+.signup-upload-image {
+    @include flex(row, space-between);
+    width: 100%;
+    margin-top: 10px;
+    padding-right: 5px;
+    font-family: "Segoe UI Light", sans-serif;
+    font-size: 13px;
+}

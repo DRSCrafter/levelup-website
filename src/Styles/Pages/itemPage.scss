@@ -1,0 +1,123 @@
+@import '../mixins';
+
+.product__plate--outer {
+  width: 100%;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 5px 8px -3px rgb(0 0 0 / 10%);
+}
+
+.product__plate--inner {
+  @include flex(column, space-between);
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 30px;
+}
+
+.product__plate__side--left {
+  @include flex(column);
+}
+
+.product__plate__content {
+  @include flex(column, space-between);
+  font-family: "Segoe UI Light", sans-serif;
+}
+
+.product__plate__image {
+  width: 250px;
+  height: 400px;
+}
+
+.product-__title {
+  font-family: "Teko SemiBold", sans-serif;
+  font-size: 25px;
+}
+
+.product__plate__price {
+  font-family: "Yekan", sans-serif;
+  font-weight: bold;
+  color: #00ACFF;
+}
+
+.text--danger {
+  color: rgba(255, 83, 83, 0.8) !important;
+}
+
+.product__controls {
+  width: 100%;
+  direction: rtl;
+}
+
+.product__plate__side--right {
+  margin-top: 15px;
+  direction: rtl;
+  font-size: 16px;
+  font-family: "B Nazanin", sans-serif;
+  color: #707070;
+}
+
+.product__exp {
+  margin-bottom: 30px;
+  font-family: "Segoe UI Light", sans-serif;
+  font-size: 20px;
+  color: black;
+}
+
+.product__plate__details {
+  width: 100%;
+  position: relative;
+  font-family: "Segoe UI Light", sans-serif;
+}
+
+.product__header--outer {
+  display: flex;
+  width: 100%;
+  border-top: 0.25px solid rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+}
+
+.product__header--inner {
+  margin-inline: auto;
+  padding: 10px 25px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  font-family: "Yekan", sans-serif;
+  color: white;
+  background-color: #0080FF;
+}
+
+.product__details__container {
+  width: 100%;
+  background: linear-gradient(#000, #000) no-repeat center/0.25px 100%;
+}
+
+.product__details {
+  @include flex(row, space-between, center);
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px 40px;
+  font-size: 15px;
+}
+
+@media (min-width: 1024px) {
+  .product__plate--inner {
+    flex-direction: row;
+  }
+
+  .product__plate__content {
+    height: 400px;
+    margin-left: 15px;
+  }
+
+  .product__plate__side--left {
+    flex-direction: row;
+  }
+
+  .product__plate__side--right {
+    width: 400px;
+    margin-top: 0;
+    box-sizing: border-box;
+    padding-left: 25px;
+  }
+}

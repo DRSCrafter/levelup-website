@@ -1,0 +1,10 @@
+@import '../../mixins';
+
+.filter__dialog {
+  @include flex(column);
+  row-gap: 20px;
+}
+
+.filter__slider__root {
+  padding: 20px;
+}

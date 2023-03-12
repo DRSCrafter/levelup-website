@@ -1,4 +1,4 @@
-import '../Styles/Components/productCard.css';
+import '../Styles/Components/productCard.scss';
 import React, {useContext} from 'react';
 import UserContext from "../Context/userContext";
 
@@ -12,6 +12,8 @@ import {Buy, Like} from "../Utils/productHandling";
 import {LazyLoadImage} from "react-lazy-load-image-component";
 import ProductCardProps from "../types/components/productCard";
 import placeholder from '../Assets/itemholder.jpg';
+
+import buttonStyles from '../Styles/MUI/button.style';
 
 function ProductCard({info, shadow = false}: ProductCardProps) {
     const {_id, name, price, thumbnailImage, stock} = info;
@@ -33,7 +35,7 @@ function ProductCard({info, shadow = false}: ProductCardProps) {
         if (isLoggedIn)
             Buy(user, handleUpdateUser, info);
         else
-            navigate('../../signup');
+            navigate('/signup');
     }
 
     const handleLike = (event: React.FormEvent) => {
@@ -42,25 +44,25 @@ function ProductCard({info, shadow = false}: ProductCardProps) {
         if (isLoggedIn)
             Like(user, handleUpdateUser, _id);
         else
-            navigate('../../signup');
+            navigate('/signup');
     }
 
     return (
         <>
-            <div className={`card-root ${shadow ? 'card-shadow' : ''}`} onClick={handleClick}>
-                <div className="card-container">
+            <div className={`card__root ${shadow ? 'card__shadow' : ''}`} onClick={handleClick}>
+                <div className="card__root">
                     <LazyLoadImage
                         src={thumbnailImage}
                         placeholderSrc={placeholder}
-                        className="product-image"
+                        className="product__image"
                         alt="product"
                     />
-                    <div className="product-info">
-                        <div className="product-name">{name}</div>
-                        <div className={`product-price ${!isAvailable ? "text-danger" : ''}`}>
+                    <div className="product__info">
+                        <div className="product__name">{name}</div>
+                        <div className={`product__price ${!isAvailable ? "text--danger" : ''}`}>
                             {isAvailable ? `${price} تومان` : 'ناموجود'}
                         </div>
-                        <div className="product-commands">
+                        <div className="product__commands">
                             <Checkbox
                                 style={{color: "#FF5D5D"}} icon={<FavoriteBorder htmlColor="#FF5D5D"/>}
                                 checkedIcon={<Favorite htmlColor="#FF5D5D"/>}
@@ -68,7 +70,10 @@ function ProductCard({info, shadow = false}: ProductCardProps) {
                                 onClick={handleLike}/>
                             {matches ?
                                 <Button
-                                    style={{borderRadius: 10, fontFamily: '"Yekan", sans-serif', color: '#0080FF'}}
+                                    style={{
+                                        ...buttonStyles.base,
+                                        ...buttonStyles.cardButton
+                                    }}
                                     variant="outlined"
                                     endIcon={<ShoppingCartOutlinedIcon style={{minWidth: 30}}/>}
                                     onClick={handleBuy}

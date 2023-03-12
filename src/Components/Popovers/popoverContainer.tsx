@@ -1,4 +1,4 @@
-import '../../Styles/Components/Popovers/popoverContainer.css';
+import '../../Styles/Components/Popovers/popover.scss';
 import React from 'react';
 import {Popover} from "@mui/material";
 import PopoverProps from '../../types/components/popovers/popover';

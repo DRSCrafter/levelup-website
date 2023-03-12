@@ -1,0 +1,9 @@
+@import '../mixins';
+
+.counter {
+  @include flex(row, space-between, center);
+  width: 110px;
+  height: 30px;
+  margin-left: 20px;
+  color: #707070;
+}

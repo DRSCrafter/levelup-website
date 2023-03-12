@@ -7,7 +7,9 @@ import {Buy} from "../Utils/productHandling";
 import UserContext from "../Context/userContext";
 import Product from "../types/context/product";
 
-function ProductPlate({product}: {product: Product}) {
+import buttonStyles from '../Styles/MUI/button.style';
+
+function ProductPlate({product}: { product: Product }) {
     const [count, setCount] = useState(0);
 
     const {user, handleUpdateUser, isLoggedIn} = useContext(UserContext);
@@ -27,22 +29,22 @@ function ProductPlate({product}: {product: Product}) {
     return (
         <>
             <div className="product-plate-root">
-                <div className="product-plate-container-outer">
-                    <div className="product-plate-container-inner">
-                        <span className="product-plate-left-side">
+                <div className="product__plate--outer">
+                    <div className="product__plate--inner">
+                        <span className="product__plate__side--left">
                         <img src={product && product.productImage}
-                             className="product-title-image" alt="product"/>
-                        <div className="product-info-container">
+                             className="product__plate__image" alt="product"/>
+                        <div className="product__plate__content">
                             <div>
-                                <div className="product-title">{product?.name}</div>
+                                <div className="product-__title">{product?.name}</div>
                                 <div>{product?.company}</div>
                             </div>
-                            <div className="product-controls">
+                            <div className="product__controls">
                                 <div>تعداد:</div>
                                 <div style={{width: "100%", display: 'flex', justifyContent: 'space-between'}}>
                                     <Counter value={count} onChange={setCount} maxValue={product?.stock}/>
                                     <span
-                                        className={`product-info-price ${!isAvailable || !isLoggedIn ? 'text-danger' : ''}`}>
+                                        className={`product__plate__price ${!isAvailable || !isLoggedIn ? 'text--danger' : ''}`}>
                                         {isLoggedIn ?
                                             (product && isAvailable ?
                                                 `${product.price} تومان`
@@ -52,13 +54,9 @@ function ProductPlate({product}: {product: Product}) {
                                     </span>
                                 </div>
                                 <Button style={{
-                                    color: 'white',
-                                    width: '100%',
-                                    fontFamily: '"Yekan", sans-serif',
-                                    marginTop: 10,
-                                    boxSizing: 'border-box',
-                                    padding: 10
-                                }}
+                                    ...buttonStyles.base,
+                                    ...buttonStyles.productButton
+                                } as React.CSSProperties}
                                         variant="contained"
                                         endIcon={<ShoppingCartOutlinedIcon style={{minWidth: 30}}/>}
                                         onClick={handleBuy}
@@ -69,19 +67,19 @@ function ProductPlate({product}: {product: Product}) {
                             </div>
                         </div>
                         </span>
-                        <span className="product-plate-right-side">
-                            <div className="product-exp">توضیحات</div>
+                        <span className="product__plate__side--right">
+                            <div className="product__exp">توضیحات</div>
                             {product && product.description}
                         </span>
                     </div>
                     {product.details &&
-                        <div className="product-details-root">
-                            <div className="product-details-header-outer">
-                                <span className="product-details-header-inner">جزئیات</span>
+                        <div className="product__plate__details">
+                            <div className="product__header--outer">
+                                <span className="product__header--inner">جزئیات</span>
                             </div>
-                            <div className="product-details-container">
+                            <div className="product__details__container">
                                 {product.details && Object.keys(product.details).map(key => (
-                                    <div className="product-details">
+                                    <div className="product__details">
                                         <span>{key}</span>
                                         <span>{product.details[key]}</span>
                                     </div>

@@ -1,0 +1,21 @@
+@import '../mixins';
+
+.content {
+  @include flex(column, space-between);
+  row-gap: 20px;
+  width: 90%;
+  max-width: 1300px;
+  margin: 60px auto 30px;
+}
+
+@media (min-width: 1024px) {
+  .content {
+    margin-top: 110px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .content {
+    width: 90%;
+  }
+}

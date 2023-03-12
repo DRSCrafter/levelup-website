@@ -56,10 +56,10 @@ function SearchPage() {
     return (
         <>
             <ContentContainer>
-                <div className="products-items-container">
+                <div className="products__list">
                     {products.length !== 0 ?
                         <>
-                            <div className="products-grid">
+                            <div className="products__grid">
                                 {paginatedItems && paginatedItems.map(item => (
                                     <div className="products-grid-item" key={item._id}>
                                         <ProductCard info={item} shadow/>
@@ -67,7 +67,7 @@ function SearchPage() {
                                 ))}
                             </div>
                             {Math.ceil(sortedItems.length / 12) > 1 ?
-                                <div className="products-pagination">
+                                <div className="products__pagination">
                                     <Pagination
                                         count={Math.ceil(sortedItems.length / 12)}
                                         page={page}

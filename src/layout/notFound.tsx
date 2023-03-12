@@ -1,12 +1,12 @@
-import '../Styles/layout/notFound.css';
+import '../Styles/layout/notFound.scss';
 import React from 'react';
 import MoodBadIcon from "@mui/icons-material/MoodBad";
 
 function NotFound() {
     return (
         <>
-            <div className="nf-root">
-                <div className="nf-container">
+            <div className="not-found">
+                <div className="not-found__content">
                     <MoodBadIcon/>
                     <div>متاسفانه هیچ موردی یافت نشد</div>
                 </div>

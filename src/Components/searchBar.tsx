@@ -1,4 +1,4 @@
-import '../Styles/Components/searchBar.css';
+import '../Styles/Components/searchBar.scss';
 import React from 'react';
 import {IconButton} from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
@@ -13,13 +13,13 @@ function SearchBar({placeholder, isSideBar, value, onChange, onSubmit, isFilterD
     return (
         <>
             <form
-                className={`search-bar-container ${isSideBar ? 'side-search-bar' : ''} ${isFilterDialog ? 'filter-dialog' : ''}`}
+                className={`search-bar ${isSideBar ? 'search-bar--side' : ''} ${isFilterDialog ? 'filter__dialog' : ''}`}
                 onSubmit={handleSubmit}
             >
-                <IconButton className="search-bar-btn" type="submit">
+                <IconButton className="search__button" type="submit">
                     <SearchIcon htmlColor="#0080FF"/>
                 </IconButton>
-                <input className="search-bar-input input" placeholder={placeholder} value={value} onChange={onChange}/>
+                <input className="search-bar__input input" placeholder={placeholder} value={value} onChange={onChange}/>
             </form>
         </>
     );

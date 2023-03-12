@@ -1,4 +1,4 @@
-import '../Styles/Components/productSwiper.css';
+import '../Styles/Components/productSwiper.scss';
 import "swiper/css/pagination";
 import "swiper/css";
 
@@ -15,14 +15,14 @@ function ProductSwiper({title, data}: ProductSwiperProps) {
 
     return (
         <>
-            <div className="product-swiper-container">
-                <div className="product-swiper-header">
-                    <span className="product-swiper-header-inner"><h4>{title}</h4></span>
+            <div className="product__swiper__root">
+                <div className="product__swiper__header">
+                    <span className="product__swiper__header--inner"><h4>{title}</h4></span>
                 </div>
                 <Swiper
                     slidesPerView={matches ? 5 : 2}
                     spaceBetween={3}
-                    className="product-swiper"
+                    className="product__swiper"
                     preventClicks={false}
                     preventClicksPropagation={false}
                     noSwipingSelector={"button"}

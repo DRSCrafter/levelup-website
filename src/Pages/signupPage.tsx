@@ -1,4 +1,5 @@
-import '../Styles/Pages/loginPage.css';
+import '../Styles/Pages/loginPage.scss';
+import '../Styles/Pages/signupPage.scss';
 import React, {Component} from 'react';
 import Joi from 'joi';
 
@@ -15,6 +16,9 @@ import httpConnection from "../Utils/http";
 
 import signupFields from "../Data/signupFields.js";
 import {IIndexable} from "../types/global";
+
+import textFieldStyles from '../Styles/MUI/textField.style';
+import buttonStyles from '../Styles/MUI/button.style';
 
 class SignupPage extends Component {
 
@@ -117,19 +121,19 @@ class SignupPage extends Component {
                 <CacheProvider value={this.cacheRtl}>
                     <ThemeProvider theme={this.theme}>
                         <div dir="rtl">
-                            <div className="login-root">
-                                <form className="login-container" onSubmit={this.handleSubmit}>
-                                    <div className="login-header">
-                                        <div className="login-header-inner"><h4>ثبت نام</h4></div>
+                            <div className="login">
+                                <form className="login__content" onSubmit={this.handleSubmit}>
+                                    <div className="login__header">
+                                        <div className="login__header--inner"><h4>ثبت نام</h4></div>
                                     </div>
-                                    <div className="login-body">
-                                        <div className="login-title">
+                                    <div className="login__body">
+                                        <div className="login__title">
                                             لطفا مشخصات لازم را وارد نمایید
                                         </div>
                                         <div>
                                             {signupFields.map(field => (
                                                 <TextField
-                                                    sx={{width: '100%', marginBlock: '5px'}}
+                                                    sx={textFieldStyles.formField}
                                                     inputProps={{style: {fontFamily: 'Segoe UI Light'}}}
                                                     variant="outlined"
                                                     name={field.tag} value={(data as IIndexable)[field.tag]}
@@ -141,8 +145,10 @@ class SignupPage extends Component {
                                             ))}
                                             <div className="signup-upload-image">
                                                 <span>آپلود عکس:</span>
-                                                <IconButton color="primary" aria-label="upload picture"
-                                                            component="label">
+                                                <IconButton
+                                                    color="primary"
+                                                    component="label"
+                                                >
                                                     <input hidden accept="image/*" type="file"
                                                            onChange={this.handleFileChange}/>
                                                     <PhotoCamera/>
@@ -152,14 +158,13 @@ class SignupPage extends Component {
                                         <div>
                                             <LoadingButton
                                                 loading={loading}
+                                                variant="contained"
                                                 style={{
-                                                    width: '100%',
-                                                    paddingBlock: 15,
-                                                    color: `${loading ? 'rgba(0,0,0,0)' : 'white'}`,
-                                                    boxShadow: `0 10px 20px -10px ${loading ? 'gray' : '#0080FF'}`,
-                                                    fontFamily: '"Yekan"'
-                                                }} variant="contained"
-                                                type="submit">
+                                                    ...buttonStyles.base,
+                                                    ...buttonStyles.formPrimaryButton(loading)
+                                                }}
+                                                type="submit"
+                                            >
                                                 ثبت نام
                                             </LoadingButton>
                                         </div>

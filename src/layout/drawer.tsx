@@ -53,12 +53,15 @@ function Drawer({open, onDrawerToggle}: DrawerProps) {
                     onClick={() => onDrawerToggle(false)}
                     onKeyDown={() => onDrawerToggle(false)}
                 >
-                    <div className="drawer-info-container">
-                        <div className="user-personal-info">
-                            <img src={user && user.userImage}
-                                 style={{width: 150, height: 150, borderRadius: '50%'}} alt="تصویر کاربر"/>
-                            <div className="user-info-name">{user && user.name}</div>
-                            <div className="user-info-email">{user && user.email}</div>
+                    <div className="drawer__info">
+                        <div className="account__user__details">
+                            <img
+                                src={user && user.userImage}
+                                className="account__user__image"
+                                alt="تصویر کاربر"
+                            />
+                            <div className="account__user__name">{user && user.name}</div>
+                            <div className="account__user__email">{user && user.email}</div>
                         </div>
                     </div>
                     <Divider/>

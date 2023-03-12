@@ -6,7 +6,7 @@ function RadioBox({label, onChange, selectedValue, value}: RadioBoxProps) {
 
     return (
         <>
-            <div className="side-input-container">
+            <div className="side__input__root">
                 <FormControlLabel
                     className="side-input"
                     value="start"

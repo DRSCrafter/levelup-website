@@ -1,4 +1,4 @@
-import '../Styles/Components/input.css';
+import '../Styles/Components/input.scss';
 import React from 'react';
 import {Checkbox, FormControlLabel} from "@mui/material";
 import CheckBoxProps from "../types/components/checkBox";
@@ -12,7 +12,7 @@ function CheckBox({label, onChanged}: CheckBoxProps) {
     };
 
     return (
-        <div className="side-input-container">
+        <div className="side__input__root">
             <FormControlLabel
                 className="side-input"
                 value="start"

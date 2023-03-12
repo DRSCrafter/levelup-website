@@ -1,0 +1,26 @@
+@import '../mixins';
+
+.loading {
+  @include flex(column, center, center);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  z-index: 9;
+  background-color: #ffffff;
+}
+
+.loading--disabled {
+  display: none;
+}
+
+.loading__animation {
+  width: 300px;
+  height: 300px;
+}
+
+.loading__text {
+  font-family: Yekan, sans-serif;
+  font-size: 20px;
+  color: #707070;
+}

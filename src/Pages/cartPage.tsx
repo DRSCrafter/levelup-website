@@ -1,4 +1,4 @@
-import '../Styles/Pages/cartPage.css';
+import '../Styles/Pages/cartPage.scss';
 import React, {useContext, useEffect} from 'react';
 import UserContext from "../Context/userContext.js";
 import {DeleteOrder} from "../Utils/orderHandling";
@@ -10,6 +10,8 @@ import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import httpConnection from "../Utils/http";
 import {useLoadingContext} from "react-router-loading";
+
+import buttonStyles from '../Styles/MUI/button.style';
 
 function CartPage() {
     const {user, handleUpdateUser} = useContext(UserContext);
@@ -47,11 +49,11 @@ function CartPage() {
     return (
         <>
             <ContentContainer>
-                <div className="orders-table-container-outer">
-                    <div className="orders-table-header">
-                        <div className="orders-table-header-inner"><h4>سبد خرید</h4></div>
+                <div className="orders__table--outer">
+                    <div className="orders__table__header">
+                        <div className="orders__table__header--inner"><h4>سبد خرید</h4></div>
                     </div>
-                    <table className="orders-table-container-inner">
+                    <table className="orders__table--inner">
                         <tr>
                             <th>نام سفارش</th>
                             <th>تعداد</th>
@@ -64,39 +66,40 @@ function CartPage() {
                                 <td>{item.quantity}</td>
                                 <td>{item.totalPrice}</td>
                                 <td>
-                                    <IconButton style={{color: '#FF9797'}} size="small"
-                                                onClick={() => DeleteOrder(user, handleUpdateUser, item)}>
+                                    <IconButton
+                                        style={{color: '#FF9797'}}
+                                        size="small"
+                                        onClick={() => DeleteOrder(user, handleUpdateUser, item)}
+                                    >
                                         <DeleteIcon htmlColor="#FF0000"/>
                                     </IconButton>
                                 </td>
                             </tr>
                         ))}
                     </table>
-                    <div className="orders-btn-section">
+                    <div className="orders__button__section">
                         <span style={{margin: "auto"}}>
-                            <Button style={{
-                                width: '100%',
-                                height: '50px',
-                                color: 'rgba(255,0,0,0.55)',
-                                fontFamily: '"Yekan"',
-                                borderRadius: 0,
-                                boxShadow: "none"
-                            }} startIcon={<RemoveShoppingCartIcon style={{marginLeft: 20}} onClick={handleClearCart}/>}
-                                    variant="text">
+                            <Button
+                                style={{
+                                    ...buttonStyles.base,
+                                    ...buttonStyles.cartSecondaryButton
+                                }}
+                                startIcon={<RemoveShoppingCartIcon style={{marginLeft: 20}} onClick={handleClearCart}/>}
+                                variant="text"
+                            >
                                 خالی کردن سبد
                             </Button>
                         </span>
                         <span style={{margin: "auto"}}>
-                            <Button style={{
-                                width: '100%',
-                                height: '50px',
-                                backgroundColor: '#98CCFF',
-                                color: '#0080FF',
-                                fontFamily: '"Yekan"',
-                                borderRadius: 0,
-                                boxShadow: "none"
-                            }} startIcon={<AccountBalanceWalletIcon style={{marginLeft: 20}}/>}
-                                    onClick={handleSubmitCart} variant="contained">
+                            <Button
+                                variant="contained"
+                                style={{
+                                    ...buttonStyles.base,
+                                    ...buttonStyles.cartPrimaryButton
+                                }}
+                                startIcon={<AccountBalanceWalletIcon style={{marginLeft: 20}}/>}
+                                onClick={handleSubmitCart}
+                            >
                                 ثبت سفارش و پرداخت
                             </Button>
                         </span>

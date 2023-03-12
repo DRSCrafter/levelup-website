@@ -37,7 +37,7 @@ interface Category {
     }[]
 }
 
-interface OpenCategory extends IIndexable{
+interface OpenCategory extends IIndexable {
     console: boolean,
     game: boolean,
     other: boolean
@@ -100,7 +100,8 @@ function CategoryDialog({onClose, open}: DialogProps) {
                                                     <ListItemButton
                                                         sx={{pl: 4}}
                                                         onClick={() => handleNavigate(subCategory.link)}
-                                                        key={index}>
+                                                        key={index}
+                                                    >
                                                         <ListItemText primary={subCategory.name}/>
                                                     </ListItemButton>
                                                 ))}

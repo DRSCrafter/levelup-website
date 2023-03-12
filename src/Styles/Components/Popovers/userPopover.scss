@@ -1,0 +1,54 @@
+.user__popover {
+    width: 300px;
+    border-radius: 10px;
+    direction: rtl;
+    font-family: "Segoe UI Light", sans-serif;
+    background-color: white;
+}
+
+.user__popover__header {
+    width: 100%;
+    height: 120px;
+    background-color: #0080FF;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.user__popover__header__content {
+    position: relative;
+    padding: 15px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 60%;
+}
+
+.user__popover__image {
+    width: 70px;
+    height: 70px;
+    display: block!important;
+    border-radius: 50%;
+    position: absolute;
+    top: -15px;
+    right: 5px;
+}
+
+.user__popover__header__content--inner {
+    position: absolute;
+    left: 20px;
+}
+
+.user-popover-topside-account {
+    width: 100%;
+    height: 40%;
+    box-sizing: border-box;
+    padding: 10px 25px;
+}
+
+.user-popover-downside {
+    width: 100%;
+    height: 40%;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    overflow: hidden;
+}

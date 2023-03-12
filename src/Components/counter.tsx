@@ -1,4 +1,4 @@
-import '../Styles/Components/counter.css';
+import '../Styles/Components/counter.scss';
 import React from 'react';
 
 import {IconButton} from "@mui/material";
@@ -9,7 +9,7 @@ import CounterProps from "../types/components/counter";
 function Counter({value, onChange, maxValue}: CounterProps) {
     return (
         <>
-            <span className="product-counter">
+            <span className="counter">
                 <IconButton
                     color="primary"
                     size="small"

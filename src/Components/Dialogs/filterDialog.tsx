@@ -1,3 +1,4 @@
+import '../../Styles/Components/Dialogs/filterDialog.scss';
 import React from 'react';
 import {AppBar, Dialog, IconButton, Slider, Toolbar, Typography} from "@mui/material";
 import SearchBar from "../searchBar";
@@ -6,6 +7,7 @@ import CheckBox from "../checkBox";
 import RadioBox from "../radioBox";
 import CloseIcon from "@mui/icons-material/Close";
 import FilterDialogProps from "../../types/components/dialog/filterDialog";
+import typoStyles from '../../Styles/MUI/typography.style';
 
 function FilterDialog({
                           onClose, open, onCheckboxChange, radioValue, onRadioChange, maxPrice, onSubmitString,
@@ -24,12 +26,12 @@ function FilterDialog({
                         <IconButton edge="end" color="inherit" onClick={onClose} aria-label="close">
                             <CloseIcon/>
                         </IconButton>
-                        <Typography sx={{ml: 2, flex: 1, direction: "rtl"}} variant="h6" component="div">
+                        <Typography sx={typoStyles.typography} variant="h6" component="div">
                             فیلتر ها
                         </Typography>
                     </Toolbar>
                 </AppBar>
-                <div style={{display: 'flex', flexDirection: 'column', rowGap: '20px'}}>
+                <div className="filter__dialog">
                     <SearchBar
                         placeholder="نام محصول را جستجو کنید"
                         isSideBar
@@ -49,7 +51,7 @@ function FilterDialog({
                         <RadioBox label="موجود" onChange={onRadioChange} selectedValue={radioValue} value={"1"}/>
                     </SideFilter>
                     <SideFilter label="محدوده قیمت" overFlowVisible>
-                        <div style={{padding: 20}}>
+                        <div className="filter__slider__root">
                             <Slider
                                 step={100000}
                                 min={0}

@@ -1,4 +1,4 @@
-import './Styles/global.css';
+import './Styles/global.scss';
 import React, {useEffect, useState} from 'react';
 import {Route, Routes} from 'react-router-loading';
 
@@ -28,7 +28,7 @@ function App() {
     const handleLoginUser = async () => {
         const jwtToken = localStorage.getItem('token');
         if (!jwtToken) {
-            toast.warn('برای بهره مندی از خدمات سایت وارد شوید');
+            toast.info('برای بهره مندی از خدمات سایت وارد شوید');
             const defaultUser = {
                 name: "کاربر میهمان",
                 userImage: defaultPic,

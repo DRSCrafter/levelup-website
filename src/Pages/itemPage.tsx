@@ -1,4 +1,4 @@
-import '../Styles/Pages/itemPage.css';
+import '../Styles/Pages/itemPage.scss';
 import React, {useEffect, useState} from "react";
 
 import ProductPlate from "../Components/productPlate.js";
@@ -20,7 +20,7 @@ function ItemPage() {
     const loadingContext = useLoadingContext();
 
     useEffect(() => {
-        getFullProduct(id, setProduct, setRelatedList).then(() => loadingContext.done())
+        getFullProduct(id!, setProduct, setRelatedList).then(() => loadingContext.done())
     }, [id]);
 
     return (

@@ -1,4 +1,4 @@
-import '../../Styles/Components/Popovers/userPopover.css';
+import '../../Styles/Components/Popovers/userPopover.scss';
 import React, {SetStateAction, useContext, useState} from 'react';
 import PopoverContainer from "./popoverContainer.js";
 
@@ -31,20 +31,24 @@ function UserPopover() {
 
     return (
         <>
-            <IconButton style={{marginRight: 10}} className="navbar-icon-btn" aria-describedby={userID}
-                        onClick={handlePopOver1}>
+            <IconButton
+                style={{marginRight: 10}}
+                className="navbar-icon-btn"
+                aria-describedby={userID}
+                onClick={handlePopOver1}
+            >
                 <PersonIcon htmlColor="#0080FF"/>
             </IconButton>
             <PopoverContainer anchorEl={popAnchorEl1} onClose={handleClosePopOver1} open={openUser} id={userID!}>
-                <div className="user-popover-container">
-                    <div className="user-popover-topside">
-                        <div className="user-popover-topside-info">
+                <div className="user__popover">
+                    <div className="user__popover__header">
+                        <div className="user__popover__header__content">
                             <img
                                 src={user?.userImage}
-                                className="user-popover-image"
+                                className="user__popover__image"
                                 alt="User"
                             />
-                            <div className="user-popover-topside-info-inner">
+                            <div className="user__popover__header__content--inner">
                                 <div>{user?.name}</div>
                                 <div className="font-sm">{user && user.email}</div>
                             </div>

@@ -1,4 +1,4 @@
-import '../../Styles/Components/Dialogs/accountDialog.css';
+import '../../Styles/Components/Dialogs/accountDialog.scss';
 import React, {useState} from 'react';
 
 import {Button, Dialog, TextField, useMediaQuery} from "@mui/material";
@@ -9,6 +9,9 @@ import createCache from "@emotion/cache";
 import {CacheProvider, ThemeProvider} from "@emotion/react";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import AccountDialogProps from "../../types/components/dialog/accountDialog";
+
+import textFieldStyles from '../../Styles/MUI/textField.style';
+import buttonStyles from '../../Styles/MUI/button.style';
 
 function AccountDialog({onClose, open, onCharge}: AccountDialogProps) {
     const isPC = useMediaQuery('(min-width: 1024px)');
@@ -34,33 +37,32 @@ function AccountDialog({onClose, open, onCharge}: AccountDialogProps) {
     return (
         <>
             <Dialog onClose={handleClose} open={open} fullWidth={!isPC}>
-                <div className="account-dialog-root">
-                    <div className="account-dialog-header">
-                        <span className="account-dialog-title">افزایش اعتبار</span>
+                <div className="account__dialog">
+                    <div className="account__dialog__header">
+                        <span className="account__dialog__title">افزایش اعتبار</span>
                     </div>
-                    <div className="account-dialog-body">
+                    <div className="account__body">
                         <CacheProvider value={cacheRtl}>
                             <ThemeProvider theme={theme}>
                                 <div dir="rtl">
                                     <span>مبلغ موردنظر (تومان):</span>
-                                    <TextField sx={{width: '100%', marginBlock: '25px'}}
-                                               inputProps={{style: {fontFamily: 'Segoe UI Light'}}} variant="outlined"
-                                               name="name" value={amount} onChange={handleChangeAmount}
-                                               label="مبلغ موردنظر را وارد نمایید"/>
-                                    <div className="account-dialog-btn-section">
+                                    <TextField
+                                        sx={{width: '100%', marginBlock: '25px'}}
+                                        inputProps={{style: textFieldStyles.input}} variant="outlined"
+                                        name="name" value={amount} onChange={handleChangeAmount}
+                                        label="مبلغ موردنظر را وارد نمایید"
+                                    />
+                                    <div className="account__dialog__button__section">
                                         <Button style={{
-                                            width: '25%',
-                                            fontFamily: '"Yekan"',
-                                            color: '#707070'
+                                            ...buttonStyles.base,
+                                            ...buttonStyles.dialogSecondary
                                         }} variant="text" onClick={onClose}>
                                             لغو
                                         </Button>
                                         <Button
                                             style={{
-                                                width: '70%',
-                                                backgroundColor: '#98CCFF',
-                                                color: '#0080FF',
-                                                fontFamily: '"Yekan"',
+                                                ...buttonStyles.base,
+                                                ...buttonStyles.dialogPrimary
                                             }}
                                             startIcon={<AccountBalanceWalletIcon style={{marginLeft: 20}}/>}
                                             variant="contained" onClick={() => onCharge(+amount)}

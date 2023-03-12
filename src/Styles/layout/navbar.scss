@@ -1,0 +1,89 @@
+@import '../mixins';
+
+.navbar {
+  width: 100%;
+  height: 110px;
+  position: fixed;
+  top: 0;
+  z-index: 5;
+}
+
+.navbar__content {
+  @include flex(row, space-between, center);
+  width: 100%;
+  height: 64px;
+  box-sizing: border-box;
+  padding-left: 35px;
+  padding-right: 25px;
+  background-color: white;
+  box-shadow: 0 15px 20px -20px rgba(0, 0, 0, 0.2);
+}
+
+.navbar__logo {
+  height: 50px;
+  cursor: pointer;
+}
+
+.navbar__icon .MuiButtonBase-root {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.47);
+}
+
+.sub-navbar {
+  display: none;
+}
+
+.font-sm {
+  font-size: 13px;
+}
+
+.drawer__info {
+  @include flex(column, space-between, center);
+  row-gap: 30px;
+  padding: 10px;
+  direction: rtl;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.drawer__wallet {
+  width: 75%;
+  padding-top: 10px;
+}
+
+.css-10hburv-MuiTypography-root {
+  font-family: "Segoe UI Light", sans-serif !important;
+  font-size: 15px;
+}
+
+@media (min-width: 1024px) {
+  .sub-navbar {
+    @include flex(row-reverse, space-between);
+    width: 100%;
+    height: 45px;
+    box-sizing: border-box;
+    padding: 10px 30px 0;
+    position: absolute;
+    z-index: 0;
+    background-color: white;
+    box-shadow: 0 15px 20px -20px rgba(0, 0, 0, 0.2);
+  }
+
+  .sub-navbar__button {
+    display: flex;
+    gap: 50px;
+  }
+
+  .sub-navbar--active {
+    transition: all 0.2s;
+    visibility: visible;
+  }
+  .sub-navbar--hidden {
+    z-index: -9999;
+    transition: all 0.2s;
+    transform: translateY(-100%);
+    visibility: hidden;
+  }
+}

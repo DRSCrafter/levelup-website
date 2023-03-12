@@ -1,4 +1,4 @@
-import '../Styles/Components/menuButton.css'
+import '../Styles/Components/menuButton.scss'
 import React, {SetStateAction, useState} from 'react';
 
 import Menu from '@mui/material/Menu';
@@ -23,7 +23,7 @@ function MenuButton({title, list}: MenuButtonProps) {
 
     return (
         <>
-            <span className="navbar-menu-btn" onClick={handleClick}>
+            <span className="navbar__button" onClick={handleClick}>
                 <ExpandMoreIcon fontSize="small"/>
                 {title}
             </span>
@@ -49,7 +49,7 @@ function MenuButton({title, list}: MenuButtonProps) {
                 {list.map(item => (
                     /*@ts-ignore*/
                     <MenuItem onClick={handleClickMenu} key={item.name} data-my-value={item.link}>
-                        <span className="navbar-menu-btn-inner">
+                        <span className="navbar__button--inner">
                             {item.name}
                         </span>
                     </MenuItem>

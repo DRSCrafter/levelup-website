@@ -1,0 +1,50 @@
+.side__filter {
+  width: 100%;
+  padding: 10px 0;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 5px 8px -3px rgb(0 0 0 / 10%);
+}
+
+.side__filter__header {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 10px 10px;
+  direction: rtl;
+  position: relative;
+  font-family: "Yekan", sans-serif;
+  color: #545454;
+}
+
+.side__filter__title {
+  padding-right: 30px;
+  position: relative;
+  font-size: 16px;
+
+  &:before {
+    display: block;
+    width: 10px;
+    height: 10px;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 50%;
+    background: #00ACFF;
+    box-shadow: 0 0 6px #00ACFF;
+    content: "";
+  }
+}
+
+.side__filter__list {
+  width: 100%;
+  max-height: 300px;
+  margin: 0 auto;
+  overflow-y: scroll;
+  color: #707070;
+}
+
+.overflow--visible {
+  overflow: visible !important;
+}
