@@ -1,17 +1,18 @@
 @import '../mixins';
+@import '../variables';
 
 .navbar__button {
   @include flex(row, normal, center);
   font-size: 15px;
   font-family: IRMehr, sans-serif;
-  color: #707070;
+  color: $gray;
   cursor: pointer;
 }
 
 .navbar__button--inner {
   margin: 5px;
   font-family: "Yekan", sans-serif;
-  color: #707070;
+  color: $gray;
 }
 
 .css-6hp17o-MuiList-root-MuiMenu-list {

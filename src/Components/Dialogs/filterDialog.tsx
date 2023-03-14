@@ -23,7 +23,7 @@ function FilterDialog({
             <Dialog onClose={onClose} open={open} fullScreen>
                 <AppBar sx={{position: 'relative'}}>
                     <Toolbar>
-                        <IconButton edge="end" color="inherit" onClick={onClose} aria-label="close">
+                        <IconButton edge="end" onClick={onClose}>
                             <CloseIcon/>
                         </IconButton>
                         <Typography sx={typoStyles.typography} variant="h6" component="div">

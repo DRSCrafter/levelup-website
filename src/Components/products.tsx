@@ -106,7 +106,7 @@ function Products({
                             <div className="products__grid">
                                 {
                                     paginatedItems.map(item => (
-                                        <div className="products-grid-item" key={item._id}>
+                                        <div className="products__grid__item" key={item._id}>
                                             <ProductCard info={item} shadow/>
                                         </div>
                                     ))

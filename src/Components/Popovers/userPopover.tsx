@@ -37,9 +37,16 @@ function UserPopover() {
                 aria-describedby={userID}
                 onClick={handlePopOver1}
             >
-                <PersonIcon htmlColor="#0080FF"/>
+                <PersonIcon htmlColor="var(--var-color-primary)"/>
             </IconButton>
-            <PopoverContainer anchorEl={popAnchorEl1} onClose={handleClosePopOver1} open={openUser} id={userID!}>
+            <PopoverContainer
+                anchorEl={popAnchorEl1}
+                onClose={handleClosePopOver1}
+                style={{overflow: 'visible'}}
+                paperProps={{input: {overflow: 'visible'}}}
+                open={openUser}
+                id={userID!}
+            >
                 <div className="user__popover">
                     <div className="user__popover__header">
                         <div className="user__popover__header__content">
@@ -93,7 +100,7 @@ const styles = {
         width: '100%',
         display: "flex",
         justifyContent: "flex-start",
-        color: '#707070',
+        color: 'var(--var-color-gray)',
         fontFamily: 'Segoe UI Light',
     }
 }

@@ -1,3 +1,5 @@
+@import '../variables';
+
 .orders__table--outer {
   flex-basis: 100%;
   direction: rtl;
@@ -10,7 +12,7 @@
   width: 100%;
   box-sizing: border-box;
   padding-inline: 20px;
-  color: #707070;
+  color: $gray;
 }
 
 .orders__table__header--inner {
@@ -42,13 +44,13 @@
 th {
   padding: 25px;
   font-family: "Yekan", sans-serif;
-  color: #0080FF;
+  color: $primary-color;
 }
 
 td {
   padding: 15px 25px;
   font-weight: bold;
-  color: #707070;
+  color: $gray;
 }
 
 .orders__button__section {

@@ -1,4 +1,5 @@
 @import '../mixins';
+@import '../variables';
 
 .card__root {
   display: flex;
@@ -22,7 +23,7 @@
   }
 }
 
-.card__root {
+.card {
   @include flex(column);
   width: 80%;
   min-width: 140px;
@@ -47,11 +48,11 @@
   text-align: center;
   font-family: "Segoe UI Light", sans-serif;
   font-size: 13px;
-  color: rgb(76, 94, 96);
+  color: $title-color;
 }
 
 .product__price {
-  color: #707070;
+  color: $gray;
   font-family: IRTitr, sans-serif;
   margin-top: 20px;
   direction: rtl;

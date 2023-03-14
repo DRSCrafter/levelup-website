@@ -13,6 +13,7 @@ function MUIPopover({anchorEl, open, onClose, id, children}: PopoverProps) {
                 anchorEl={anchorEl}
                 onClose={onClose}
                 sx={{overflow: 'visible!important'}}
+                style={{overflow: 'visible!important'}}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'left',

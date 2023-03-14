@@ -1,3 +1,5 @@
+@import '../variables';
+
 .footer {
   width: 100%;
   display: flex;
@@ -16,12 +18,12 @@
   flex-direction: column;
   padding: 20px;
   direction: rtl;
-  color: #8c8c8c;
+  color: $light-gray;
 }
 
 .footer__list__title {
   position: relative;
-  color: #707070;
+  color: $gray;
   margin-right: 8px;
   display: flex;
   align-items: center;
@@ -46,7 +48,7 @@
   }
 
   & > li > a:hover {
-    color: #414141;
+    color: $strong-gray;
   }
 }
 

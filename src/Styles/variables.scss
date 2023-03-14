@@ -1,0 +1,23 @@
+$primary-color: var(--var-color-primary);
+$secondary-color: var(--var-color-secondary);
+$background-color: var(--var-color-background);
+$gray: var(--var-color-gray);
+$light-gray: var(--var-color-light-gray);
+$strong-gray: var(--var-color-strong-gray);
+$title-color: var(--var-color-title);
+$danger-background-color: var(--var-color-danger-background);
+$danger-text-color: var(--var-color-danger-text);
+$light-red: var(--var-color-light-red);
+
+:root {
+  --var-color-primary: #0080FF;
+  --var-color-secondary: #98CCFF;
+  --var-color-background: #FBFBFB;
+  --var-color-gray: #707070;
+  --var-color-light-gray: #8D8D8D;
+  --var-color-strong-gray: #414141;
+  --var-color-title: #4C5E60;
+  --var-color-danger-background: #FF9797;
+  --var-color-danger-text: #FF0000;
+  --var-color-light-red: #FF5D5D;
+}

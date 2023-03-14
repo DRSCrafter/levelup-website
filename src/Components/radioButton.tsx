@@ -20,12 +20,12 @@ function RadioButton({selectedValue, value, onSelect, children}: RadioButtonProp
 
 const styles = {
     notSelected: {
-        color: '#707070',
+        color: 'var(--var-color-gray)',
         fontFamily: "'Segoe UI Light', sans-serif"
     },
     selected: {
-        color: '#ffffff',
-        backgroundColor: 'rgb(0, 128, 255)',
+        color: 'white',
+        backgroundColor: 'var(--var-color-primary)',
         fontFamily: "'Segoe UI Light', sans-serif"
     }
 }

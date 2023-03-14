@@ -1,3 +1,5 @@
+@import '../variables';
+
 .product__swiper__root {
   width: 100%;
   margin-inline: auto;
@@ -11,7 +13,7 @@
   box-sizing: border-box;
   padding-inline: 20px;
   direction: rtl;
-  color: #707070;
+  color: $gray;
 }
 
 .product__swiper__header--inner {

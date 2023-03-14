@@ -50,7 +50,7 @@ function ProductCard({info, shadow = false}: ProductCardProps) {
     return (
         <>
             <div className={`card__root ${shadow ? 'card__shadow' : ''}`} onClick={handleClick}>
-                <div className="card__root">
+                <div className="card">
                     <LazyLoadImage
                         src={thumbnailImage}
                         placeholderSrc={placeholder}
@@ -64,8 +64,9 @@ function ProductCard({info, shadow = false}: ProductCardProps) {
                         </div>
                         <div className="product__commands">
                             <Checkbox
-                                style={{color: "#FF5D5D"}} icon={<FavoriteBorder htmlColor="#FF5D5D"/>}
-                                checkedIcon={<Favorite htmlColor="#FF5D5D"/>}
+                                style={{color: "var(--var-color-light-red)"}}
+                                icon={<FavoriteBorder htmlColor="var(--var-color-light-red)"/>}
+                                checkedIcon={<Favorite htmlColor="var(--var-color-light-red)"/>}
                                 checked={user?.likes?.includes(_id)}
                                 onClick={handleLike}/>
                             {matches ?
@@ -78,8 +79,8 @@ function ProductCard({info, shadow = false}: ProductCardProps) {
                                     endIcon={<ShoppingCartOutlinedIcon style={{minWidth: 30}}/>}
                                     onClick={handleBuy}
                                     disabled={!isAvailable}>خرید</Button> :
-                                <IconButton style={{color: "#0080FF"}} onClick={handleBuy}>
-                                    <ShoppingCartOutlinedIcon htmlColor="#0080FF"/>
+                                <IconButton style={{color: "var(--var-color-primary)"}} onClick={handleBuy}>
+                                    <ShoppingCartOutlinedIcon htmlColor="var(--var-color-primary)"/>
                                 </IconButton>
                             }
                         </div>

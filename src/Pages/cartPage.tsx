@@ -67,11 +67,11 @@ function CartPage() {
                                 <td>{item.totalPrice}</td>
                                 <td>
                                     <IconButton
-                                        style={{color: '#FF9797'}}
+                                        style={{color: 'var(--var-color-danger-background)'}}
                                         size="small"
                                         onClick={() => DeleteOrder(user, handleUpdateUser, item)}
                                     >
-                                        <DeleteIcon htmlColor="#FF0000"/>
+                                        <DeleteIcon htmlColor="var(--var-color-danger-text)"/>
                                     </IconButton>
                                 </td>
                             </tr>

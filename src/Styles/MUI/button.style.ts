@@ -5,22 +5,22 @@ export default {
     },
     dialogPrimary: {
         width: '75%',
-        color: '#0080FF',
-        backgroundColor: '#98CCFF'
+        color: 'var(--var-color-primary)',
+        backgroundColor: 'var(--var-color-background)'
     },
     dialogSecondary: {
         width: '25%',
-        color: '#707070'
+        color: 'var(--var-color-gray)'
     },
     popoverButton: {
         width: '60%',
         position: "relative",
         borderRadius: 10,
-        color: '#ffffff'
+        color: 'white'
     },
     cardButton: {
         borderRadius: 10,
-        color: '#0080FF'
+        color: 'var(--var-color-primary)'
     },
     productButton: {
         width: '100%',
@@ -31,13 +31,13 @@ export default {
     },
     dangerButton: {
         width: '75%',
-        backgroundColor: '#FF9797',
-        color: '#FF0000',
+        backgroundColor: 'var(--var-color-danger-background)',
+        color: 'var(--var-color-danger-text)',
     },
     cartPrimaryButton: {
         height: '50px',
-        backgroundColor: '#98CCFF',
-        color: '#0080FF',
+        backgroundColor: '#var(--var-color-secondary)',
+        color: 'var(--var-color-primary)',
         fontFamily: '"Yekan"',
         borderRadius: 0,
         boxShadow: "none"
@@ -55,7 +55,7 @@ export default {
     }),
     formSecondaryButton: {
         paddingBlock: 15,
-        color: '#0080FF',
+        color: 'var(--var-color-primary)',
         marginTop: 10
     }
 }

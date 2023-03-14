@@ -40,7 +40,7 @@ function AccountPopover() {
     return (
         <>
             <IconButton className="navbar-icon-btn" aria-describedby={shoppingCardID} onClick={handlePopOver2}>
-                <AccountBalanceWalletIcon htmlColor="#0080FF"/>
+                <AccountBalanceWalletIcon htmlColor="var(--var-color-primary)"/>
             </IconButton>
             <PopoverContainer
                 anchorEl={popAnchorEl2}
@@ -59,11 +59,11 @@ function AccountPopover() {
                             {user && shoppingList.map((order: Order, index: number) => (
                                 <div className="account__order" key={index}>
                                     <IconButton
-                                        style={{color: '#FF9797'}}
+                                        style={{color: 'var(--var-color-danger-background)'}}
                                         size="small"
                                         onClick={() => DeleteOrder(user, handleUpdateUser, order)}
                                     >
-                                        <DeleteIcon htmlColor="#FF0000"/>
+                                        <DeleteIcon htmlColor="var(--var-color-danger-text)"/>
                                     </IconButton>
                                     <span>{user && order.totalPrice} تومان</span>
                                     <span>
@@ -75,10 +75,10 @@ function AccountPopover() {
                         </div>
                         <div className="account__popover__button">
                             <Button
-                                style={({
+                                style={{
                                     ...buttonStyles.base,
                                     ...buttonStyles.popoverButton
-                                }) as React.CSSProperties}
+                                } as React.CSSProperties}
                                 variant="contained"
                                 endIcon={<ShopIcon style={(iconStyles.buttonEnd as React.CSSProperties)}/>}
                                 onClick={handleNavigate}>تکمیل خرید</Button>

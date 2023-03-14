@@ -17,7 +17,7 @@ function SearchBar({placeholder, isSideBar, value, onChange, onSubmit, isFilterD
                 onSubmit={handleSubmit}
             >
                 <IconButton className="search__button" type="submit">
-                    <SearchIcon htmlColor="#0080FF"/>
+                    <SearchIcon htmlColor="var(--var-color-primary)"/>
                 </IconButton>
                 <input className="search-bar__input input" placeholder={placeholder} value={value} onChange={onChange}/>
             </form>
